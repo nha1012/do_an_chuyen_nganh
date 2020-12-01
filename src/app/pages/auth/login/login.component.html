@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-header>Đăng nhập</nb-card-header>
+    <nb-card-body>
+        <input nbInput type="username" [(ngModel)]="username" placeholder="Tên đăng nhập" required fullWidth
+            title="Nhập tên đăng nhập" />
+        <input nbInput type="password" [(ngModel)]="password" placeholder="Mật khẩu" required fullWidth
+            title="Nhập mật khẩu" />
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton submit fullWidth status="primary" (click)="login()" [nbSpinner]="isLoging">Đăng nhập</button>
+    </nb-card-footer>
+</nb-card>

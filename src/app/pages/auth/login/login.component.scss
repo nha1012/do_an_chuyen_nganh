@@ -1,0 +1,8 @@
+:host{
+    margin: auto;
+    nb-card-body{
+        > * {
+            margin-top: 1rem;
+        }
+    }
+}
