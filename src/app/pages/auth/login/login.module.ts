@@ -12,8 +12,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule, FormsModule,
     NbButtonModule,
     NbCardModule,
-    NbInputModule, NbSpinnerModule
+    NbInputModule,
+    NbSpinnerModule,
   ],
-  exports: [LoginComponent]
+  exports: [LoginComponent],
 })
 export class LoginModule { }

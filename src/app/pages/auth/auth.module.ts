@@ -20,10 +20,10 @@ import { NbLayoutModule, NbCardModule, NbIconModule } from '@nebular/theme';
         path: '', component: AuthComponent,
         children: [
           { path: '', component: LoginComponent },
-          { path: 'login', component: LoginComponent }
-        ]
+          { path: 'login', component: LoginComponent },
+        ],
       },
-    ])
-  ]
+    ]),
+  ],
 })
 export class AuthModule { }

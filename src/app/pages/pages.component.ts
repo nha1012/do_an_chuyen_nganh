@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { MENU_ITEMS } from './pages-menu';
-import { DTGAuthService } from 'ditagis-auth';
 
 @Component({
   selector: 'ngx-pages',
@@ -13,20 +12,7 @@ import { DTGAuthService } from 'ditagis-auth';
     </ngx-one-column-layout>
   `,
 })
-export class PagesComponent implements OnInit {
-  constructor(
-    private authService: DTGAuthService,
-  ) { }
+export class PagesComponent {
 
   menu = MENU_ITEMS;
-  ngOnInit() {
-    this.menu.forEach((item) => {
-      if (item.data) {
-        this.authService
-          .isAccess({ appId: item.data })
-          .toPromise()
-          .then((value) => (item.hidden = !value));
-      }
-    });
-  }
 }

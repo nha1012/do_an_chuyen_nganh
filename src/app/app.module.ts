@@ -5,14 +5,14 @@
  */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, Injector } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
-import { TreeModule } from 'angular-tree-component';
 import { AppRoutingModule } from './app-routing.module';
 import {
+  NbChatModule,
   NbDatepickerModule,
   NbDialogModule,
   NbMenuModule,
@@ -20,17 +20,6 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import {
-  DitagisAuthModule,
-  ErrorInterceptor,
-  JwtInterceptor,
-  DTGAuthService,
-} from 'ditagis-auth';
-import { environment } from '../environments/environment';
-import { registerLocaleData } from '@angular/common';
-import localeVi from '@angular/common/locales/vi';
-registerLocaleData(localeVi, 'en-US');
-import '../mapconfig';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,35 +28,19 @@ import '../mapconfig';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
-    ThemeModule.forRoot(),
-
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
-    TreeModule.forRoot(),
-    CoreModule.forRoot(),
-    DitagisAuthModule.forRoot({
-      apiUrl: environment.apiUrl,
+    NbChatModule.forRoot({
+      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-      deps: [DTGAuthService],
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-      deps: [DTGAuthService],
-    },
+    CoreModule.forRoot(),
+    ThemeModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

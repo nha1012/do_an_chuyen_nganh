@@ -1,11 +1,11 @@
+import { AuthService } from './../../../shared/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
-import { DTGAuthService } from 'ditagis-auth';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'ga-login',
+  selector: 'ngx-ga-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -14,44 +14,15 @@ export class LoginComponent implements OnInit {
   password: string;
   isLoging = false;
   constructor(
-    private authService: DTGAuthService,
     private toast: NbToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {}
 
   async login() {
-    this.isLoging = true;
-
-    try {
-      if (this.isValid()) {
-        const isAuth = await this.authService.authenticate({
-          username: this.username,
-          password: this.password,
-          appId: environment.appId.appId,
-        });
-        if (isAuth) {
-          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-          this.router.navigateByUrl(returnUrl || '/');
-        } else {
-          throw new Error('Sai tài khoản hoặc mật khẩu');
-        }
-      }
-    } catch (error) {
-      this.toast.danger(error);
-    } finally {
-      this.isLoging = false;
-    }
+    this.authService.logIn(this.username, this.password);
   }
 
-  isValid(): boolean {
-    if (this.username && this.password) {
-      return true;
-    } else {
-      this.toast.danger('Vui lòng nhập đầy đủ thông tin');
-      return false;
-    }
-  }
 }
