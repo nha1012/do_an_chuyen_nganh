@@ -1,5 +1,6 @@
 import express from 'express';
+import authController from '../controllers/auth.controller'
 let authRouter = express.Router();
-authRouter.get('/login', (req, res) => res.send({}));
-authRouter.get('/register', (req, res) => res.send({}));
+authRouter.post('/login', authController.login);
+authRouter.post('/register', (req, res) => res.send({}));
 module.exports = authRouter;

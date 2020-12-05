@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { resolve } from 'dns';
 import { rejects } from 'assert';
+import { CrudBaseService } from 'nest-crud-typeorm-client';
 @Injectable({
   providedIn: 'root',
 })

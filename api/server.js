@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const connect = require("./model/db")
 const app = express();
 import routes from './routes/index'
 // parse requests of content-type: application/json

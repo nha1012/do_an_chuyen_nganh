@@ -17,8 +17,4 @@ connection.connect(error => {
   console.log("Successfully connected to the database.");
 });
 
-connection.end(function (err) {
-  if (err) throw err;
-  console.log("Closed!");
-});
 module.exports = connection;
