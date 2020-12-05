@@ -1,0 +1,8 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "description": "Nodejs api quan ly giay",
+  "main": "server.js",
+  "author": "nha 1012",
+  "license": "MIT"
+}
