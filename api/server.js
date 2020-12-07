@@ -1,10 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-import routes from './routes/index'
+import routes from './routes/index';
+import cors from 'cors';
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
-
+//cors
+var corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions))
 // parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 // import router

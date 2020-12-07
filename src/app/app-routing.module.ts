@@ -3,15 +3,6 @@ import { LoginModule } from './pages/auth/login/login.module';
 import { AuthGuard } from './shared/services/guard/auth.guard';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from '@nebular/auth';
-
 export const routes: Routes = [
   {
     path: 'pages',

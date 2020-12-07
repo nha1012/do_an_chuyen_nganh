@@ -1,3 +1,4 @@
+import { AuthService } from './../../../shared/services/auth/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
@@ -38,16 +39,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [  { title: 'Log out'} ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private authService: AuthService,
+              private nbMenuService: NbMenuService,
+              ) {
   }
-
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
@@ -69,6 +72,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+    this.nbMenuService.onItemClick()
+      .subscribe(value => this.authService.logout());
   }
 
   ngOnDestroy() {
@@ -91,4 +96,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+
 }

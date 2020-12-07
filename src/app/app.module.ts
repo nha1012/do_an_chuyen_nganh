@@ -11,6 +11,8 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -21,6 +23,9 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -39,6 +44,13 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:4200/pages'],
+        disallowedRoutes: ['localhost:4200/pages'],
+      },
+    }),
   ],
   bootstrap: [AppComponent],
 })

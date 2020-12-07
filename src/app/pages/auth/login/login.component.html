@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card [nbSpinner]="status.loadLogin">
     <nb-card-header>Đăng nhập</nb-card-header>
     <nb-card-body>
         <input nbInput value="amin" type="username" [(ngModel)]="username" placeholder="Tên đăng nhập" required
@@ -7,6 +7,6 @@
             title="Nhập mật khẩu" />
     </nb-card-body>
     <nb-card-footer>
-        <button nbButton submit fullWidth status="primary" (click)="login()" [nbSpinner]="isLoging">Đăng nhập</button>
+        <button nbButton submit fullWidth status="primary" (click)="login()">Đăng nhập</button>
     </nb-card-footer>
 </nb-card>

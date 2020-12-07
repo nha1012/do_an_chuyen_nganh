@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
-import { NbButtonModule, NbCardModule, NbInputModule, NbSpinnerModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbInputModule, NbSpinnerModule, NbToastrModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 
 
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     NbCardModule,
     NbInputModule,
     NbSpinnerModule,
+    NbToastrModule,
   ],
   exports: [LoginComponent],
 })

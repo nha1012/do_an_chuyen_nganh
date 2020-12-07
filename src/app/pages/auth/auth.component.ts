@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'ga-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
 
