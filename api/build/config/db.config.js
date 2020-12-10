@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   HOST: "https://www.db4free.net",
   USER: "nha1012",

@@ -16,16 +16,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // import router
 routes(app);
 // return 404
-app.use((req, res, next) => {
-  const err = new Error('Not found');
-  err.stattus = 404;
-  next(err)
-})
-app.use((err, req, res) => {
-  res.stattus(err.stattus || 500).json({
-    message: err
-  })
-})
+// app.use((req, res, next) => {
+//   const err = new Error('Not found');
+//   err.stattus = 404;
+//   next(err)
+// })
+// app.use((err, req, res) => {
+//   res.stattus(err.stattus || 500).json({
+//     message: err
+//   })
+// })
 // set port, listen for requests
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
