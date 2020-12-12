@@ -19,6 +19,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'quan-ly-san-pham',
+        loadChildren: () =>
+          import('./quan-ly-san-pham/quan-ly-san-pham.module').then(
+            (m) => m.QuanLySanPhamModule,
+          ),
+      },
+      {
         path: 'dashboard',
         component: ECommerceComponent,
       },
