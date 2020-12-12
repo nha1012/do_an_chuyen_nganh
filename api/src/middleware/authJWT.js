@@ -5,7 +5,7 @@ import UserRole from '../model/user-role.model';
 import Role from '../model/role.model';
 
 let verifyToken = (req, res, next) => {
-  let token = req.headers["access-token"];
+  let token = req.headers["access_token"];
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
   }
@@ -21,7 +21,6 @@ let verifyToken = (req, res, next) => {
 let isAdmin =async (req, res, next) => {
   let userRoleId = await UserRole.getUserRoleByIdUser(req.userId);
   userRoleId = userRoleId[0].role_id;
-  console.log(userRoleId);
   Role.getRoleById(userRoleId)
     .then(value=>{
       if(value[0].id === 1){

@@ -6,7 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { AddHeaderInterceptor } from './shared/interceptor/add-header.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -52,7 +53,13 @@ export function tokenGetter() {
       },
     }),
   ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AddHeaderInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

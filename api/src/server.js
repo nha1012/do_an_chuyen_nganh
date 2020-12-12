@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+import morgan from 'morgan';
 import routes from './routes/index';
 import cors from 'cors';
 // parse requests of content-type: application/json
@@ -15,6 +16,8 @@ app.use(cors(corsOptions))
 app.use(bodyParser.urlencoded({ extended: true }));
 // import router
 routes(app);
+app.use(morgan('dev'));
+
 // return 404
 // app.use((req, res, next) => {
 //   const err = new Error('Not found');

@@ -10,3 +10,14 @@ exports.getAllUser = (req, res) => {
       return res.status(500).json({ message: "Lỗi hệ thống!" })
     })
 }
+exports.deleteUser = (req, res) => {
+  const userId = req.params.id
+  UserModel.deleteUser(userId)
+    .then(data => {
+      return res.status(200).json({ message: 'Xóa thành công' })
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ message: "Lỗi hệ thống!" })
+    })
+}
