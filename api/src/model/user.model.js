@@ -1,5 +1,33 @@
 
 import db from './db';
+// create user
+exports.createNewUser = (user) => {
+  const query = `INSERT INTO users set ?`
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query, user, (err, result) => {
+        if (err) reject(err)
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}
+// update user
+exports.updateUser = (userId, user) => {
+  const query = `UPDATE users set ? WHERE id = '${userId}'`
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query, user, (err, result) => {
+        if (err) reject(err)
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}
 // get all user
 exports.getAllUser = () => {
   const query = `SELECT * FROM users`

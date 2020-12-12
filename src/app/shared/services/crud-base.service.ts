@@ -5,13 +5,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CRUDBaseService {
+  constructor(private http: HttpClient) {}
+
   getAccessToken() {
     if (localStorage.getItem('access_token')) {
       return localStorage.getItem('access_token') || '';
     }
     return '';
   }
-  constructor(private http: HttpClient) {}
 
   createAuthorizationHeader(headers: Headers) {
     headers.append('Authorization', 'Basic ' + btoa('username:password'));
@@ -33,6 +34,12 @@ export class CRUDBaseService {
   delete(url: string) {
     const token = this.getAccessToken();
     return this.http.delete(url, {
+      headers: { access_token: token },
+    });
+  }
+  put(url: string, data: any) {
+    const token = this.getAccessToken();
+    return this.http.put(url, data, {
       headers: { access_token: token },
     });
   }

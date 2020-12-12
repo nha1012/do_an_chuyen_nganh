@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     NbInputModule,
     ThemeModule,
     Ng2SmartTableModule,
-    RouterModule.forChild([{ path: '', component: QuanLyTaiKhoanComponent }])
-  ]
+    RouterModule.forChild([{ path: '', component: QuanLyTaiKhoanComponent }]),
+  ],
 })
 export class QuanLyTaiKhoanModule {}
