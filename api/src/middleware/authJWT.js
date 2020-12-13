@@ -14,21 +14,20 @@ let verifyToken = (req, res, next) => {
       return res.status(401).send({ message: "Unauthorized!" });
     }
     req.userId = decoded.userId;
-    next();
+    return next();
   });
 };
 
 let isAdmin =async (req, res, next) => {
   let userRoleId = await UserRole.getUserRoleByIdUser(req.userId);
-  if (userRoleId.length > 0){
-    userRoleId = userRoleId[0].role_id;
-    Role.getRoleById(userRoleId)
+  userRoleId = userRoleId[0].role_id;
+  Role.getRoleById(userRoleId)
     .then(value=>{
       if(value[0].id === 1){
         next();
         return;
       }
-      res.status(403).send({ message: "Admin mới có quyền này" });
+      res.status(403).send({ message: "Require Admin Role!" });
       return;
     })
     .catch(err=>{
@@ -37,9 +36,6 @@ let isAdmin =async (req, res, next) => {
         return;
       }
     })
-  }
-  return res.status(403).send({ message: "Admin mới có quyền này" });
-
 };
 
 module.exports = {
