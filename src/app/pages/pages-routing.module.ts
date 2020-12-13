@@ -12,6 +12,13 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
+        path: 'dang-ky-ca-lam',
+        loadChildren: () =>
+          import('./dang-ky-ca-lam/dang-ky-ca-lam.module').then(
+            (m) => m.DangKyCaLamModule,
+          ),
+      },
+      {
         path: 'quan-ly-danh-muc',
         loadChildren: () =>
           import('./quan-ly-danh-muc/quan-ly-danh-muc.module').then(

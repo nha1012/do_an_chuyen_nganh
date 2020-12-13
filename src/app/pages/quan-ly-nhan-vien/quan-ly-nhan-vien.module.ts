@@ -19,6 +19,13 @@ import { Router, RouterModule } from '@angular/router';
             (m) => m.QuanLyTaiKhoanModule,
           ),
       },
+      {
+        path: 'quan-ly-ca-lam',
+        loadChildren: () =>
+          import('./quan-ly-ca-lam/quan-ly-ca-lam.module').then(
+            (m) => m.QuanLyCaLamModule,
+          ),
+      },
     ]),
   ],
 })

@@ -1,16 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { NbToastContainer, NbToastrService } from '@nebular/theme';
+import { Component, OnInit } from '@angular/core';
+import { NbToastrService } from '@nebular/theme';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
+import {
+  SmartTableDatepickerComponent,
+  SmartTableDatepickerRenderComponent,
+} from './smart-table-datepicker/smart-table-datepicker.component';
 
 @Component({
-  selector: 'ngx-quan-ly-tai-khoan',
-  templateUrl: './quan-ly-tai-khoan.component.html',
-  styleUrls: ['./quan-ly-tai-khoan.component.scss'],
+  selector: 'ngx-quan-ly-ca-lam',
+  templateUrl: './quan-ly-ca-lam.component.html',
+  styleUrls: ['./quan-ly-ca-lam.component.scss'],
 })
-export class QuanLyTaiKhoanComponent {
+export class QuanLyCaLamComponent {
   settings = {
     pager: {
       display: true,
@@ -33,49 +36,40 @@ export class QuanLyTaiKhoanComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      username: {
-        title: 'Tên người dùng',
-        type: 'string',
-      },
       fullname: {
-        title: 'Họ và tên',
-        type: 'number',
-      },
-      email: {
-        title: 'E-mail',
+        title: 'Tên nhân viên',
         type: 'string',
       },
-      password: {
-        title: 'Mật khẩu',
-        type: 'string',
-        width: '200px',
-      },
-      phone: {
-        title: 'Số điện thoại',
+      ca_lam: {
+        title: 'Ca làm',
         type: 'string',
       },
-      address: {
-        title: 'Địa chỉ',
-        width: '200px',
+      ghi_chu: {
+        title: 'Ghi chú',
         type: 'string',
+      },
+      date: {
+        title: 'Ngày làm',
+        type: 'custom',
+        renderComponent: SmartTableDatepickerRenderComponent,
+        width: '250px',
+        filter: false,
+        sortDirection: 'desc',
+        editor: {
+          type: 'custom',
+          component: SmartTableDatepickerComponent,
+        },
       },
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
-    this.crudBaseService.get(`${environment.rest}/user`).subscribe(
-      (value: { allUser: [] }) => {
-        this.source.load(value.allUser);
-      },
-      (err) => {
-        this.toast.danger(err.error.message);
-      },
-    );
+    this.crudBaseService
+      .get(`${environment.rest}/work-shift`)
+      .subscribe((value: { allProductType: [] }) => {
+        this.source.load(value.allProductType);
+      });
   }
   constructor(
     private crudBaseService: CRUDBaseService,
@@ -87,12 +81,21 @@ export class QuanLyTaiKhoanComponent {
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.crudBaseService
-        .delete(`${environment.rest}/user/${event.data.id}`)
-        .subscribe((values: { message: string }) => {
-          if (values) {
-            this.toast.success(values.message);
-          }
-        });
+        .delete(`${environment.rest}/work-shift/${event.data.id}`)
+        .subscribe(
+          (values: { message: string }) => {
+            if (values) {
+              this.toast.success(values.message);
+            }
+          },
+          (err) => {
+            this.loadDataTable();
+            this.toast.danger(err.error.message);
+          },
+          () => {
+            this.loadDataTable();
+          },
+        );
       event.confirm.resolve();
     } else {
       event.confirm.reject();
@@ -100,13 +103,14 @@ export class QuanLyTaiKhoanComponent {
   }
   onCreateConfirm(event) {
     this.crudBaseService
-      .post(`${environment.rest}/user`, event.newData)
+      .post(`${environment.rest}/work-shift`, event.newData)
       .subscribe(
         (value: { message: string }) => {
           this.toast.success(value.message);
+          this.loadDataTable();
         },
         (err) => {
-          this.toast.danger(err.message);
+          this.toast.danger(err.error.message);
         },
         () => {
           this.loadDataTable();
@@ -115,13 +119,13 @@ export class QuanLyTaiKhoanComponent {
   }
   onSaveConfirm(event) {
     this.crudBaseService
-      .put(`${environment.rest}/user/${event.data.id}`, event.newData)
+      .put(`${environment.rest}/work-shift/${event.data.id}`, event.newData)
       .subscribe(
         (value: { message: string }) => {
           this.toast.success(value.message);
         },
         (err) => {
-          this.toast.danger(err.message);
+          this.toast.danger(err.error.message);
         },
         () => {
           this.loadDataTable();

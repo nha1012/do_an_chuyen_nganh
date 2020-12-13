@@ -1,0 +1,26 @@
+.fa {
+  font-size: 1.2rem;
+}
+
+input {
+  padding: 0.375em 0.75em !important;
+}
+i.fa.fa-calendar {
+  font-size: 35px;
+}
+.dl-date-time-picker > input {
+  visibility: hidden;
+  width: 0;
+}
+.owl-dt-timer {
+  display: none !important;
+  justify-content: center;
+  width: 100%;
+  height: 7em;
+  padding: 0.5em;
+  outline: 0;
+}
+.dl-date-time-picker {
+  visibility: hidden;
+  width: 0;
+}
