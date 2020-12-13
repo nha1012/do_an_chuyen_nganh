@@ -122,7 +122,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Danh mục sản phẩm ',
-        link: '/pages/quan-ly-danh-muc/danh-sach',
+        link: '/pages/quan-ly-danh-muc/danh-muc-san-pham',
       },
     ],
   },
@@ -148,6 +148,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Đăng ký ca làm',
     link: '/pages/dang-ky-ca-lam',
+    icon: 'calendar-outline',
   },
   {
     title: 'IoT Dashboard',

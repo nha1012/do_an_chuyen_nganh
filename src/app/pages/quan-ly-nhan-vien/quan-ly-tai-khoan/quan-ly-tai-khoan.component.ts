@@ -64,11 +64,14 @@ export class QuanLyTaiKhoanComponent {
 
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
-    this.crudBaseService
-      .get(`${environment.rest}/user`)
-      .subscribe((value: { allUser: [] }) => {
+    this.crudBaseService.get(`${environment.rest}/user`).subscribe(
+      (value: { allUser: [] }) => {
         this.source.load(value.allUser);
-      });
+      },
+      (err) => {
+        this.toast.danger(err.error.message);
+      },
+    );
   }
   constructor(
     private crudBaseService: CRUDBaseService,

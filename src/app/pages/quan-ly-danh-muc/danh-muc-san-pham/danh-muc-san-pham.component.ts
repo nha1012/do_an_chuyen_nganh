@@ -5,11 +5,11 @@ import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'ngx-danh-sach',
-  templateUrl: './danh-sach.component.html',
-  styleUrls: ['./danh-sach.component.scss'],
+  selector: 'ngx-danh-muc-san-pham',
+  templateUrl: './danh-muc-san-pham.component.html',
+  styleUrls: ['./danh-muc-san-pham.component.scss'],
 })
-export class DanhSachComponent {
+export class DanhMucSanPhamComponent {
   settings = {
     pager: {
       display: true,
@@ -37,26 +37,8 @@ export class DanhSachComponent {
         type: 'number',
       },
       name: {
-        title: 'Tên sản phẩm',
+        title: 'Tên loại sản phẩm',
         type: 'string',
-      },
-      price: {
-        title: 'Giá',
-        type: 'string',
-      },
-      description: {
-        title: 'Mô tả',
-        type: 'string',
-      },
-      type_id: {
-        title: 'Mã loại sản phẩm',
-        type: 'string',
-      },
-      product_type: {
-        title: 'Loại sản phẩm',
-        type: 'string',
-        editable: false,
-        addable: false,
       },
     },
   };
@@ -64,9 +46,9 @@ export class DanhSachComponent {
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
     this.crudBaseService
-      .get(`${environment.rest}/product`)
-      .subscribe((value: { allProduct: [] }) => {
-        this.source.load(value.allProduct);
+      .get(`${environment.rest}/product-type`)
+      .subscribe((value: { allProductType: [] }) => {
+        this.source.load(value.allProductType);
       });
   }
   constructor(
@@ -79,27 +61,35 @@ export class DanhSachComponent {
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.crudBaseService
-        .delete(`${environment.rest}/product/${event.data.id}`)
-        .subscribe((values: { message: string }) => {
-          if (values) {
-            this.toast.success(values.message);
-          }
-        });
+        .delete(`${environment.rest}/product-type/${event.data.id}`)
+        .subscribe(
+          (values: { message: string }) => {
+            if (values) {
+              this.toast.success(values.message);
+            }
+          },
+          (err) => {
+            this.loadDataTable();
+            this.toast.danger(err.error.message);
+          },
+          () => {
+            this.loadDataTable();
+          },
+        );
       event.confirm.resolve();
     } else {
       event.confirm.reject();
     }
   }
   onCreateConfirm(event) {
-    delete event.newData.product_type;
     this.crudBaseService
-      .post(`${environment.rest}/product`, event.newData)
+      .post(`${environment.rest}/product-type`, event.newData)
       .subscribe(
         (value: { message: string }) => {
           this.toast.success(value.message);
         },
         (err) => {
-          this.toast.danger(err.message);
+          this.toast.danger(err.error.message);
         },
         () => {
           this.loadDataTable();
@@ -107,15 +97,14 @@ export class DanhSachComponent {
       );
   }
   onSaveConfirm(event) {
-    delete event.newData.product_type;
     this.crudBaseService
-      .put(`${environment.rest}/product/${event.data.id}`, event.newData)
+      .put(`${environment.rest}/product-type/${event.data.id}`, event.newData)
       .subscribe(
         (value: { message: string }) => {
           this.toast.success(value.message);
         },
         (err) => {
-          this.toast.danger(err.message);
+          this.toast.danger(err.error.message);
         },
         () => {
           this.loadDataTable();

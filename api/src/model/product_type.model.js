@@ -1,11 +1,11 @@
 
 import db from './db';
-// get all product
-exports.getAllProduct = () => {
-  const query = `SELECT product.id, product.name, product.price, product.description, product.type_id, product_type.name as product_type FROM product INNER JOIN product_type ON product.type_id=product_type.id;`
+// get all type product
+exports.getAllTypeProduct = () => {
+  const query = `SELECT * FROM product_type`
   return new Promise((resolve, reject) => {
     try {
-      db.query(query, '', (err, result) => {
+      db.query(query, "", (err, result) => {
         if (err) reject(err)
         resolve(result)
       })
@@ -14,13 +14,12 @@ exports.getAllProduct = () => {
     }
   });
 }
-
-// create product
-exports.createNewProduct = (product) => {
-  const query = `INSERT INTO product set ?`
+// create
+exports.createNewProductType = (productType) => {
+  const query = `INSERT INTO product_type set ?`
   return new Promise((resolve, reject) => {
     try {
-      db.query(query, product, (err, result) => {
+      db.query(query, productType, (err, result) => {
         if (err) reject(err)
         resolve(result)
       })
@@ -29,12 +28,12 @@ exports.createNewProduct = (product) => {
     }
   });
 }
-// update user
-exports.updateProduct = (productId, product) => {
-  const query = `UPDATE product set ? WHERE id = '${productId}'`
+// update
+exports.updateProductType = (productTypeId, productType) => {
+  const query = `UPDATE product_type set ? WHERE id = '${productTypeId}'`
   return new Promise((resolve, reject) => {
     try {
-      db.query(query, product, (err, result) => {
+      db.query(query, productType, (err, result) => {
         if (err) reject(err)
         resolve(result)
       })
@@ -43,9 +42,9 @@ exports.updateProduct = (productId, product) => {
     }
   });
 }
-// delete product by id
-exports.deleteProduct = (productId) => {
-  const query = `DELETE FROM product WHERE id = '${productId}'`
+// delete
+exports.deleteProductType = (productTypeId) => {
+  const query = `DELETE FROM product_type WHERE id = '${productTypeId}'`
   return new Promise((resolve, reject) => {
     try {
       db.query(query, (err, result) => {
