@@ -11,7 +11,17 @@ exports.getAllProduct = (req, res) => {
     })
 }
 
-
+// lay thong tin thong ke san pham
+exports.getDataThongKeSanPham = (req, res) => {
+  ProductModel.getDataThongKeSanPham()
+    .then(data => {
+      return res.status(200).json({ allProduct: data })
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ message: "Lỗi hệ thống!" })
+    })
+}
 // xoa user
 exports.deleteProduct = async(req, res) => {
   const productId = req.params.id

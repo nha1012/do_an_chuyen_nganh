@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { QuanLyHieuSuatComponent } from './quan-ly-hieu-suat/quan-ly-hieu-suat.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [QuanLyHieuSuatComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -24,6 +25,13 @@ import { Router, RouterModule } from '@angular/router';
         loadChildren: () =>
           import('./quan-ly-ca-lam/quan-ly-ca-lam.module').then(
             (m) => m.QuanLyCaLamModule,
+          ),
+      },
+      {
+        path: 'quan-ly-hieu-suat',
+        loadChildren: () =>
+          import('./quan-ly-hieu-suat/quan-ly-hieu-suat.module').then(
+            (m) => m.QuanLyHieuSuatModule,
           ),
       },
     ]),

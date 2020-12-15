@@ -57,3 +57,17 @@ exports.deleteProduct = (productId) => {
     }
   });
 }
+// lay thong tin thong ke san pham
+exports.getDataThongKeSanPham = (productId) => {
+  const query = `SELECT product.name, product.price, orders.amount FROM product INNER JOIN orders ON product.id = orders.product_id`;
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query, (err, result) => {
+        if (err) reject(err)
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}

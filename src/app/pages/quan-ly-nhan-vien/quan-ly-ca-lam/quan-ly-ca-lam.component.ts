@@ -14,6 +14,9 @@ import {
   styleUrls: ['./quan-ly-ca-lam.component.scss'],
 })
 export class QuanLyCaLamComponent {
+  valuePrepareFunction() {
+    '<input type="checkbox" checked>';
+  }
   settings = {
     pager: {
       display: true,
@@ -36,6 +39,10 @@ export class QuanLyCaLamComponent {
       confirmDelete: true,
     },
     columns: {
+      id: {
+        title: 'Id',
+        type: 'string',
+      },
       fullname: {
         title: 'Tên nhân viên',
         type: 'string',
@@ -47,6 +54,10 @@ export class QuanLyCaLamComponent {
       ghi_chu: {
         title: 'Ghi chú',
         type: 'string',
+      },
+      status: {
+        title: 'Có đi làm hay không',
+        type: 'checkbox',
       },
       date: {
         title: 'Ngày làm',
@@ -102,6 +113,7 @@ export class QuanLyCaLamComponent {
     }
   }
   onCreateConfirm(event) {
+    delete event.newData.fullname;
     this.crudBaseService
       .post(`${environment.rest}/work-shift`, event.newData)
       .subscribe(
@@ -118,6 +130,8 @@ export class QuanLyCaLamComponent {
       );
   }
   onSaveConfirm(event) {
+    delete event.newData.fullname;
+    event.newData.status = false;
     this.crudBaseService
       .put(`${environment.rest}/work-shift/${event.data.id}`, event.newData)
       .subscribe(

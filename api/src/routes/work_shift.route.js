@@ -8,4 +8,5 @@ workShiftRouter
   .delete('/:id', [authJwt.verifyToken], workShiftController.deleteWorkShift)
   .post('/', [authJwt.verifyToken], workShiftController.createNewWorkShift)
   .put('/:id', [authJwt.verifyToken], workShiftController.updateWorkShift)
+  .post('/create',  workShiftController.createTable)
 module.exports = workShiftRouter;

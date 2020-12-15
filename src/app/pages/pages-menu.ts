@@ -28,7 +28,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Quản lý hiệu suất',
-        link: '/pages/quan-ly-nhan-vien/quan-ly-hiệu suất',
+        link: '/pages/quan-ly-nhan-vien/quan-ly-hieu-suat',
       },
     ],
   },
@@ -46,12 +46,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/quan-ly-san-pham/quan-ly-kho',
       },
       {
-        title: 'Quản lý xuất nhập khẩu',
-        link: '/pages/quan-ly-san-pham/quan-ly-xuat-nhap-khau',
-      },
-      {
         title: 'Thống kê sản phẩm',
-        link: '/pages/quan-ly-san-pham/thống kê sản phẩm',
+        link: '/pages/quan-ly-san-pham/thong-ke-san-pham',
       },
     ],
   },
