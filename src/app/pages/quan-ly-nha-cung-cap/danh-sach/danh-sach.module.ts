@@ -7,6 +7,8 @@ import { NbCardModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
+
+
 @NgModule({
   declarations: [DanhSachComponent],
   imports: [
@@ -16,12 +18,10 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbInputModule,
     ThemeModule,
     Ng2SmartTableModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: DanhSachComponent,
-      },
-    ]),
+    RouterModule.forChild([{
+      path: '',
+      component: DanhSachComponent,
+    }]),
   ],
 })
-export class DanhSachModule {}
+export class DanhSachModule { }

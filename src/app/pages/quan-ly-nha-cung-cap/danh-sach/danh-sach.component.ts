@@ -9,7 +9,8 @@ import { LocalDataSource } from 'ng2-smart-table';
   templateUrl: './danh-sach.component.html',
   styleUrls: ['./danh-sach.component.scss'],
 })
-export class DanhSachComponent {
+export class DanhSachComponent implements OnInit {
+
   settings = {
     pager: {
       display: true,
@@ -37,39 +38,22 @@ export class DanhSachComponent {
         type: 'number',
       },
       name: {
-        title: 'Tên sản phẩm',
+        title: 'Tên nhà người dùng',
         type: 'string',
-      },
-      price: {
-        title: 'Giá',
-        type: 'string',
-      },
-      description: {
-        title: 'Mô tả',
-        type: 'string',
-      },
-      amount: {
-        title: 'Số lượng',
-        type: 'number',
-      },
-      type_id: {
-        title: 'Mã loại sản phẩm',
-      },
-      product_type: {
-        title: 'Loại sản phẩm',
-        type: 'string',
-        editable: false,
-        addable: false,
       },
     },
   };
+
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
-    this.crudBaseService
-      .get(`${environment.rest}/product`)
-      .subscribe((value: { allProduct: [] }) => {
-        this.source.load(value.allProduct);
-      });
+    this.crudBaseService.get(`${environment.rest}/nha-cung-cap`).subscribe(
+      (value: { allNhaCungCap: [] }) => {
+        this.source.load(value.allNhaCungCap);
+      },
+      (err) => {
+        this.toast.danger(err.error.message);
+      },
+    );
   }
   constructor(
     private crudBaseService: CRUDBaseService,
@@ -81,7 +65,7 @@ export class DanhSachComponent {
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.crudBaseService
-        .delete(`${environment.rest}/product/${event.data.id}`)
+        .delete(`${environment.rest}/nha-cung-cap/${event.data.id}`)
         .subscribe((values: { message: string }) => {
           if (values) {
             this.toast.success(values.message);
@@ -92,10 +76,9 @@ export class DanhSachComponent {
       event.confirm.reject();
     }
   }
-  onCreateConfirm(event: { newData: { product_type: any; }; }) {
-    delete event.newData.product_type;
+  onCreateConfirm(event) {
     this.crudBaseService
-      .post(`${environment.rest}/product`, event.newData)
+      .post(`${environment.rest}/nha-cung-cap`, event.newData)
       .subscribe(
         (value: { message: string }) => {
           this.toast.success(value.message);
@@ -108,10 +91,9 @@ export class DanhSachComponent {
         },
       );
   }
-  onSaveConfirm(event: { newData: { product_type: any; }; data: { id: any; }; }) {
-    delete event.newData.product_type;
+  onSaveConfirm(event) {
     this.crudBaseService
-      .put(`${environment.rest}/product/${event.data.id}`, event.newData)
+      .put(`${environment.rest}/nha-cung-cap/${event.data.id}`, event.newData)
       .subscribe(
         (value: { message: string }) => {
           this.toast.success(value.message);
@@ -124,4 +106,8 @@ export class DanhSachComponent {
         },
       );
   }
+
+  ngOnInit(): void {
+  }
+
 }

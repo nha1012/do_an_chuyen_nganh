@@ -5,6 +5,7 @@ const authJwt = require("../middleware/authJWT");
 let productRouter = express.Router();
 productRouter
   .get('/', [authJwt.verifyToken, authJwt.isEmployee], productController.getAllProduct)
+  .get('/get-san-pham-trong-kho', [authJwt.verifyToken, authJwt.isEmployee], productController.getSanPhamTrongKho)
   // lay thong tin thong ke san pham
   .get('/thong-ke-san-pham', [authJwt.verifyToken, authJwt.isEmployee], productController.getDataThongKeSanPham)
   .delete('/:id', [authJwt.verifyToken, authJwt.isEmployee], productController.deleteProduct)

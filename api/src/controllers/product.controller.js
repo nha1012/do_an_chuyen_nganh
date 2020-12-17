@@ -23,7 +23,7 @@ exports.getDataThongKeSanPham = (req, res) => {
     })
 }
 // xoa user
-exports.deleteProduct = async(req, res) => {
+exports.deleteProduct = async (req, res) => {
   const productId = req.params.id
   ProductModel.deleteProduct(productId)
     .then(data => {
@@ -34,7 +34,7 @@ exports.deleteProduct = async(req, res) => {
     })
 }
 // sua user
-exports.updateProduct = async(req, res) => {
+exports.updateProduct = async (req, res) => {
   const productId = req.params.id
   const product = req.body
   ProductModel.updateProduct(productId, product)
@@ -52,6 +52,16 @@ exports.createNewProduct = (req, res) => {
   ProductModel.createNewProduct(product)
     .then(data => {
       return res.status(200).json({ message: 'Thêm thành công' })
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500).json({ message: "Lỗi hệ thống!" })
+    })
+}
+exports.getSanPhamTrongKho = (req, res) => {
+  ProductModel.getSanPhamTrongKho()
+    .then(data => {
+      return res.status(200).json({ products: data })
     })
     .catch(err => {
       console.log(err);

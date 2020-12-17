@@ -62,7 +62,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Danh sách khách hàng',
-        link: '/pages/quan-ly-san-pham/danh-sach',
+        link: '/pages/quan-ly-khach-hang/danh-sach-khach-hang',
       },
       {
         title: 'Chi tiết từng khách hàng',

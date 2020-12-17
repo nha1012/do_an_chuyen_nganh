@@ -12,6 +12,11 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'quan-ly-nhan-vien',
+      },
+      {
         path: 'quan-ly-khach-hang',
         loadChildren: () =>
           import('./quan-ly-khach-hang/quan-ly-khach-hang.module').then(
@@ -44,6 +49,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./quan-ly-san-pham/quan-ly-san-pham.module').then(
             (m) => m.QuanLySanPhamModule,
+          ),
+      },
+      {
+        path: 'quan-ly-nha-cung-cap',
+        loadChildren: () =>
+          import('./quan-ly-nha-cung-cap/quan-ly-nha-cung-cap.module').then(
+            (m) => m.QuanLyNhaCungCapModule,
           ),
       },
       {
