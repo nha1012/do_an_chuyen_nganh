@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NbCardModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { SelectLoaiSanPhamModule } from 'app/shared/components/select-loai-san-pham/select-loai-san-pham.module';
+import { SelectLoaiSanPhamComponent } from 'app/shared/components/select-loai-san-pham/select-loai-san-pham.component';
 
 @NgModule({
   declarations: [DanhSachComponent],
@@ -16,6 +18,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbInputModule,
     ThemeModule,
     Ng2SmartTableModule,
+    SelectLoaiSanPhamModule,
     RouterModule.forChild([
       {
         path: '',
@@ -23,5 +26,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
       },
     ]),
   ],
+
 })
 export class DanhSachModule {}

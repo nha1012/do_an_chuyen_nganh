@@ -1,8 +1,6 @@
 import { verify } from "jsonwebtoken";
 import { secret } from "../config/auth.config.js";
-import UserModel from '../model/user.model';
 import UserRole from '../model/user-role.model';
-import Role from '../model/role.model';
 
 let verifyToken = (req, res, next) => {
   let token = req.headers["access_token"];

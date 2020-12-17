@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
+import { SelectLoaiSanPhamComponent } from 'app/shared/components/select-loai-san-pham/select-loai-san-pham.component';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -48,19 +49,25 @@ export class DanhSachComponent {
         title: 'Mô tả',
         type: 'string',
       },
-      type_id: {
-        title: 'Mã loại sản phẩm',
-        type: 'string',
-      },
+      // type_id: {
+      //   title: 'Mã loại sản phẩm',
+      // },
       product_type: {
         title: 'Loại sản phẩm',
-        type: 'string',
-        editable: false,
-        addable: false,
+        type: 'html',
+        editor: {
+          type: 'custom',
+          // valuePrepareFunction: (_cell: anxy, row: any) => row,
+          component: SelectLoaiSanPhamComponent,
+          onComponentInitFunction(instance) {
+            instance.save.subscribe(row => {
+              console.log(this);
+            });
+          },
+        },
       },
     },
   };
-
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
     this.crudBaseService
@@ -91,7 +98,6 @@ export class DanhSachComponent {
     }
   }
   onCreateConfirm(event) {
-    delete event.newData.product_type;
     this.crudBaseService
       .post(`${environment.rest}/product`, event.newData)
       .subscribe(
@@ -107,7 +113,6 @@ export class DanhSachComponent {
       );
   }
   onSaveConfirm(event) {
-    delete event.newData.product_type;
     this.crudBaseService
       .put(`${environment.rest}/product/${event.data.id}`, event.newData)
       .subscribe(
