@@ -11,8 +11,8 @@ exports.login = (req, res) => {
     .then(data => {
       if (!_.isEmpty(data)) {
         user = {
-          userId:data[0].id,
-          fullName:data[0].fullname,
+          userId: data[0].id,
+          fullName: data[0].fullname,
           userName: data[0].username,
           email: data[0].email
         }
@@ -22,6 +22,7 @@ exports.login = (req, res) => {
       return res.status(401).json({ message: "Sai tài khoản hoặc mật khẩu!" })
     })
     .catch(err => {
+      console.log(err);
       return res.status(500).json({ message: "Lỗi hệ thống!" })
     })
 }

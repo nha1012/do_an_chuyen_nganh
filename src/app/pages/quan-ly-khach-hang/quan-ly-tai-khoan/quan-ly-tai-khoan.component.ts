@@ -36,6 +36,8 @@ export class QuanLyTaiKhoanComponent {
       id: {
         title: 'ID',
         type: 'number',
+        editable: false,
+        addable: false,
       },
       username: {
         title: 'Tên người dùng',
@@ -68,7 +70,7 @@ export class QuanLyTaiKhoanComponent {
 
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
-    this.crudBaseService.get(`${environment.rest}/user/employee`).subscribe(
+    this.crudBaseService.get(`${environment.rest}/user/customers`).subscribe(
       (value: { allUser: [] }) => {
         this.source.load(value.allUser);
       },
@@ -99,6 +101,7 @@ export class QuanLyTaiKhoanComponent {
     }
   }
   onCreateConfirm(event) {
+    delete event.newData.id;
     this.crudBaseService
       .post(`${environment.rest}/user`, event.newData)
       .subscribe(

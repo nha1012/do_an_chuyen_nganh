@@ -1,12 +1,25 @@
 
 import db from './db';
-// create user
-exports.createNewUser = (user) => {
+// create customers
+exports.createNewEmployee = (user) => {
   const query = `INSERT INTO users set ?`
   return new Promise((resolve, reject) => {
     try {
       db.query(query, user, (err, result) => {
         if (err) reject(err)
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}
+exports.createNewUser = (user) => {
+  const query = `INSERT INTO users set ?`
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query, user, (err, result) => {
+        if (err) throw err;
         resolve(result)
       })
     } catch (error) {
@@ -29,8 +42,22 @@ exports.updateUser = (userId, user) => {
   });
 }
 // get all user
-exports.getAllUser = () => {
-  const query = `SELECT * FROM users`
+exports.getAllCustomer = () => {
+  const query = `SELECT * FROM users INNER JOIN user_roles ON users.id = user_roles.user_id AND user_roles.role_id > 2`;
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query, "", (err, result) => {
+        if (err) reject(err)
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}
+// lay tat ca cac nhan vien
+exports.getNhanVien = () => {
+  const query = `SELECT * FROM users INNER JOIN user_roles ON users.id = user_roles.user_id AND user_roles.role_id <= 2`;
   return new Promise((resolve, reject) => {
     try {
       db.query(query, "", (err, result) => {

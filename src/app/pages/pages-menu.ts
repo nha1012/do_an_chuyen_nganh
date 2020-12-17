@@ -57,6 +57,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/quan-ly-khach-hang',
     children: [
       {
+        title: 'Quản lý tài khoản',
+        link: '/pages/quan-ly-khach-hang/quan-ly-tai-khoan',
+      },
+      {
         title: 'Danh sách khách hàng',
         link: '/pages/quan-ly-san-pham/danh-sach',
       },

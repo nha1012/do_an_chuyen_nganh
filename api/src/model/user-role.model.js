@@ -28,3 +28,22 @@ exports.deleteUserRoleByIdUser = (userId) => {
     }
   });
 }
+
+// create user Role
+exports.createUserRole = (userId, roleId) => {
+  let userRole = {
+    user_id: userId,
+    role_id: roleId
+  }
+  const query = `INSERT INTO user_roles set ?`
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query, userRole, (err, result) => {
+        if (err) reject(err)
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}

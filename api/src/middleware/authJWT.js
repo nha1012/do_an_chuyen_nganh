@@ -18,19 +18,33 @@ let verifyToken = (req, res, next) => {
   });
 };
 
-let isAdmin =async (req, res, next) => {
-  let userRoleId = await UserRole.getUserRoleByIdUser(req.userId);
-  userRoleId = userRoleId[0].role_id;
-  Role.getRoleById(userRoleId)
-    .then(value=>{
-      if(value[0].id === 1){
+let isEmployee = async (req, rest, next) => {
+  UserRole.getUserRoleByIdUser(req.userId)
+    .then(value => {
+      if (value[0].role_id === 2 || value[0].role_id === 1) {
+        req.isAdmin = true;
         next();
         return;
       }
-      res.status(403).send({ message: "Require Admin Role!" });
-      return;
     })
-    .catch(err=>{
+    .catch(err => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+    })
+};
+
+let isAdmin = async (req, res, next) => {
+  UserRole.getUserRoleByIdUser(req.userId)
+    .then(value => {
+      if (value[0].role_id === 1) {
+        req.isAdmin = true;
+        next();
+        return;
+      }
+    })
+    .catch(err => {
       if (err) {
         res.status(500).send({ message: err });
         return;
@@ -40,5 +54,6 @@ let isAdmin =async (req, res, next) => {
 
 module.exports = {
   verifyToken: verifyToken,
-  isAdmin: isAdmin
+  isAdmin: isAdmin,
+  isEmployee: isEmployee
 };
