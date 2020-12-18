@@ -1,1 +1,11 @@
-<p>danh-sach-khach-hang works!</p>
+<nb-card>
+  <nb-card-header>
+    Quản lý tài khoản
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="onUserRowSelect($event)"
+      (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"
+      (deleteConfirm)="onDeleteConfirm($event) ">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

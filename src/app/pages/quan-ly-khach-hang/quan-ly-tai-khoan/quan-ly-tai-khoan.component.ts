@@ -54,16 +54,6 @@ export class QuanLyTaiKhoanComponent {
       password: {
         title: 'Mật khẩu',
         type: 'string',
-        width: '200px',
-      },
-      phone: {
-        title: 'Số điện thoại',
-        type: 'string',
-      },
-      address: {
-        title: 'Địa chỉ',
-        width: '200px',
-        type: 'string',
       },
     },
   };
@@ -117,6 +107,8 @@ export class QuanLyTaiKhoanComponent {
       );
   }
   onSaveConfirm(event) {
+    delete event.newData.role_id;
+    delete event.newData.user_id;
     this.crudBaseService
       .put(`${environment.rest}/user/${event.data.id}`, event.newData)
       .subscribe(

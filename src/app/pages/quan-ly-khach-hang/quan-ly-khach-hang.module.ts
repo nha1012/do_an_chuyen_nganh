@@ -26,6 +26,13 @@ import { RouterModule } from '@angular/router';
             (m) => m.DanhSachKhachHangModule,
           ),
       },
+      {
+        path: 'chi-tiet/:id',
+        loadChildren: () =>
+          import('./chi-tiet/chi-tiet.module').then(
+            (m) => m.ChiTietModule,
+          ),
+      },
     ]),
   ],
 })

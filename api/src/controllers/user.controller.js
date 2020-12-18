@@ -1,6 +1,28 @@
 
 import UserModel from '../model/user.model';
 import UserRoleModel from '../model/user-role.model';
+// getCustomerList
+exports.getCustomerList = (req, res) => {
+  UserModel.getCustomerList()
+    .then(data => {
+      return res.status(200).json({ allUser: data })
+    })
+    .catch(err => {
+      return res.status(500).json({ message: "Lỗi hệ thống!" })
+    })
+}
+// get user by id
+exports.getUserById = (req, res) => {
+  const userId = req.params.id
+  UserModel.getUserById(userId)
+    .then(data => {
+      return res.status(200).json({ user: data })
+    })
+    .catch(err => {
+      return res.status(500).json({ message: "Lỗi hệ thống!" })
+    })
+}
+
 // xua ly logic lay tat ca user
 exports.getAllCustomer = (req, res) => {
   UserModel.getAllCustomer()

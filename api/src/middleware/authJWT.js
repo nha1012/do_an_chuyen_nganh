@@ -20,7 +20,6 @@ let isEmployee = async (req, rest, next) => {
   UserRole.getUserRoleByIdUser(req.userId)
     .then(value => {
       if (value[0].role_id === 2 || value[0].role_id === 1) {
-        req.isAdmin = true;
         next();
         return;
       }

@@ -1,0 +1,32 @@
+<nb-card>
+  <nb-card-header>
+    Thông tin chi tiết khách hàng: {{thongTinKhachHang.fullname}}
+  </nb-card-header>
+  <nb-card-body>
+    <nb-card>
+      <nb-card-header>
+        Thông tin cá nhân
+      </nb-card-header>
+      <nb-card-body status="success">
+        <p><strong>Họ và tên:</strong> {{thongTinKhachHang.fullname}}</p>
+        <p><strong>Địa chỉ:</strong> {{thongTinKhachHang.address}}</p>
+        <p><strong>Số điện thoại:</strong> {{thongTinKhachHang.phone}}</p>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>
+        Các sản phẩm đã mua
+      </nb-card-header>
+      <nb-card-body *ngIf="!checkCacSanPhamDaMua()">
+        Khách hàng chưa mua hàng
+      </nb-card-body>
+      <nb-card-body *ngIf="checkCacSanPhamDaMua()">
+        <ng2-smart-table [settings]="settings" [source]="source">
+        </ng2-smart-table>
+      </nb-card-body>
+      <nb-card-footer>
+        <p><strong>Tổng tiền đã mua:</strong> {{prettier(tongTienDaMua)}} VND</p>
+      </nb-card-footer>
+    </nb-card>
+  </nb-card-body>
+</nb-card>

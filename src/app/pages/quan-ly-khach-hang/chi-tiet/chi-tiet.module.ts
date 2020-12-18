@@ -1,27 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DanhSachKhachHangComponent } from './danh-sach-khach-hang.component';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { NbCardModule, NbInputModule } from '@nebular/theme';
+import { ChiTietComponent } from './chi-tiet.component';
+import { NbCardModule, NbIconModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
-
-
 @NgModule({
-  declarations: [DanhSachKhachHangComponent],
+  declarations: [ChiTietComponent],
   imports: [
-    HttpClientModule,
     CommonModule,
     NbCardModule,
-    NbInputModule,
+    NbIconModule,
     ThemeModule,
     Ng2SmartTableModule,
     RouterModule.forChild([{
       path: '',
-      component: DanhSachKhachHangComponent,
+      component: ChiTietComponent,
     }]),
   ],
 })
-export class DanhSachKhachHangModule { }
+export class ChiTietModule { }

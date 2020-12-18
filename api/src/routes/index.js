@@ -4,6 +4,7 @@ import productRouter from './product.route';
 import productTypeRouter from './product_type.route';
 import workShiftRouter from './work_shift.route';
 import nhaCungCapRouter from './nha-cung-cap.route';
+import orderRouter from './order.route';
 let router = (app) => {
   app.use('/user', userRouter);
   app.get("/", (req, res) => {
@@ -14,5 +15,6 @@ let router = (app) => {
   app.use('/product-type', productTypeRouter);
   app.use('/work-shift', workShiftRouter);
   app.use('/nha-cung-cap', nhaCungCapRouter);
+  app.use('/order', orderRouter);
 }
 module.exports = router

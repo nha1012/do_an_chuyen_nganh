@@ -14,6 +14,22 @@ exports.createNewEmployee = (user) => {
     }
   });
 }
+//lay danh sach khach hang
+exports.getCustomerList = (user) => {
+  const query = `SELECT users.id, users.fullname, users.email, users.address, users.phone FROM users`
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query, user, (err, result) => {
+        console.log(err);
+        if (err) reject(err);
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}
+
 exports.createNewUser = (user) => {
   const query = `INSERT INTO users set ?`
   return new Promise((resolve, reject) => {
@@ -85,7 +101,7 @@ exports.getUserLogin = (user) => {
 }
 // get user by id
 exports.getUserById = (userId) => {
-  const query = `SELECT id, username, fullname, email FROM users WHERE id = '${userId}'`
+  const query = `SELECT id, username, fullname, email, address, phone FROM users WHERE id = '${userId}'`
   return new Promise((resolve, reject) => {
     try {
       db.query(query, (err, result) => {
