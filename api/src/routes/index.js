@@ -5,6 +5,9 @@ import productTypeRouter from './product_type.route';
 import workShiftRouter from './work_shift.route';
 import nhaCungCapRouter from './nha-cung-cap.route';
 import orderRouter from './order.route';
+import transactionRouter from './transaction.route';
+import khuyenMaiRouter from './khuyen-mai.route';
+import imageRouter from './image.route';
 let router = (app) => {
   app.use('/user', userRouter);
   app.get("/", (req, res) => {
@@ -16,5 +19,8 @@ let router = (app) => {
   app.use('/work-shift', workShiftRouter);
   app.use('/nha-cung-cap', nhaCungCapRouter);
   app.use('/order', orderRouter);
+  app.use('/transaction', transactionRouter);
+  app.use('/khuyen-mai', khuyenMaiRouter);
+  app.use('/image', imageRouter);
 }
 module.exports = router
