@@ -22,6 +22,20 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'quan-ly-khuyen-mai',
+        loadChildren: () =>
+          import('./quan-ly-khuyen-mai/quan-ly-khuyen-mai.module').then(
+            (m) => m.QuanLyKhuyenMaiModule,
+          ),
+      },
+      {
+        path: 'quan-ly-don-hang',
+        loadChildren: () =>
+          import('./quan-ly-don-hang/quan-ly-don-hang.module').then(
+            (m) => m.QuanLyDonHangModule,
+          ),
+      },
+      {
         path: 'dang-ky-ca-lam',
         loadChildren: () =>
           import('./dang-ky-ca-lam/dang-ky-ca-lam.module').then(

@@ -3,6 +3,7 @@ import { NbToastrService } from '@nebular/theme';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
+import { SmartTableDatepickerComponent, SmartTableDatepickerRenderComponent } from '../smart-table-datepicker/smart-table-datepicker.component';
 
 @Component({
   selector: 'ngx-danh-sach',
@@ -37,34 +38,41 @@ export class DanhSachComponent {
         type: 'number',
       },
       name: {
-        title: 'Tên sản phẩm',
+        title: 'Tên chương trình',
         type: 'string',
       },
-      price: {
-        title: 'Giá',
-        type: 'string',
+      start_date: {
+        title: 'Ngày bắt đầu',
+        type: 'custom',
+        renderComponent: SmartTableDatepickerRenderComponent,
+        width: '250px',
+        filter: false,
+        sortDirection: 'desc',
+        editor: {
+          type: 'custom',
+          component: SmartTableDatepickerComponent,
+        },
       },
-      amount: {
-        title: 'Số lượng',
-        type: 'number',
-      },
-      type_id: {
-        title: 'Mã loại sản phẩm',
-      },
-      product_type: {
-        title: 'Loại sản phẩm',
-        type: 'string',
-        editable: false,
-        addable: false,
+      end_date: {
+        title: 'Ngày kết thúc',
+        type: 'custom',
+        renderComponent: SmartTableDatepickerRenderComponent,
+        width: '250px',
+        filter: false,
+        sortDirection: 'desc',
+        editor: {
+          type: 'custom',
+          component: SmartTableDatepickerComponent,
+        },
       },
     },
   };
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
     this.crudBaseService
-      .get(`${environment.rest}/product`)
-      .subscribe((value: { allProduct: [] }) => {
-        this.source.load(value.allProduct);
+      .get(`${environment.rest}/khuyen-mai`)
+      .subscribe((value: { khuyenMais: [] }) => {
+        this.source.load(value.khuyenMais);
       });
   }
   constructor(
@@ -77,7 +85,7 @@ export class DanhSachComponent {
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.crudBaseService
-        .delete(`${environment.rest}/product/${event.data.id}`)
+        .delete(`${environment.rest}/transaction/${event.data.id}`)
         .subscribe((values: { message: string }) => {
           if (values) {
             this.toast.success(values.message);

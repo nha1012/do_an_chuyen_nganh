@@ -1,0 +1,14 @@
+<nb-card>
+  <nb-card-header>
+    Báo cáo đơn hàng
+  </nb-card-header>
+  <nb-card-body>
+    <p><strong>Tổng tiền đã bán được: </strong>{{prettier(tongTienDaNhanDuoc)}} VNĐ</p>
+    <p><strong>Tổng tiền đã bán nhưng chưa nhận: </strong>{{prettier(tongTienChuaNhanDuoc)}} VNĐ</p>
+  </nb-card-body>
+  <nb-card-footer>
+    <strong>
+      Tổng cộng: {{prettier(tongTienDaNhanDuoc + tongTienChuaNhanDuoc)}} VNĐ
+    </strong>
+  </nb-card-footer>
+</nb-card>

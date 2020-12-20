@@ -43,6 +43,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/quan-ly-san-pham',
     children: [
       {
+        title: 'Thêm mới',
+        link: '/pages/quan-ly-san-pham/them-moi',
+      },
+      {
         title: 'Danh sách sản phẩm',
         link: '/pages/quan-ly-san-pham/danh-sach',
       },

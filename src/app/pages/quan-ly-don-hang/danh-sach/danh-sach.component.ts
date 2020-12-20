@@ -36,35 +36,46 @@ export class DanhSachComponent {
         title: 'ID',
         type: 'number',
       },
-      name: {
+      user_name: {
         title: 'Tên sản phẩm',
         type: 'string',
       },
-      price: {
-        title: 'Giá',
+      user_email: {
+        title: 'Email',
+        type: 'string',
+      },
+      user_id: {
+        title: 'ID khách hàng',
+        type: 'string',
+      },
+      user_phone: {
+        title: 'Số điện thoại',
         type: 'string',
       },
       amount: {
-        title: 'Số lượng',
+        title: 'Số tiền phải trả',
+        type: 'string',
+      },
+      status: {
+        title: 'Trạng thái',
         type: 'number',
       },
-      type_id: {
-        title: 'Mã loại sản phẩm',
+      message: {
+        title: 'Ghi chú',
+        type: 'number',
       },
-      product_type: {
-        title: 'Loại sản phẩm',
+      payment_info: {
+        title: 'Phương thức thanh toán',
         type: 'string',
-        editable: false,
-        addable: false,
       },
     },
   };
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
     this.crudBaseService
-      .get(`${environment.rest}/product`)
-      .subscribe((value: { allProduct: [] }) => {
-        this.source.load(value.allProduct);
+      .get(`${environment.rest}/transaction`)
+      .subscribe((value: { allTransaction: [] }) => {
+        this.source.load(value.allTransaction);
       });
   }
   constructor(
@@ -77,7 +88,7 @@ export class DanhSachComponent {
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.crudBaseService
-        .delete(`${environment.rest}/product/${event.data.id}`)
+        .delete(`${environment.rest}/transaction/${event.data.id}`)
         .subscribe((values: { message: string }) => {
           if (values) {
             this.toast.success(values.message);

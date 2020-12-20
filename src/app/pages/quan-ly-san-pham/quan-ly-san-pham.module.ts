@@ -23,6 +23,11 @@ import { FormsModule } from '@angular/forms';
           import('./danh-sach/danh-sach.module').then((m) => m.DanhSachModule),
       },
       {
+        path: 'them-moi',
+        loadChildren: () =>
+          import('./them-moi/them-moi.module').then((m) => m.ThemMoiModule),
+      },
+      {
         path: 'quan-ly-kho',
         loadChildren: () =>
           import('./quan-ly-kho/quan-ly-kho.module').then(

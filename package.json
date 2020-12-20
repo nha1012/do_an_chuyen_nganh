@@ -45,6 +45,8 @@
     "@angular/router": "^10.0.10",
     "@asymmetrik/ngx-leaflet": "3.0.1",
     "@auth0/angular-jwt": "^5.0.2",
+    "@ckeditor/ckeditor5-angular": "^2.0.1",
+    "@ckeditor/ckeditor5-build-classic": "^24.0.0",
     "@firebase/app": "^0.6.13",
     "@nebular/auth": "6.0.0",
     "@nebular/eva-icons": "6.0.0",
