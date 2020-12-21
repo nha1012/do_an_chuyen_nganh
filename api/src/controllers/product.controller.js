@@ -51,7 +51,7 @@ exports.createNewProduct = (req, res) => {
   const product = req.body
   ProductModel.createNewProduct(product)
     .then(data => {
-      return res.status(200).json({ message: 'Thêm thành công' })
+      return res.status(200).json({ message: 'Thêm thành công', data:data })
     })
     .catch(err => {
       console.log(err);
