@@ -1,14 +1,15 @@
 import db from './db';
 // get work shif by id user
 exports.createNewImageProduct = (data) => {
-  const query = `INSERT INTO product_image set = ?`
+  const query = `INSERT INTO product_image set ?`
   return new Promise((resolve, reject) => {
     try {
       db.query(query, data, (err, result) => {
-        if (err) reject(err)
+        if (err) console.log(err);
         resolve(result)
       })
     } catch (error) {
+      console.log(error);
       if (error) reject(error)
     }
   });

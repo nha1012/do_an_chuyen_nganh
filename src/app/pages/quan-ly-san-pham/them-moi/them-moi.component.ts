@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
@@ -26,6 +27,7 @@ export class ThemMoiComponent implements OnInit {
   constructor(
     private crudBaseService: CRUDBaseService,
     private toast: NbToastrService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -65,6 +67,13 @@ export class ThemMoiComponent implements OnInit {
                 .subscribe((v: { message: any }) => {
                   this.toast.success(v.message);
                   this.loading = false;
+                  this.thongTinSanPham = {
+                    name: '',
+                    price: 0,
+                    amount: 0,
+                    type_id: 0,
+                    description: '',
+                  };
                 });
             },
             (error) => {

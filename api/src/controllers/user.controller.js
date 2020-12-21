@@ -19,6 +19,7 @@ exports.getUserById = (req, res) => {
       return res.status(200).json({ user: data })
     })
     .catch(err => {
+      console.log(err);
       return res.status(500).json({ message: "Lỗi hệ thống!" })
     })
 }
