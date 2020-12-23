@@ -52,7 +52,10 @@ export class QuanLyTaiKhoanComponent {
       password: {
         title: 'Mật khẩu',
         type: 'string',
-        width: '200px',
+      },
+      name: {
+        title: 'Quyền',
+        type: 'string',
       },
       phone: {
         title: 'Số điện thoại',
@@ -60,7 +63,6 @@ export class QuanLyTaiKhoanComponent {
       },
       address: {
         title: 'Địa chỉ',
-        width: '200px',
         type: 'string',
       },
     },

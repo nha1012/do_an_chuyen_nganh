@@ -4,6 +4,7 @@ const app = express();
 import morgan from 'morgan';
 import routes from './routes/index';
 import cors from 'cors';
+import path from 'path';
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
 //cors
@@ -11,6 +12,8 @@ var corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
+app.get("/", express.static(path.join("./public")));
+
 app.use(cors(corsOptions))
 // parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));

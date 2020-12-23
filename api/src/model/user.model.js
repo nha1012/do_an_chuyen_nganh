@@ -73,7 +73,7 @@ exports.getAllCustomer = () => {
 }
 // lay tat ca cac nhan vien
 exports.getNhanVien = () => {
-  const query = `SELECT * FROM users INNER JOIN user_roles ON users.id = user_roles.user_id AND user_roles.role_id <= 2`;
+  const query = `SELECT *, roles.name FROM users INNER JOIN user_roles ON users.id = user_roles.user_id AND user_roles.role_id <= 2 INNER JOIN roles ON user_roles.role_id = roles.id`;
   return new Promise((resolve, reject) => {
     try {
       db.query(query, "", (err, result) => {
