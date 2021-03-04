@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
+import { DiemDanhComponent } from 'app/shared/components/diem-danh/diem-danh.component';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -18,6 +19,11 @@ export class QuanLyCaLamComponent {
     '<input type="checkbox" checked>';
   }
   settings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
     pager: {
       display: true,
       perPage: 7,
@@ -26,17 +32,14 @@ export class QuanLyCaLamComponent {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
     },
     columns: {
       id: {
@@ -56,8 +59,9 @@ export class QuanLyCaLamComponent {
         type: 'string',
       },
       status: {
-        title: 'Có đi làm hay không',
-        type: 'checkbox',
+        title: 'Điểm danh',
+        type: 'custom',
+        renderComponent: DiemDanhComponent,
       },
       date: {
         title: 'Ngày làm',

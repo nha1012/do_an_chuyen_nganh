@@ -72,3 +72,16 @@ exports.createNewWorkShift = (req, res) => {
       return res.status(500).json({ message: "Lỗi hệ thống!" })
     })
 }
+
+// diem danh
+exports.diemDanh = async(req, res) => {
+  const workShiftId = req.params.id
+  const workShift = req.body;
+  WorkShiftModel.diemDanh(workShiftId, workShift)
+    .then(data => {
+      return res.status(200).json({ message: 'Cập nhật ca làm thành công' })
+    })
+    .catch(err => {
+      return res.status(500).json({ message: "Lỗi hệ thống" })
+    })
+}

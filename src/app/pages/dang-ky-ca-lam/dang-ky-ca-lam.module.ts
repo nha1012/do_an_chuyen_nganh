@@ -3,7 +3,13 @@ import { CommonModule } from '@angular/common';
 import { DangKyCaLamComponent } from './dang-ky-ca-lam.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { NbCardModule, NbInputModule } from '@nebular/theme';
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbDialogModule,
+  NbInputModule,
+  NbSelectModule,
+} from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -22,6 +28,16 @@ import {
   OWL_DATE_TIME_FORMATS,
   OWL_DATE_TIME_LOCALE,
 } from 'ng-pick-datetime';
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import { DnDialogModule } from 'ditagis-nebular';
+
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+]);
 
 export const MY_CUSTOM_FORMATS = {
   fullPickerInput: 'YYYY-MM-DD',
@@ -44,6 +60,11 @@ export const MY_CUSTOM_FORMATS = {
     FormsModule,
     OwlNativeDateTimeModule,
     Ng2SmartTableModule,
+    DnDialogModule,
+    NbSelectModule,
+    NbButtonModule,
+    FullCalendarModule, // register FullCalendar with you app
+    NbDialogModule.forRoot(),
     RouterModule.forChild([
       {
         pathMatch: 'full',
@@ -52,10 +73,7 @@ export const MY_CUSTOM_FORMATS = {
       },
     ]),
   ],
-  entryComponents: [
-    SmartTableDatepickerComponent,
-    SmartTableDatepickerRenderComponent,
-  ],
+  entryComponents: [SmartTableDatepickerComponent],
   providers: [
     {
       provide: DateTimeAdapter,

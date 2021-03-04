@@ -5,7 +5,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CRUDBaseService {
-  constructor(private http: HttpClient) {}
+  private token: string;
+  constructor(private http: HttpClient) {
+    this.token = this.getAccessToken();
+  }
 
   getAccessToken() {
     if (localStorage.getItem('access_token')) {
@@ -19,28 +22,29 @@ export class CRUDBaseService {
   }
 
   get(url: string) {
-    const token = this.getAccessToken();
     return this.http.get(url, {
-      headers: { access_token: token },
+      headers: { access_token: this.token },
     });
   }
 
   post(url: string, data: any) {
-    const token = this.getAccessToken();
     return this.http.post(url, data, {
-      headers: { access_token: token },
+      headers: { access_token: this.token },
     });
   }
   delete(url: string) {
-    const token = this.getAccessToken();
     return this.http.delete(url, {
-      headers: { access_token: token },
+      headers: { access_token: this.token },
     });
   }
   put(url: string, data: any) {
-    const token = this.getAccessToken();
     return this.http.put(url, data, {
-      headers: { access_token: token },
+      headers: { access_token: this.token },
+    });
+  }
+  path(url: string, data: any) {
+    return this.http.patch(url, data, {
+      headers: { access_token: this.token },
     });
   }
 }

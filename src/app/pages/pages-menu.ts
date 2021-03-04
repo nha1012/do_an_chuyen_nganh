@@ -3,7 +3,6 @@ import { icon } from 'leaflet';
 import { title } from 'process';
 
 export const MENU_ITEMS: NbMenuItem[] = [
-
   {
     title: 'Thống kê',
     group: true,
@@ -83,10 +82,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách nhà cung cấp',
         link: '/pages/quan-ly-nha-cung-cap/danh-sach',
-      },
-      {
-        title: 'Sản phẩm nhà cung cấp',
-        link: '/pages/quan-ly-nha-cung-cap/san-pham-nha-cung-cap',
       },
     ],
   },

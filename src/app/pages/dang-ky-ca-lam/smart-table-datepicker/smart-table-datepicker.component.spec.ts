@@ -8,9 +8,8 @@ describe('SmartTableDatepickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SmartTableDatepickerComponent ]
-    })
-    .compileComponents();
+      declarations: [SmartTableDatepickerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

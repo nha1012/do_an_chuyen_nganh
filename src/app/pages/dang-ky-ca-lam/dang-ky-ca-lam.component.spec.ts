@@ -8,9 +8,8 @@ describe('DangKyCaLamComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DangKyCaLamComponent ]
-    })
-    .compileComponents();
+      declarations: [DangKyCaLamComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -85,3 +85,17 @@ exports.deleteWorkShift = (workShiftId) => {
     }
   });
 }
+// diem danh ca lam
+exports.diemDanh = (workShiftId, data) => {
+  const query = `UPDATE work_shift set ? WHERE id = '${workShiftId}'`
+  return new Promise((resolve, reject) => {
+    try {
+      db.query(query,data, (err, result) => {
+        if (err) reject(err)
+        resolve(result)
+      })
+    } catch (error) {
+      if (error) reject(error)
+    }
+  });
+}

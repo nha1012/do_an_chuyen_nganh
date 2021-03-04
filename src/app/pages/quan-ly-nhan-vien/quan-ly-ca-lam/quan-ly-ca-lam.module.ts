@@ -22,6 +22,7 @@ import {
   OWL_DATE_TIME_LOCALE,
 } from 'ng-pick-datetime';
 import { QuanLyCaLamComponent } from './quan-ly-ca-lam.component';
+import { DiemDanhModule } from 'app/shared/components/diem-danh/diem-danh.module';
 
 export const MY_CUSTOM_FORMATS = {
   fullPickerInput: 'YYYY-MM-DD',
@@ -44,6 +45,7 @@ export const MY_CUSTOM_FORMATS = {
     FormsModule,
     OwlNativeDateTimeModule,
     Ng2SmartTableModule,
+    DiemDanhModule,
     RouterModule.forChild([
       {
         pathMatch: 'full',

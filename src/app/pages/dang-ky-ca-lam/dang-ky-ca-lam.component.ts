@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
+import {
+  NbDialogModule,
+  NbDialogRef,
+  NbDialogService,
+  NbToastrService,
+} from '@nebular/theme';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -7,6 +12,8 @@ import {
   SmartTableDatepickerComponent,
   SmartTableDatepickerRenderComponent,
 } from './smart-table-datepicker/smart-table-datepicker.component';
+import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
+// tslint:disable-next-line:max-line-length
 
 @Component({
   selector: 'ngx-dang-ky-ca-lam',
@@ -14,6 +21,13 @@ import {
   styleUrls: ['./dang-ky-ca-lam.component.scss'],
 })
 export class DangKyCaLamComponent {
+  // calendarOptions: CalendarOptions = {
+  //   initialView: 'dayGridMonth',
+  //   dateClick: (event) => {
+  //     this.openDialog(event);
+  //   }
+  // };
+  isOpen = false;
   settings = {
     pager: {
       display: true,
@@ -70,6 +84,7 @@ export class DangKyCaLamComponent {
   constructor(
     private crudBaseService: CRUDBaseService,
     private toast: NbToastrService,
+    private dialog: NbDialogService,
   ) {
     this.loadDataTable();
   }
@@ -119,6 +134,25 @@ export class DangKyCaLamComponent {
       .subscribe(
         (value: { message: string }) => {
           this.toast.success(value.message);
+        },
+        (err) => {
+          this.toast.danger(err.error.message);
+        },
+        () => {
+          this.loadDataTable();
+        },
+      );
+  }
+  openDialog(event) {
+    this.isOpen = true;
+  }
+  themMoi(event) {
+    this.crudBaseService
+      .post(`${environment.rest}/work-shift`, event.dateStr)
+      .subscribe(
+        (value: { message: string }) => {
+          this.toast.success(value.message);
+          this.loadDataTable();
         },
         (err) => {
           this.toast.danger(err.error.message);

@@ -1,10 +1,21 @@
-<nb-card>
-  <nb-card-header>
-   Đang ký ca làm
-  </nb-card-header>
+<!-- <nb-card>
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="onSaveConfirm($event)"
-    (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
+    <full-calendar [options]="calendarOptions"></full-calendar>
   </nb-card-body>
-</nb-card>
+  <dn-dialog [open]="isOpen">
+    <dn-dialog-header>
+      <button (click)="isOpen = false" nbButton>Đóng</button>
+    </dn-dialog-header>
+    <dn-dialog-body>
+      <nb-select fullWidth placeholder="Chọn ca làm">
+        <nb-option value="Sáng">Sáng</nb-option>
+        <nb-option value="Chiều">Chiều</nb-option>
+        <nb-option value="Tối">Tối</nb-option>
+      </nb-select>
+    </dn-dialog-body>
+    <dn-dialog-footer>
+      <button nbButton>Xóa trắng</button>
+      <button status="success" nbButton>Thêm mới</button>
+    </dn-dialog-footer>
+  </dn-dialog>
+</nb-card> -->

@@ -35,13 +35,13 @@ const routes: Routes = [
             (m) => m.QuanLyDonHangModule,
           ),
       },
-      {
-        path: 'dang-ky-ca-lam',
-        loadChildren: () =>
-          import('./dang-ky-ca-lam/dang-ky-ca-lam.module').then(
-            (m) => m.DangKyCaLamModule,
-          ),
-      },
+      // {
+      //   path: 'dang-ky-ca-lam',
+      //   loadChildren: () =>
+      //     import('./dang-ky-ca-lam/dang-ky-ca-lam.module').then(
+      //       (m) => m.DangKyCaLamModule,
+      //     ),
+      // },
       {
         path: 'quan-ly-danh-muc',
         loadChildren: () =>
@@ -87,4 +87,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

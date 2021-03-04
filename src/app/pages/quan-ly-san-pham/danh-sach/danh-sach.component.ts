@@ -11,15 +11,12 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class DanhSachComponent {
   settings = {
+    actions: {
+      add: false,
+    },
     pager: {
       display: true,
       perPage: 7,
-    },
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -88,7 +85,7 @@ export class DanhSachComponent {
       event.confirm.reject();
     }
   }
-  onCreateConfirm(event: { newData: { product_type: any; }; }) {
+  onCreateConfirm(event: { newData: { product_type: any } }) {
     delete event.newData.product_type;
     this.crudBaseService
       .post(`${environment.rest}/product`, event.newData)
@@ -104,7 +101,7 @@ export class DanhSachComponent {
         },
       );
   }
-  onSaveConfirm(event: { newData: { product_type: any; }; data: { id: any; }; }) {
+  onSaveConfirm(event: { newData: { product_type: any }; data: { id: any } }) {
     delete event.newData.product_type;
     this.crudBaseService
       .put(`${environment.rest}/product/${event.data.id}`, event.newData)
