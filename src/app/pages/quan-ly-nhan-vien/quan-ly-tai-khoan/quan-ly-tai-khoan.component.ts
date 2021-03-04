@@ -4,7 +4,6 @@ import { NbToastContainer, NbToastrService } from '@nebular/theme';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
-
 @Component({
   selector: 'ngx-quan-ly-tai-khoan',
   templateUrl: './quan-ly-tai-khoan.component.html',
@@ -33,10 +32,6 @@ export class QuanLyTaiKhoanComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
       username: {
         title: 'Tên người dùng',
         type: 'string',
@@ -57,7 +52,7 @@ export class QuanLyTaiKhoanComponent {
         title: 'Quyền',
         type: 'string',
       },
-      phone: {
+      phoneNumber: {
         title: 'Số điện thoại',
         type: 'string',
       },
@@ -70,18 +65,14 @@ export class QuanLyTaiKhoanComponent {
 
   source: LocalDataSource = new LocalDataSource();
   loadDataTable() {
-    this.crudBaseService.get(`${environment.rest}/user/employee`).subscribe(
-      (value: { allUser: [] }) => {
-        this.source.load(value.allUser);
-      },
-      (err) => {
-        this.toast.danger(err.error.message);
-      },
-    );
+    this.userService.getMany()
+      .subscribe(value => this.source.load(value));
+
   }
   constructor(
     private crudBaseService: CRUDBaseService,
     private toast: NbToastrService,
+    private userService: UserService,
   ) {
     this.loadDataTable();
   }
