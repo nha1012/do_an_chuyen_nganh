@@ -15,7 +15,11 @@ import { RoleEnum } from 'app/shared/services/role/role.interface';
 export class QuanLyTaiKhoanComponent {
   @ViewChild('table', { static: false })
   table: DatatableComponent<UserEntity>;
-  source: LocalDataSource = new LocalDataSource();
+
+  filterEntity: UserEntity = {
+    userId: '',
+    roleId: '',
+  };
   datatableService: DatatableService<UserEntity> = {
     service: this.userService,
     primaryField: 'userId',
@@ -30,10 +34,22 @@ export class QuanLyTaiKhoanComponent {
     private userService: UsersService,
   ) {
   }
-
+  loadDataTable() {
+    this.table.loadData();
+  }
+  getNhanVien($event) {
+    this.filterEntity.userId = $event;
+  }
   getBuilder(builder: RequestQueryBuilder) {
-    builder.select(['username', 'role', 'address', 'email', 'displayName', 'phoneNumber', 'password', 'roleId']);
+    // tslint:disable-next-line:max-line-length
+    builder.select(['userId', 'username', 'role', 'address', 'email', 'displayName', 'phoneNumber', 'password', 'roleId']);
     builder.setJoin({ field: 'role', select: ['roleName'] });
     builder.setFilter({ field: 'roleId', operator: '$in', value: [RoleEnum.Admin, RoleEnum.Employee] });
+    this.filterEntity && this.filterEntity.userId &&
+      builder.setFilter({ field: 'userId', operator: '$eq', value: this.filterEntity.userId });
+
+    this.filterEntity && this.filterEntity.roleId &&
+      builder.setFilter({ field: 'roleId', operator: '$eq', value: this.filterEntity.roleId });
+
   }
 }

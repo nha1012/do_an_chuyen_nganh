@@ -14,10 +14,16 @@ export class SelectNhanVienComponent implements OnInit {
   nhanViens: UserEntity[];
   constructor(private userService: UsersService) {
     this.userService
-      .getMany({ filter: { field: 'roleId', operator: '$eq', value: [RoleEnum.Admin, RoleEnum.Employee] } })
+      .getMany(this.getBuilder())
       .subscribe(value => this.nhanViens = value);
   }
   ngOnInit(): void {
 
+  }
+  getBuilder() {
+    const builder = new RequestQueryBuilder();
+    builder.select(['userId', 'displayName', 'roleId'] as Array<keyof UserEntity>);
+    builder.setFilter({ field: 'roleId', operator: '$in', value: [RoleEnum.Admin, RoleEnum.Employee] });
+    return builder;
   }
 }

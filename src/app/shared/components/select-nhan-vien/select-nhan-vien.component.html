@@ -1,5 +1,3 @@
-<nb-select class="m-2" placeholder="Chọn ca làm" fullWidth (selectedChange)="valueChange.emit($event)">
-  <nb-option value="SANG">Sáng</nb-option>
-  <nb-option value="CHIEU">Chiều</nb-option>
-  <nb-option value="TOI">Tối</nb-option>
+<nb-select placeholder="Nhân viên" fullWidth (selectedChange)="nhanVienSelected.emit($event)">
+  <nb-option *ngFor="let user of nhanViens" [value]="user.userId">{{user.displayName}}</nb-option>
 </nb-select>

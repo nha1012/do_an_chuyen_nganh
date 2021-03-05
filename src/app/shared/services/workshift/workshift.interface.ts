@@ -6,6 +6,7 @@ export interface WorkshiftEntity {
   userId?: string;
   date?: Date;
   user?: UserEntity;
+  status?: boolean;
 }
 
 export enum CaLamEnum {

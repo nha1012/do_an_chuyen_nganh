@@ -3,6 +3,20 @@
    Quản lý tài khoản
   </nb-card-header>
   <nb-card-body>
+    <div class="row d-flex">
+      <ngx-select-nhan-vien class="m-2" (nhanVienSelected)="getNhanVien($event)"></ngx-select-nhan-vien>
+      <ngx-select-role class="m-2" (valueChange)="filterEntity.roleId = $event"></ngx-select-role>
+      <div class="nut-loc">
+        <button
+          nbButton
+          status="primary"
+          outline
+          (click)="loadDataTable()"
+        >
+          Lọc
+        </button>
+      </div>
+    </div>
     <ngn-datatable
       #table
       selectionType="single"

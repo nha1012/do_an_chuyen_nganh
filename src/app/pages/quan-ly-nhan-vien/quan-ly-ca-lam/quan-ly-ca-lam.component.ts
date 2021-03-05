@@ -21,12 +21,19 @@ export class QuanLyCaLamComponent {
     primaryField: 'workshiftId',
     builder: this.getBuilder.bind(this),
   };
-  filterEntity = {
-    caLam: '',
+  filterEntity: WorkshiftEntity = {
+    workshift: undefined,
+    userId: '',
   };
   actions: DatatableAction<WorkshiftEntity>[] = [
     { name: 'quick-edit' },
     { name: 'delete' },
+    {
+      name: 'diem danh',
+      tooltip: 'Điểm danh nhân viên',
+      icon: '<i class="far fa-check-circle text-success"></i>',
+      click: (e) => this.diemDanh(e),
+    },
   ];
   constructor(
     private toast: NbToastrService,
@@ -36,8 +43,19 @@ export class QuanLyCaLamComponent {
   loadDataTable() {
     this.table.loadData();
   }
+  async diemDanh(workshiftCurrent: WorkshiftEntity) {
+    if (confirm('Xác nhận điểm danh nhân viên')) {
+      try {
+        await this.workshiftService.put(workshiftCurrent.workshiftId, { status: true }).toPromise();
+        this.toast.success('Điểm danh thành công', 'Thông báo');
+        this.table.loadData();
+      } catch (error) {
+        this.toast.danger(error.message);
+      }
+    }
+  }
   getBuilder(builder: RequestQueryBuilder) {
-    builder.select(['date', 'workshift', 'user'] as Array<keyof WorkshiftEntity>);
+    builder.select(['date', 'workshift', 'user', 'status'] as Array<keyof WorkshiftEntity>);
     // tslint:disable-next-line:max-line-length
     builder.setJoin({ field: 'user', select: ['username', 'displayName', 'phoneNumber', 'address'] as Array<keyof UserEntity> });
     this.tgLamViec &&
@@ -54,7 +72,10 @@ export class QuanLyCaLamComponent {
         operator: '$lte',
         value: ((this.tgLamViec as any).end as Date).toJSON(),
       });
-    this.filterEntity.caLam &&
-      builder.setFilter({ field: 'workshift', operator: '$eq', value: this.filterEntity.caLam });
+    this.filterEntity && this.filterEntity.workshift &&
+      builder.setFilter({ field: 'workshift', operator: '$eq', value: this.filterEntity.workshift });
+    this.filterEntity && this.filterEntity.userId &&
+      builder.setFilter({ field: 'userId', operator: '$eq', value: this.filterEntity.userId });
+
   }
 }

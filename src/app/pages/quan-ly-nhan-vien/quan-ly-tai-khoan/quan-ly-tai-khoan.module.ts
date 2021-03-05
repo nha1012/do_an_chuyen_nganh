@@ -4,10 +4,12 @@ import { QuanLyTaiKhoanComponent } from './quan-ly-tai-khoan.component';
 import { RouterModule } from '@angular/router';
 import { NgnDatatableModule } from 'ngn-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { NbCardModule, NbInputModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SelectNhanVienModule } from 'app/shared/components/select-nhan-vien/select-nhan-vien.module';
+import { SelectRoleModule } from 'app/shared/components/select-role/select-role.module';
 
 @NgModule({
   declarations: [QuanLyTaiKhoanComponent],
@@ -20,6 +22,9 @@ import { FormsModule } from '@angular/forms';
     Ng2SmartTableModule,
     NgnDatatableModule,
     FormsModule,
+    SelectNhanVienModule,
+    NbButtonModule,
+    SelectRoleModule,
     RouterModule.forChild([{ path: '', component: QuanLyTaiKhoanComponent }]),
   ],
 })

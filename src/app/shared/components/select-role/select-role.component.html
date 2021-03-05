@@ -1,0 +1,4 @@
+<nb-select placeholder="Chọn quyền" fullWidth (selectedChange)="valueChange.emit($event)">
+  <nb-option [value]="RoleEnum.Admin">Admin</nb-option>
+  <nb-option [value]="RoleEnum.Employee">Nhân viên</nb-option>
+</nb-select>

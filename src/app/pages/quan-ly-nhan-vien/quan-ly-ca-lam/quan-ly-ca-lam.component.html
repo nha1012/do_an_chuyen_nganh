@@ -12,8 +12,8 @@
         [nbDatepicker]="dpkHSTrongThang"
       />
       <nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
-      <ngx-select-ca-lam (valueChange)="filterEntity.caLam = $event"></ngx-select-ca-lam>
-      <ngx-select-nhan-vien></ngx-select-nhan-vien>
+      <ngx-select-ca-lam class="m-2" (valueChange)="filterEntity.workshift= $event"></ngx-select-ca-lam>
+      <ngx-select-nhan-vien class="m-2" (nhanVienSelected)="filterEntity.userId= $event"></ngx-select-nhan-vien>
       <div class="nut-loc">
         <button
           nbButton
@@ -37,10 +37,17 @@
     >
       <ngn-datatable-column name="Ngày" prop="date" [width]="200">
         <ng-template ngn-datatable-cell-template let-value="value">
-          <span>{{ value   }}</span>
+          <span>{{ value }}</span>
         </ng-template>
       </ngn-datatable-column>
       <ngn-datatable-column name="Ca làm" prop="workshift" type="string"  [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Có/Không làm" prop="status" [width]="200">
+        <ng-template ngn-datatable-cell-template let-value="value">
+          <nb-checkbox disabled status="primary" *ngIf="value" [checked]="value">Có</nb-checkbox>
+          <nb-checkbox disabled status="warning" *ngIf="!value" [checked]="value">Không</nb-checkbox>
+
+        </ng-template>
+      </ngn-datatable-column>
       <ngn-datatable-column name="Tên" prop="user.displayName" type="string"  [width]="200"></ngn-datatable-column>
 
       <ngn-datatable-column name="Số điện thoại" prop="user.phoneNumber" type="string"  [width]="250"></ngn-datatable-column>
