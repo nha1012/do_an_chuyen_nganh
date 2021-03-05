@@ -11,12 +11,12 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   public isAuthorized: boolean = false;
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
   login(userName: string, password: string): Observable<boolean> {
-    return this.http.post<{token: string}>(`${rest}/login`, {userName: userName, password: password})
+    return this.http.post<{ accessToken: string }>(`${rest}/login`, { username: userName, password: password })
       .pipe(
         map(result => {
-          localStorage.setItem('access_token', result.token);
+          localStorage.setItem('access_token', result.accessToken);
           return true;
         }),
       );

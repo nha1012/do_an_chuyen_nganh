@@ -3,8 +3,24 @@
    Quản lý tài khoản
   </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="onSaveConfirm($event)"
-    (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
+    <ngn-datatable
+      #table
+      selectionType="single"
+      [datatableService]="datatableService"
+      [externalPaging]="true"
+      [limit]="10"
+      [scrollbarH]="true"
+      class="material"
+      [actions]="actions"
+    >
+      <ngn-datatable-column name="Tài khoản" prop="username" type="string" [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Mật Khẩu" prop="password" type="string"  [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Quyền" prop="role.roleName" type="string"  [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Số điện thoại" prop="phoneNumber" type="string"  [width]="100"></ngn-datatable-column>
+      <ngn-datatable-column name="Tên" prop="displayName" type="string"  [width]="200"></ngn-datatable-column>
+
+      <ngn-datatable-column name="Email" prop="email" type="string"  [width]="250"></ngn-datatable-column>
+      <ngn-datatable-column name="Địa chỉ" prop="address" type="string"  [width]="350"></ngn-datatable-column>
+    </ngn-datatable>
   </nb-card-body>
 </nb-card>

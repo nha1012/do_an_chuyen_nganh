@@ -14,20 +14,23 @@
 
 // loading progress bar theme
 @import './pace.theme';
-
+@import '~ngn-datatable/themes/material.scss';
 @import './layout';
 @import './overrides';
 
 // install the framework and custom global styles
 @include nb-install() {
+	// framework global styles
+	@include nb-theme-global();
+	@include nb-auth-global();
 
-  // framework global styles
-  @include nb-theme-global();
-  @include nb-auth-global();
+	@include ngx-layout();
+	// loading progress bar
+	@include ngx-pace-theme();
 
-  @include ngx-layout();
-  // loading progress bar
-  @include ngx-pace-theme();
-
-  @include nb-overrides();
-};
+	@include nb-overrides();
+}
+.ng2-smart-table th {
+	min-width: 300px;
+	max-width: 300px;
+}

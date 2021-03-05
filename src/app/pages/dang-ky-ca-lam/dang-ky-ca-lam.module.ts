@@ -31,7 +31,6 @@ import {
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin
-import { DnDialogModule } from 'ditagis-nebular';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -60,7 +59,6 @@ export const MY_CUSTOM_FORMATS = {
     FormsModule,
     OwlNativeDateTimeModule,
     Ng2SmartTableModule,
-    DnDialogModule,
     NbSelectModule,
     NbButtonModule,
     FullCalendarModule, // register FullCalendar with you app
@@ -83,4 +81,4 @@ export const MY_CUSTOM_FORMATS = {
     { provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS },
   ],
 })
-export class DangKyCaLamModule {}
+export class DangKyCaLamModule { }

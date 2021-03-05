@@ -19,9 +19,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     RouterModule.forChild([
       {
         path: '',
-        component: DanhMucSanPhamComponent
-      }
-    ])
-  ]
+        component: DanhMucSanPhamComponent,
+      },
+    ]),
+  ],
 })
-export class DanhMucSanPhamModule {}
+export class DanhMucSanPhamModule { }

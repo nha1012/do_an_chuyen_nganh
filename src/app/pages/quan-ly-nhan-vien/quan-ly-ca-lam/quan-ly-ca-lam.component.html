@@ -1,10 +1,50 @@
 <nb-card>
   <nb-card-header>
-   Đang ký ca làm
+   Quản lý ca làm
   </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="onSaveConfirm($event)"
-    (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
+    <div class="row d-flex">
+      <input
+        class="m-2"
+        nbInput
+        placeholder="Thời gian làm việc"
+        [(ngModel)]="tgLamViec"
+        [nbDatepicker]="dpkHSTrongThang"
+      />
+      <nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
+      <ngx-select-ca-lam (valueChange)="filterEntity.caLam = $event"></ngx-select-ca-lam>
+      <ngx-select-nhan-vien></ngx-select-nhan-vien>
+      <div class="nut-loc">
+        <button
+          nbButton
+          status="primary"
+          outline
+          (click)="loadDataTable()"
+        >
+          Lọc
+        </button>
+      </div>
+    </div>
+    <ngn-datatable
+      #table
+      selectionType="single"
+      [datatableService]="datatableService"
+      [externalPaging]="true"
+      [limit]="10"
+      [scrollbarH]="true"
+      class="material"
+      [actions]="actions"
+    >
+      <ngn-datatable-column name="Ngày" prop="date" [width]="200">
+        <ng-template ngn-datatable-cell-template let-value="value">
+          <span>{{ value   }}</span>
+        </ng-template>
+      </ngn-datatable-column>
+      <ngn-datatable-column name="Ca làm" prop="workshift" type="string"  [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Tên" prop="user.displayName" type="string"  [width]="200"></ngn-datatable-column>
+
+      <ngn-datatable-column name="Số điện thoại" prop="user.phoneNumber" type="string"  [width]="250"></ngn-datatable-column>
+      <ngn-datatable-column name="Địa chỉ" prop="user.address" type="string"  [width]="350"></ngn-datatable-column>
+    </ngn-datatable>
   </nb-card-body>
 </nb-card>

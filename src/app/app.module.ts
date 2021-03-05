@@ -1,4 +1,3 @@
-import { UserModule } from './../../api_graph/src/user/user.module';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -31,7 +30,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    UserModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

@@ -1,9 +1,13 @@
+import { RoleEntity } from '../role/role.interface';
+
 export class UserEntity {
-  id?: number;
-  userName: string;
-  fullName: string;
+  userId?: number;
+  username: string;
+  displayName: string;
   email?: string;
-  phone?: string;
+  phoneNumber?: string;
   password?: string;
   address?: string;
+  roleId?: string;
+  role?: RoleEntity;
 }

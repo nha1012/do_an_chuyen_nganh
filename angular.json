@@ -25,11 +25,17 @@
               "src/favicon.png",
               {
                 "glob": "**/*",
+                "input": "node_modules/ngn-datatable/assets",
+                "output": "./assets"
+              },
+              {
+                "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
               }
             ],
             "styles": [
+              "node_modules/ngn-datatable/assets/icons.css",
               "node_modules/ng-pick-datetime/assets/style/picker.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/typeface-exo/index.css",

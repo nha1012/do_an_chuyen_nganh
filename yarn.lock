@@ -4308,6 +4308,13 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
+ditagis-auth@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/ditagis-auth/-/ditagis-auth-0.2.4.tgz#e139493119aeb885455cc9df3ef9c1c111c2c0f3"
+  integrity sha512-kS6qZxJc1fPhSlaqgchj0WTc0wtOFHDbwOx7gMADopzPYjTHv+YCXlQoJiqL95RDoXptRHkqs6jx5H35ZRqGow==
+  dependencies:
+    tslib "~1.x"
+
 dns-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dns-equal/-/dns-equal-1.0.0.tgz#b39e7f1da6eb0a75ba9c17324b34753c47e0654d"
@@ -8014,19 +8021,19 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-nest-crud-client@0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/nest-crud-client/-/nest-crud-client-0.2.4.tgz#a3355afe7dd67843a722bcdad10c8cbdecdac0d2"
-  integrity sha512-fva04XlJ2aldI6BxdOFRWogN9zCnR79uEiKS1U62cI5dbaEmfQRdjps/aLw3VjGHfrTwxAl2tfyf4/HEOWEHUg==
+nest-crud-client@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/nest-crud-client/-/nest-crud-client-0.1.1.tgz#fab4dfd5ece7de95f25dcf6a8ab0d9d07d329a1d"
+  integrity sha512-21NsUcezP/kNblF7sQpDtIl0l2qe1qH9uyYSlf7wiLz6kqmEsKUkzpxs3plrKDlBU1BPy2ONSAhypELvcQrWhA==
   dependencies:
     tslib "^1.10.0"
 
-nest-crud-typeorm-client@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/nest-crud-typeorm-client/-/nest-crud-typeorm-client-0.2.4.tgz#6ef4c211a01499374972721a0124a7c1c23c8456"
-  integrity sha512-Jfz/wZLPZBNjGecZ+JdKdyyZc1WkHwgtnzwQwNPxkkdbsPHPg2tfb3IeYhSZM1cUOYNkoWDK2f0iLOzQjpi4gg==
+nest-crud-typeorm-client@^0.1.13:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/nest-crud-typeorm-client/-/nest-crud-typeorm-client-0.1.18.tgz#d292f0507e482ec565aa65667317946c9754f00b"
+  integrity sha512-JLoBMDjLcMgAtQgHe6AltlRuht0HuFl7ukldeTxTbm5pDDsxgMF6Or+BWwQ+EJpoWB7LHFIWwU6go/+PJRPv0A==
   dependencies:
-    nest-crud-client "0.2.4"
+    nest-crud-client "^0.1.0"
     tslib "^1.10.0"
 
 next-tick@~1.0.0:
@@ -8051,13 +8058,20 @@ ng2-completer@^9.0.1:
   resolved "https://registry.yarnpkg.com/ng2-completer/-/ng2-completer-9.0.1.tgz#5ba97fd978bfcef746f5ed71d965f65d280de4de"
   integrity sha512-zEKehHdCK8E/k4Y0HepprGdYBHr2AOsaq4QpeqoCyUElOOC5M3qi3ZEHV1VF54I7heBQktswwXe5UyWduJ0Xeg==
 
-ng2-smart-table@^1.6.0:
+ng2-smart-table@^1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/ng2-smart-table/-/ng2-smart-table-1.7.2.tgz#227efacc243c6d0ba0281281c0841282a604d201"
   integrity sha512-TwREaaTtgaPyxxocoxH4W4BQEpiuYhOhPxDOgR/+O36i7m61c0O+OWx2u7wSHU9UabdQDWwgWU6Eus2tOT3RJA==
   dependencies:
     lodash "^4.17.10"
     tslib "^2.0.0"
+
+ngn-datatable@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/ngn-datatable/-/ngn-datatable-1.2.2.tgz#8446d6defd45fad6cb670cce1a46465bd20de66d"
+  integrity sha512-gGmf8o+TnJ+bqpkeWLSo5EWfd8fkUB0ijyaUnzVWruwaCQEia9hCzjgbxP58mw0vG1Ml1pxn2M4XPII90YmkuQ==
+  dependencies:
+    tslib "^1.10.0"
 
 ngx-echarts@^4.2.2:
   version "4.2.2"
@@ -11728,7 +11742,7 @@ tslib@2.0.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.0.tgz#18d13fc2dce04051e20f074cc8387fd8089ce4f3"
   integrity sha512-lTqkx847PI7xEDYJntxZH89L2/aXInsyF2luSafe/+0fHOMjlBNXdH6th7f70qxLDhul7KZK0zC8V5ZIyHl0/g==
 
-tslib@^1.10.0, tslib@^1.11.1, tslib@^1.13.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.11.1, tslib@^1.13.0, tslib@^1.8.1, tslib@^1.9.0, tslib@~1.x:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
