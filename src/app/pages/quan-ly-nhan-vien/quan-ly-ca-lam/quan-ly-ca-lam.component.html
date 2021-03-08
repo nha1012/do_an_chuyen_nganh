@@ -42,10 +42,9 @@
       </ngn-datatable-column>
       <ngn-datatable-column name="Ca làm" prop="workshift" type="string"  [width]="150"></ngn-datatable-column>
       <ngn-datatable-column name="Có/Không làm" prop="status" [width]="200">
-        <ng-template ngn-datatable-cell-template let-value="value">
-          <nb-checkbox disabled status="primary" *ngIf="value" [checked]="value">Có</nb-checkbox>
-          <nb-checkbox disabled status="warning" *ngIf="!value" [checked]="value">Không</nb-checkbox>
-
+        <ng-template ngn-datatable-cell-template let-row="row" let-value="value">
+          <nb-checkbox [disabled]="checkDate(row.date)" status="primary" *ngIf="value" (change)="diemDanh(row)" [checked]="value">Có</nb-checkbox>
+          <nb-checkbox [disabled]="checkDate(row.date)" status="warning" *ngIf="!value" (change)="diemDanh(row)" [checked]="value">Không</nb-checkbox>
         </ng-template>
       </ngn-datatable-column>
       <ngn-datatable-column name="Tên" prop="user.displayName" type="string"  [width]="200"></ngn-datatable-column>

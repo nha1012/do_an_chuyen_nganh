@@ -1,13 +1,30 @@
 <nb-card>
-  <nb-card-header> Danh sách sản phẩm </nb-card-header>
+  <nb-card-header>
+   Quản lý sản phẩm
+  </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table
-      [settings]="settings"
-      [source]="source"
-      (editConfirm)="onSaveConfirm($event)"
-      (createConfirm)="onCreateConfirm($event)"
-      (deleteConfirm)="onDeleteConfirm($event)"
-    >
-    </ng2-smart-table>
+    <div class="row d-flex">
+
+    </div>
+    <ngn-datatable
+      #table
+      selectionType="single"
+      [datatableService]="datatableService"
+      [externalPaging]="true"
+      [limit]="10"
+      [scrollbarH]="true"
+      class="material"
+      [actions]="actions"
+      (activate)="clickRowHandle($event)"
+      >
+      <ngn-datatable-column type="string" name="Tên sản phẩm" prop="tenSanPham" [width]="200"></ngn-datatable-column>
+      <ngn-datatable-column name="Số lượng" prop="soLuong" type="number"  [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Giá gốc sản phẩm" type="number" prop="giaSanPham" [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Giá khuyến mãi" type="number" prop="giaKhuyenMai" [width]="150"></ngn-datatable-column>
+      <ngn-datatable-column name="Mô tả sản phẩm" prop="moTa" type="string"  [width]="250"></ngn-datatable-column>
+      <ngn-datatable-column name="Tên nhà cung cấp" prop="nhaCungCap.tenNhaCungCap" type="string"  [width]="250"></ngn-datatable-column>
+      <ngn-datatable-column name="Danh mục sản phẩm" prop="danhMucSanPham.tenDanhMuc" type="string"  [width]="250"></ngn-datatable-column>
+
+    </ngn-datatable>
   </nb-card-body>
 </nb-card>

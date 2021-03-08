@@ -41,7 +41,12 @@ import { FormsModule } from '@angular/forms';
             (m) => m.ThongKeSanPhamModule,
           ),
       },
+      {
+        path: 'chi-tiet',
+        loadChildren: () =>
+          import('./chi-tiet/chi-tiet.module').then((t) => t.ChiTietModule),
+      },
     ]),
   ],
 })
-export class QuanLySanPhamModule {}
+export class QuanLySanPhamModule { }

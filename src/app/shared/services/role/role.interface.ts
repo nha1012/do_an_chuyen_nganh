@@ -1,9 +1,12 @@
+import { UserEntity } from '../user/user.interface';
+
 export interface RoleEntity {
   roleId?: RoleEnum;
   roleName?: string;
+  user?: UserEntity;
 }
 export enum RoleEnum {
-  Employee = 'fdf1b651-f456-4e51-a714-4d698b9bb910',
-  Admin = '31f996e9-0fb9-45fa-ad67-2adb708291cb',
-  User = 'c5075942-6d22-474f-8468-40b199201b4f',
+  Employee = '78f048d3-2416-4ae1-8739-3777796a7080',
+  Admin = '72613483-4168-4e5b-b871-06800fab7ae7',
+  User = '2ddccc31-3b13-4daf-b02a-8902aca48a14',
 }

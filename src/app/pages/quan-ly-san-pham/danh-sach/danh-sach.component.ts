@@ -1,120 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
-import { CRUDBaseService } from 'app/shared/services/crud-base.service';
-import { environment } from 'environments/environment.prod';
-import { LocalDataSource } from 'ng2-smart-table';
+import { ProductEntity } from 'app/shared/services/product/product.interface';
+import { ProductService } from 'app/shared/services/product/product.service';
+import { WorkshiftEntity } from 'app/shared/services/workshift/workshift.interface';
+import { RequestQueryBuilder } from 'nest-crud-client';
+import { DatatableAction, DatatableComponent, DatatableService } from 'ngn-datatable';
 
 @Component({
   selector: 'ngx-danh-sach',
   templateUrl: './danh-sach.component.html',
   styleUrls: ['./danh-sach.component.scss'],
 })
-export class DanhSachComponent {
-  settings = {
-    actions: {
-      add: false,
-    },
-    pager: {
-      display: true,
-      perPage: 7,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      name: {
-        title: 'Tên sản phẩm',
-        type: 'string',
-      },
-      price: {
-        title: 'Giá',
-        type: 'string',
-      },
-      amount: {
-        title: 'Số lượng',
-        type: 'number',
-      },
-      type_id: {
-        title: 'Mã loại sản phẩm',
-      },
-      product_type: {
-        title: 'Loại sản phẩm',
-        type: 'string',
-        editable: false,
-        addable: false,
-      },
-    },
+export class DanhSachComponent implements OnInit {
+  tgLamViec: any;
+  @ViewChild('table', { static: false })
+  table: DatatableComponent<ProductEntity>;
+  datatableService: DatatableService<ProductEntity> = {
+    service: this.productService,
+    primaryField: 'productId',
+    builder: this.getBuilder.bind(this),
   };
-  source: LocalDataSource = new LocalDataSource();
-  loadDataTable() {
-    this.crudBaseService
-      .get(`${environment.rest}/product`)
-      .subscribe((value: { allProduct: [] }) => {
-        this.source.load(value.allProduct);
-      });
-  }
+  filterEntity: WorkshiftEntity = {
+    workshift: undefined,
+    userId: '',
+  };
+  actions: DatatableAction<WorkshiftEntity>[] = [
+    { name: 'quick-edit' },
+    { name: 'delete' },
+  ];
   constructor(
-    private crudBaseService: CRUDBaseService,
-    private toast: NbToastrService,
+    private productService: ProductService,
+    private router: Router,
+    protected route: ActivatedRoute,
   ) {
-    this.loadDataTable();
   }
+  ngOnInit(): void {
 
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      this.crudBaseService
-        .delete(`${environment.rest}/product/${event.data.id}`)
-        .subscribe((values: { message: string }) => {
-          if (values) {
-            this.toast.success(values.message);
-          }
-        });
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
+  }
+  loadDataTable() {
+    this.table.loadData();
+  }
+  clickRowHandle($event: any) {
+    if ($event.type === 'dblclick') {
+      const id = ($event.row as ProductEntity).productId;
+      this.router.navigate([`/pages/quan-ly-san-pham/chi-tiet/${id}`]);
     }
   }
-  onCreateConfirm(event: { newData: { product_type: any } }) {
-    delete event.newData.product_type;
-    this.crudBaseService
-      .post(`${environment.rest}/product`, event.newData)
-      .subscribe(
-        (value: { message: string }) => {
-          this.toast.success(value.message);
-        },
-        (err) => {
-          this.toast.danger(err.message);
-        },
-        () => {
-          this.loadDataTable();
-        },
-      );
-  }
-  onSaveConfirm(event: { newData: { product_type: any }; data: { id: any } }) {
-    delete event.newData.product_type;
-    this.crudBaseService
-      .put(`${environment.rest}/product/${event.data.id}`, event.newData)
-      .subscribe(
-        (value: { message: string }) => {
-          this.toast.success(value.message);
-        },
-        (err) => {
-          this.toast.danger(err.message);
-        },
-        () => {
-          this.loadDataTable();
-        },
-      );
+  getBuilder(builder: RequestQueryBuilder) {
+    builder.select(['anhMinhHoa', 'chuongTrinhKhuyenMai', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap'] as Array<keyof ProductEntity>);
+    // tslint:disable-next-line:max-line-length
+    builder.setJoin({ field: 'danhMucSanPham' });
+    builder.setJoin({ field: 'nhaCungCap' });
+
   }
 }

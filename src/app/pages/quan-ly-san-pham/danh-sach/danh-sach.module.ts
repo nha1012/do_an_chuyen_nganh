@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NbCardModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NgnDatatableModule } from 'ngn-datatable';
 
 @NgModule({
   declarations: [DanhSachComponent],
@@ -15,7 +15,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbCardModule,
     NbInputModule,
     ThemeModule,
-    Ng2SmartTableModule,
+    NgnDatatableModule,
     RouterModule.forChild([
       {
         path: '',
@@ -24,4 +24,4 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     ]),
   ],
 })
-export class DanhSachModule {}
+export class DanhSachModule { }

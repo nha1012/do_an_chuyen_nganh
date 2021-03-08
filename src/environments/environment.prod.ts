@@ -5,5 +5,5 @@
  */
 export const environment = {
   production: true,
-  rest: 'http://localhost:3000',
+  rest: 'https://api-quan-ly-cua-hang.herokuapp.com',
 };

@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment.prod';
 import { CrudBaseService } from 'nest-crud-typeorm-client';
-import { RoleEntity } from './role.interface';
+import { NhaCungCapEntity } from './nha-cung-cap.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RoleService extends CrudBaseService<RoleEntity> {
+export class NhaCungCapService extends CrudBaseService<NhaCungCapEntity> {
   constructor(httpClient: HttpClient) {
     super(
       {
         apiUrl: environment.rest,
-        entity: 'role',
+        entity: 'nha-cung-cap',
       },
       httpClient,
     );

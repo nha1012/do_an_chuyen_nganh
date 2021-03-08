@@ -37,4 +37,4 @@ import { QuanLyHieuSuatComponent } from './quan-ly-hieu-suat/quan-ly-hieu-suat.c
     ]),
   ],
 })
-export class QuanLyNhanVienModule {}
+export class QuanLyNhanVienModule { }

@@ -28,12 +28,6 @@ export class QuanLyCaLamComponent {
   actions: DatatableAction<WorkshiftEntity>[] = [
     { name: 'quick-edit' },
     { name: 'delete' },
-    {
-      name: 'diem danh',
-      tooltip: 'Điểm danh nhân viên',
-      icon: '<i class="far fa-check-circle text-success"></i>',
-      click: (e) => this.diemDanh(e),
-    },
   ];
   constructor(
     private toast: NbToastrService,
@@ -44,15 +38,20 @@ export class QuanLyCaLamComponent {
     this.table.loadData();
   }
   async diemDanh(workshiftCurrent: WorkshiftEntity) {
-    if (confirm('Xác nhận điểm danh nhân viên')) {
-      try {
-        await this.workshiftService.put(workshiftCurrent.workshiftId, { status: true }).toPromise();
-        this.toast.success('Điểm danh thành công', 'Thông báo');
-        this.table.loadData();
-      } catch (error) {
-        this.toast.danger(error.message);
-      }
+    const status = !workshiftCurrent.status;
+    try {
+      await this.workshiftService.put(workshiftCurrent.workshiftId, { status: status }).toPromise();
+      this.toast.success('Điểm danh thành công', 'Thông báo');
+      this.table.loadData();
+    } catch (error) {
+      this.toast.danger(error.message);
     }
+
+  }
+  checkDate(date: string): boolean {
+    const currentDate = new Date();
+    const workshiftDate = new Date(date);
+    return !(currentDate <= workshiftDate);
   }
   getBuilder(builder: RequestQueryBuilder) {
     builder.select(['date', 'workshift', 'user', 'status'] as Array<keyof WorkshiftEntity>);
