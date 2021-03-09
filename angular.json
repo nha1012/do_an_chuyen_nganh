@@ -142,6 +142,8 @@
             ],
             "assets": [
               "src/assets",
+              "src/favicon.ico",
+              "src/favicon.png",
               {
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
