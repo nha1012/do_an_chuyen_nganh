@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { QuanLyTaiKhoanComponent } from './quan-ly-tai-khoan.component';
 import { RouterModule } from '@angular/router';
 import { NgnDatatableModule } from 'ngn-datatable';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NbButtonModule, NbCardModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +18,6 @@ import { SelectRoleModule } from 'app/shared/components/select-role/select-role.
     NbCardModule,
     NbInputModule,
     ThemeModule,
-    Ng2SmartTableModule,
     NgnDatatableModule,
     FormsModule,
     SelectNhanVienModule,

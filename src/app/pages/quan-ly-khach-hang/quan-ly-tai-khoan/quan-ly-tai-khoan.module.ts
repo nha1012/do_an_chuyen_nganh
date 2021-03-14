@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { QuanLyTaiKhoanComponent } from './quan-ly-tai-khoan.component';
 import { RouterModule } from '@angular/router';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { NbCardModule, NbIconModule, NbInputModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
+import { SelectNhanVienModule } from 'app/shared/components/select-nhan-vien/select-nhan-vien.module';
+import { SelectRoleModule } from 'app/shared/components/select-role/select-role.module';
+import { NgnDatatableModule } from 'ngn-datatable';
 
 @NgModule({
   declarations: [QuanLyTaiKhoanComponent],
@@ -16,6 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
     NbInputModule,
     ThemeModule,
     Ng2SmartTableModule,
+    SelectNhanVienModule,
+    SelectRoleModule,
+    NgnDatatableModule,
+    NbButtonModule,
     RouterModule.forChild([{ path: '', component: QuanLyTaiKhoanComponent }]),
   ],
 })
