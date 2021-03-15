@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
+import { DanhMucSanPhamEntity } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.interface';
+import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
 import { environment } from 'environments/environment.prod';
 
 @Component({
@@ -10,11 +12,11 @@ import { environment } from 'environments/environment.prod';
 export class SelectLoaiSanPhamComponent implements OnInit {
   @Output() selectedItem = new EventEmitter();
 
-  lstLoaiSanPham: [];
-  constructor(private crudBaseService: CRUDBaseService) {
-    this.crudBaseService.get(`${environment.rest}/product-type`)
-      .subscribe((v: {allProductType: []} ) => this.lstLoaiSanPham = v.allProductType);
-   }
+  lstLoaiSanPham: DanhMucSanPhamEntity[];
+  constructor(private danhMucSanPham: DanhMucSanPhamService) {
+    this.danhMucSanPham.getMany()
+      .subscribe(value => this.lstLoaiSanPham = value);
+  }
 
   ngOnInit(): void {
   }

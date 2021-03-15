@@ -3,7 +3,6 @@ import { NbToastrService } from '@nebular/theme';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { environment } from 'environments/environment.prod';
 import { LocalDataSource } from 'ng2-smart-table';
-import { SmartTableDatepickerComponent, SmartTableDatepickerRenderComponent } from '../smart-table-datepicker/smart-table-datepicker.component';
 
 @Component({
   selector: 'ngx-danh-sach',
@@ -40,30 +39,6 @@ export class DanhSachComponent {
       name: {
         title: 'Tên chương trình',
         type: 'string',
-      },
-      start_date: {
-        title: 'Ngày bắt đầu',
-        type: 'custom',
-        renderComponent: SmartTableDatepickerRenderComponent,
-        width: '250px',
-        filter: false,
-        sortDirection: 'desc',
-        editor: {
-          type: 'custom',
-          component: SmartTableDatepickerComponent,
-        },
-      },
-      end_date: {
-        title: 'Ngày kết thúc',
-        type: 'custom',
-        renderComponent: SmartTableDatepickerRenderComponent,
-        width: '250px',
-        filter: false,
-        sortDirection: 'desc',
-        editor: {
-          type: 'custom',
-          component: SmartTableDatepickerComponent,
-        },
       },
     },
   };

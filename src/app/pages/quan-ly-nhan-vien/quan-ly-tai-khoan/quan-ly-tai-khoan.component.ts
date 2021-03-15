@@ -20,13 +20,11 @@ export class QuanLyTaiKhoanComponent {
     userId: '',
     roleId: '',
   };
-
   datatableService: DatatableService<UserEntity> = {
     service: this.userService,
     primaryField: 'userId',
     builder: this.getBuilder.bind(this),
   };
-
   actions: DatatableAction<UserEntity>[] = [
     { name: 'quick-edit' },
     { name: 'delete' },

@@ -1,3 +1,9 @@
-<nb-select placeholder="Nhân viên" fullWidth (selectedChange)="nhanVienSelected.emit($event)">
-  <nb-option *ngFor="let user of nhanViens" [value]="user.userId">{{user.displayName}}</nb-option>
+<nb-select
+	[placeholder]="placerHolder"
+	fullWidth
+	(selectedChange)="nhanVienSelected.emit($event)"
+>
+	<nb-option *ngFor="let user of nhanViens" [value]="user.userId">{{
+		user.displayName
+	}}</nb-option>
 </nb-select>

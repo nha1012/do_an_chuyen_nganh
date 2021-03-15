@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
-import { CRUDBaseService } from 'app/shared/services/crud-base.service';
-import { environment } from 'environments/environment.prod';
+import { CRUD_MESSAGES } from 'app/shared/messages/crud.messages';
+import { HinhAnhSanPhamEntity } from 'app/shared/services/ha-san-pham/ha-san-pham.interface';
+import { ProductEntity } from 'app/shared/services/product/product.interface';
+import { ProductService } from 'app/shared/services/product/product.service';
 
 @Component({
   selector: 'ngx-them-moi',
@@ -12,23 +14,23 @@ import { environment } from 'environments/environment.prod';
 export class ThemMoiComponent implements OnInit {
   @ViewChild('myckeditor') ckeditor: any;
   loading: boolean = false;
-  thongTinSanPham = {
-    name: '',
-    price: 0,
-    amount: 0,
-    type_id: 0,
-    description: '',
-  };
+  thongTinSanPham: ProductEntity = {};
   name = 'ng2-ckeditor';
   ckeConfig: any;
   mycontent: string;
   log: string = '';
   formData = new FormData();
+  addImageValue: any;
+  isOpenThemHinhAnh = false;
+  hinhAnhSanPham: HinhAnhSanPhamEntity = {};
+  status: {
+    loadingAddImage: false,
+  };
   constructor(
-    private crudBaseService: CRUDBaseService,
+    private productService: ProductService,
     private toast: NbToastrService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.ckeConfig = {
@@ -38,15 +40,15 @@ export class ThemMoiComponent implements OnInit {
     };
   }
   checkVaild() {
-    if (this.thongTinSanPham.name === '')
+    if (this.thongTinSanPham.tenSanPham === '')
       throw Error('Vui lòng nhập tên sản phẩm');
-    if (this.thongTinSanPham.price === 0)
+    if (this.thongTinSanPham.giaSanPham === 0)
       throw Error('Vui lòng nhập giá sản phẩm');
-    if (this.thongTinSanPham.amount === 0)
+    if (this.thongTinSanPham.soLuong === 0)
       throw Error('Vui lòng nhập số lương sản phẩm');
-    if (this.thongTinSanPham.type_id === 0)
+    if (this.thongTinSanPham.danhMucSanPhamId === '')
       throw Error('Vui lòng chọn loại sản phẩm');
-    if (this.thongTinSanPham.description === '')
+    if (this.thongTinSanPham.moTa === '')
       throw Error('Vui lòng nhập mô tả sản phẩm');
     return true;
   }
@@ -54,41 +56,21 @@ export class ThemMoiComponent implements OnInit {
     try {
       if (this.checkVaild()) {
         this.loading = true;
-        this.crudBaseService
-          .post(`${environment.rest}/product`, this.thongTinSanPham)
-          .subscribe(
-            (value: { data: any }) => {
-              this.toast.success('Thêm mới thành công');
-              this.formData.append('id', value.data.insertId);
-              this.toast.success('Đang tải hình ảnh');
-
-              this.crudBaseService
-                .post(`${environment.rest}/image`, this.formData)
-                .subscribe((v: { message: any }) => {
-                  this.toast.success(v.message);
-                  this.loading = false;
-                  this.thongTinSanPham = {
-                    name: '',
-                    price: 0,
-                    amount: 0,
-                    type_id: 0,
-                    description: '',
-                  };
-                });
-            },
-            (error) => {
-              this.toast.danger(error);
-            },
-          );
+        this.productService.create(this.thongTinSanPham)
+          .subscribe(value => this.toast.success(CRUD_MESSAGES.SUCCESS_ADD));
       }
     } catch (error) {
-      this.toast.danger(error);
+      this.toast.success(CRUD_MESSAGES.FAIL_ADD);
+    } finally {
+      this.loading = false;
     }
-  }
-  getSelectedItem(event: number) {
-    this.thongTinSanPham.type_id = event;
   }
   uploadImage(files: FileList) {
     this.formData.append('file', files[0]);
+  }
+  selectedFile(e: HinhAnhSanPhamEntity) {
+    if (e) {
+      this.addImageValue = e;
+    }
   }
 }

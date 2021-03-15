@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RoleEnum } from 'app/shared/services/role/role.interface';
 import { UserEntity } from 'app/shared/services/user/user.interface';
 import { UsersService } from 'app/shared/services/user/user.service';
@@ -11,6 +11,7 @@ import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
 })
 export class SelectNhanVienComponent implements OnInit {
   @Output() nhanVienSelected = new EventEmitter<string>();
+  @Input() placerHolder: string = '';
   nhanViens: UserEntity[];
   constructor(private userService: UsersService) {
     this.userService

@@ -73,7 +73,6 @@
     "moment": "^2.29.1",
     "nebular-icons": "1.1.0",
     "nest-crud-typeorm-client": "^0.1.13",
-    "ng-pick-datetime": "^7.0.0",
     "ng2-ckeditor": "^1.2.9",
     "ng2-completer": "^9.0.1",
     "ng2-smart-table": "^1.7.2",

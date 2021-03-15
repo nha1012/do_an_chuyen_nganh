@@ -1,0 +1,11 @@
+<nb-select
+	placeholder="Chọn nhà cung cấp"
+	(selectedChange)="setSelectedItem($event)"
+	size="small"
+>
+	<nb-option
+		*ngFor="let nhaCungCap of lstNhaCungCap"
+		value="{{ nhaCungCap.nhaCungCapId }}"
+		>{{ nhaCungCap.tenNhaCungCap }}</nb-option
+	>
+</nb-select>

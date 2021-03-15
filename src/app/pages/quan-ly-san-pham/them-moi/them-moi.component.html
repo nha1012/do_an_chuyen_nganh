@@ -1,42 +1,91 @@
 <nb-card>
-  <nb-card-header>
-    Thêm sản phẩm
-  </nb-card-header>
-  <nb-card-body>
-    <div class="row">
-      <div class="col-md-8">
-        <p class="row">
-          <strong class="col-md-3">Tên sản phẩm: </strong>
-          <input [(ngModel)]="thongTinSanPham.name" nbInput type="text" fieldSize="small"
-            placeholder="Nhập tên sản phẩm">
-        </p>
-        <p class="row">
-          <strong class="col-md-3">Loại sản phẩm: </strong>
-          <ngx-select-loai-san-pham (selectedItem)="getSelectedItem($event)"></ngx-select-loai-san-pham>
-        </p>
-        <p class="row">
-          <strong class="col-md-3">Giá sản phẩm: </strong>
-          <input [(ngModel)]="thongTinSanPham.price" nbInput type="text" fieldSize="small"
-            placeholder="Nhập giá sản phẩm">
-        </p>
-        <p class="row">
-          <strong class="col-md-3">Số lượng sản phẩm: </strong>
-          <input [(ngModel)]="thongTinSanPham.amount" nbInput type="text" fieldSize="small"
-            placeholder="Nhập số lương sản phẩm">
-        </p>
-      </div>
-      <div class="col-md-4">
-        Thêm hình ảnh sản phẩm
-        <input (change)="uploadImage($event.target.files)" type="file" accept=".jpeg,.png,.jpg">
-      </div>
-    </div>
-    <strong class="mb-2">Mô tả sản phẩm</strong>
-    <ckeditor [(ngModel)]="thongTinSanPham.description" #myckeditor="ngModel" name="myckeditor" required
-      [config]="ckeConfig" debounce="500">
-    </ckeditor>
-  </nb-card-body>
-  <nb-card-footer>
-    <button [disabled]="loading" [nbSpinner]="loading" outline status="primary" (click)="onSaveSanPham()"
-      nbButton>Save</button>
-  </nb-card-footer>
+	<nb-card-header> Thêm sản phẩm </nb-card-header>
+	<nb-card-body>
+		<div class="row">
+			<div class="col-md-8">
+				<p class="row">
+					<strong class="col-md-3">Tên sản phẩm: </strong>
+					<input
+						[(ngModel)]="thongTinSanPham.tenSanPham"
+						nbInput
+						type="text"
+						fieldSize="small"
+						placeholder="Nhập tên sản phẩm"
+					/>
+				</p>
+				<p class="row">
+					<strong class="col-md-3">Loại sản phẩm: </strong>
+					<ngx-select-loai-san-pham
+						(selectedItem)="thongTinSanPham.danhMucSanPhamId = $event"
+					></ngx-select-loai-san-pham>
+				</p>
+				<p class="row">
+					<strong class="col-md-3">Nhà cung cấp: </strong>
+					<ngx-select-nha-cung-cap
+						(selectedItem)="thongTinSanPham.nhaCungCapId = $event"
+					></ngx-select-nha-cung-cap>
+				</p>
+				<p class="row">
+					<strong class="col-md-3">Giá sản phẩm: </strong>
+					<input
+						[(ngModel)]="thongTinSanPham.giaSanPham"
+						nbInput
+						type="text"
+						fieldSize="small"
+						placeholder="Nhập giá sản phẩm"
+					/>
+				</p>
+				<p class="row">
+					<strong class="col-md-3">Giá khuyến mãi: </strong>
+					<input
+						[(ngModel)]="thongTinSanPham.giaKhuyenMai"
+						nbInput
+						type="text"
+						fieldSize="small"
+						placeholder="Nhập giá sản phẩm"
+					/>
+				</p>
+				<p class="row">
+					<strong class="col-md-3">Số lượng sản phẩm: </strong>
+					<input
+						[(ngModel)]="thongTinSanPham.soLuong"
+						nbInput
+						type="text"
+						fieldSize="small"
+						placeholder="Nhập số lương sản phẩm"
+					/>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<div class="col-md-2">
+					<button nbButton (click)="isOpenThemHinhAnh = true">
+						<nb-icon icon="cloud-upload-outline"></nb-icon>
+						Hình ảnh
+					</button>
+				</div>
+			</div>
+		</div>
+		<strong class="mb-2">Mô tả sản phẩm</strong>
+		<ckeditor
+			[(ngModel)]="thongTinSanPham.moTa"
+			#myckeditor="ngModel"
+			name="myckeditor"
+			required
+			[config]="ckeConfig"
+			debounce="500"
+		>
+		</ckeditor>
+	</nb-card-body>
+	<nb-card-footer>
+		<button
+			[disabled]="loading"
+			[nbSpinner]="loading"
+			outline
+			status="primary"
+			(click)="onSaveSanPham()"
+			nbButton
+		>
+			Save
+		</button>
+	</nb-card-footer>
 </nb-card>
