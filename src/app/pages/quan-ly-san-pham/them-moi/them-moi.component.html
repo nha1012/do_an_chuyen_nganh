@@ -57,12 +57,30 @@
 				</p>
 			</div>
 			<div class="col-md-4">
-				<div class="col-md-2">
-					<!-- <button nbButton (click)="isOpenThemHinhAnh = true">
-						<nb-icon icon="cloud-upload-outline"></nb-icon>
-						Hình ảnh
-					</button> -->
-					<input type="file" (change)="changeHinhAnhSanPham($event)" />
+				<div
+					class="custom-dropzone"
+					ngx-dropzone
+					[accept]="'image/*'"
+					(change)="onSelect($event)"
+				>
+					<ngx-dropzone-label>
+						<div>
+							<p>
+								Tải lên hình ảnh sản phẩm, hình ảnh chính vui lòng chọn cái đầu
+								tiên
+							</p>
+						</div>
+					</ngx-dropzone-label>
+					<ngx-dropzone-image-preview
+						ngProjectAs="ngx-dropzone-preview"
+						type="image"
+						*ngFor="let f of files"
+						[file]="f"
+						[removable]="true"
+						(removed)="onRemove(f)"
+					>
+						<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+					</ngx-dropzone-image-preview>
 				</div>
 			</div>
 		</div>
@@ -79,8 +97,8 @@
 	</nb-card-body>
 	<nb-card-footer>
 		<button
-			[disabled]="loading"
-			[nbSpinner]="loading"
+			[disabled]="loading || isUploadHinhAnh"
+			[nbSpinner]="loading || isUploadHinhAnh"
 			outline
 			status="primary"
 			(click)="onSaveSanPham()"

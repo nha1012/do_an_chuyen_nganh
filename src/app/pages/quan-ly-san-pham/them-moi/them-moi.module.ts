@@ -7,6 +7,7 @@ import { SelectLoaiSanPhamModule } from 'app/shared/components/select-loai-san-p
 import { CKEditorModule } from 'ng2-ckeditor';
 import { FormsModule } from '@angular/forms';
 import { SelectNhaCungCapModule } from 'app/shared/components/select-nha-cung-cap/select-nha-cung-cap.module';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [ThemMoiComponent],
@@ -21,6 +22,7 @@ import { SelectNhaCungCapModule } from 'app/shared/components/select-nha-cung-ca
     NbButtonModule,
     SelectNhaCungCapModule,
     NbIconModule,
+    NgxDropzoneModule,
     RouterModule.forChild([{
       path: '',
       component: ThemMoiComponent,

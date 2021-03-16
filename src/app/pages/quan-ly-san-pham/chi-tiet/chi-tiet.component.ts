@@ -23,6 +23,7 @@ export class ChiTietComponent implements OnInit {
     builder.setJoin({ field: 'nhaCungCap' });
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'hinhAnhSamPhams' });
+
     return builder;
   }
 }

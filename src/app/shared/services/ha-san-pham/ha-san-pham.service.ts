@@ -12,7 +12,7 @@ export class HinhAnhSanPhamService extends CrudBaseService<HinhAnhSanPhamEntity>
     super(
       {
         apiUrl: environment.rest,
-        entity: 'hinh-anh-san-pham',
+        entity: 'Ha-san-pham',
       },
       httpClient,
     );

@@ -1115,13 +1115,6 @@
   dependencies:
     lodash-es "^4.17.15"
 
-"@cloudinary/angular-5.x@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary/angular-5.x/-/angular-5.x-1.4.0.tgz#c3e902c9a56fa30741afb5f9ad5284bf9ffec6eb"
-  integrity sha512-/M6q8rdXlF3tXfdFmJs44ndvNcVCzx/MQ3M74EnElO3Q2GEla6XilhXojsHPxaGdh9XzaWmsUHT24DqCWK/MEA==
-  dependencies:
-    tslib "^1.9.0"
-
 "@compodoc/compodoc@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@compodoc/compodoc/-/compodoc-1.0.1.tgz#6f2706ce3dc524ce6612fffbd9b557c41c74d88a"
@@ -3044,11 +3037,6 @@ clone@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
-
-cloudinary-core@^2.11.3:
-  version "2.11.3"
-  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.11.3.tgz#1440f61c6280485094aac87021b7e10f746dc69e"
-  integrity sha512-ZRnpjSgvx+LbSf+aEz5NKzxDB4Z0436aY/0BSDa90kAHiwAyd84VyEi95I74SE80e15Ri9t5S2xtksTXpzk9Xw==
 
 coa@^2.0.2:
   version "2.0.2"
@@ -8103,6 +8091,13 @@ ngn-datatable@^1.2.2:
   integrity sha512-gGmf8o+TnJ+bqpkeWLSo5EWfd8fkUB0ijyaUnzVWruwaCQEia9hCzjgbxP58mw0vG1Ml1pxn2M4XPII90YmkuQ==
   dependencies:
     tslib "^1.10.0"
+
+ngx-dropzone@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-dropzone/-/ngx-dropzone-3.0.0.tgz#97a2005b419f932c34006498b4f47a8c38357840"
+  integrity sha512-rVTp/ORu7etkcwtXGtsph7sigziAr1DitnHS9JueoXPvYhhB/Ni00MuMl4MinCdU2o9Z9MWF0jzW7UrydcC71A==
+  dependencies:
+    tslib "^2.0.0"
 
 ngx-echarts@^4.2.2:
   version "4.2.2"
