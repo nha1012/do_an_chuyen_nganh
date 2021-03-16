@@ -75,7 +75,7 @@ export class ThemMoiComponent implements OnInit {
           });
       }
     } catch (error) {
-      this.toast.success(CRUD_MESSAGES.FAIL_ADD);
+      this.toast.warning(error);
     } finally {
       this.loading = false;
     }
