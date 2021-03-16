@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
 import { CRUD_MESSAGES } from 'app/shared/messages/crud.messages';
+import { HinhAnhSanPhamCloudinaryService } from 'app/shared/services/ha-san-pham/ha-san-pham-cloudinary.service';
 import { HinhAnhSanPhamEntity } from 'app/shared/services/ha-san-pham/ha-san-pham.interface';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
 import { ProductService } from 'app/shared/services/product/product.service';
+import { InputFiles } from 'typescript';
 
 @Component({
   selector: 'ngx-them-moi',
@@ -26,10 +28,13 @@ export class ThemMoiComponent implements OnInit {
   status: {
     loadingAddImage: false,
   };
+  lstHinhAnhSanPhamMoi = [];
+  files = [];
   constructor(
     private productService: ProductService,
     private toast: NbToastrService,
     private router: Router,
+    private hinhAnhSanPhamCloudinaryService: HinhAnhSanPhamCloudinaryService,
   ) { }
 
   ngOnInit() {
@@ -72,5 +77,17 @@ export class ThemMoiComponent implements OnInit {
     if (e) {
       this.addImageValue = e;
     }
+  }
+  changeHinhAnhSanPham($event) {
+    this.files = $event.target.files;
+    const fileData = this.files[0];
+    const formData = new FormData();
+    formData.append('file', fileData);
+
+    formData.append('upload_preset', 'angular_upload_file');
+    formData.append('cloud_name', 'nha-nguyen');
+
+    this.hinhAnhSanPhamCloudinaryService.upLoadFile(formData).subscribe(value => console.log(value));
+
   }
 }

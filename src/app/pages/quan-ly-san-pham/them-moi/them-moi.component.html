@@ -58,10 +58,11 @@
 			</div>
 			<div class="col-md-4">
 				<div class="col-md-2">
-					<button nbButton (click)="isOpenThemHinhAnh = true">
+					<!-- <button nbButton (click)="isOpenThemHinhAnh = true">
 						<nb-icon icon="cloud-upload-outline"></nb-icon>
 						Hình ảnh
-					</button>
+					</button> -->
+					<input type="file" (change)="changeHinhAnhSanPham($event)" />
 				</div>
 			</div>
 		</div>
