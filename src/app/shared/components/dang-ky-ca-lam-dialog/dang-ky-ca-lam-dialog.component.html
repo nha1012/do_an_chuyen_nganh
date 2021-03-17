@@ -15,17 +15,29 @@
 				</nb-select>
 				<div class="col-sm-12 btn__grp">
 					<div class="row">
-						<button
-							(click)="handleXacNhan()"
-							[disabled]="isDangKy"
-							[nbSpinner]="isDangKy"
-							status="primary"
-							class="btn__luu ml-2"
-							[fullWidth]="true"
-							nbButton
-						>
-							Đăng ký
-						</button>
+						<div class="col-md-3">
+							<button
+								class="btn__huy"
+								nbButton
+								(click)="handleHuy()"
+								status="danger"
+							>
+								Huỷ
+							</button>
+						</div>
+						<div class="col-md-9">
+							<button
+								(click)="handleXacNhan()"
+								[disabled]="isDangKy"
+								[nbSpinner]="isDangKy"
+								status="primary"
+								class="btn__luu ml-2"
+								[fullWidth]="true"
+								nbButton
+							>
+								Đăng ký
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

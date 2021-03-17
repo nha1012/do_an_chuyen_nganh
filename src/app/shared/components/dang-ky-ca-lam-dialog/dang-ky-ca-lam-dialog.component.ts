@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
+import { NbDialogRef, NbToastrService } from '@nebular/theme';
+import { TypeEvent } from 'app/pages/dang-ky-ca-lam/type-event.interface';
 import { CRUD_MESSAGES } from 'app/shared/messages/crud.messages';
 import { getUserId } from 'app/shared/services/app.service';
 import { CaLamEnum, WorkshiftEntity } from 'app/shared/services/workshift/workshift.interface';
@@ -11,19 +12,20 @@ import { WorkshiftService } from 'app/shared/services/workshift/workshift.servic
   styleUrls: ['./dang-ky-ca-lam-dialog.component.scss'],
 })
 export class DangKyCaLamDialogComponent implements OnInit {
-  @Output() handleClose = new EventEmitter<boolean>();
   CaLamEnum = CaLamEnum;
   caLamSelected: CaLamEnum;
   date: Date;
   data: any;
   isDangKy = false;
-  constructor(private workshiftService: WorkshiftService, private toast: NbToastrService) { }
+  constructor(
+    private workshiftService: WorkshiftService,
+    private toast: NbToastrService,
+    protected ref: NbDialogRef<DangKyCaLamDialogComponent>) { }
   ngOnInit(): void {
-    console.log(this.data);
-
   }
   handleHuy() {
-    this.handleClose.emit(true);
+    this.ref.close();
+
   }
   checkValid() {
     if (!this.caLamSelected) {
@@ -46,6 +48,11 @@ export class DangKyCaLamDialogComponent implements OnInit {
         this.workshiftService.create(workshift).subscribe(value => {
           this.toast.success(CRUD_MESSAGES.SUCCESS_DKCL);
           this.isDangKy = false;
+          const event: TypeEvent = {
+            title: value.workshift,
+            date: value.date,
+          };
+          this.ref.close(event);
         });
       }
     } catch (error) {

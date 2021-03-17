@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/common';
 import { NbDialogService } from '@nebular/theme';
 // tslint:disable-next-line:max-line-length
@@ -52,6 +52,10 @@ export class DangKyCaLamComponent implements OnInit {
   }
   ngOnInit(): void { }
   handleDateClick(arg) {
-    this.dialogService.open(DangKyCaLamDialogComponent, { context: { date: arg.date, data: arg } });
+    this.dialogService.open(DangKyCaLamDialogComponent, { context: { date: arg.date, data: arg } }).onClose
+      .subscribe(value => {
+        this.events.push(value);
+        this.calendarOptions.events = this.events;
+      });
   }
 }
