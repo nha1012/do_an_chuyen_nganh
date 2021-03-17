@@ -1,5 +1,3 @@
-import { LoginComponent } from './pages/auth/login/login.component';
-import { LoginModule } from './pages/auth/login/login.module';
 import { AuthGuard } from './shared/services/guard/auth.guard';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';

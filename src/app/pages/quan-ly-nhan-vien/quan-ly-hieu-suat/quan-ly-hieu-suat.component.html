@@ -1,1 +1,52 @@
-<p>quan-ly-hieu-suat works!</p>
+<nb-card>
+	<nb-card-header> Thống kê làm việc nhân viên </nb-card-header>
+	<nb-card-body>
+		<div class="row d-flex">
+			<input
+				class="m-2"
+				nbInput
+				placeholder="Thời gian làm việc"
+				[(ngModel)]="tgLamViec"
+				[nbDatepicker]="dpkHSTrongThang"
+			/>
+			<nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
+			<ngx-select-ca-lam
+				class="m-2"
+				(valueChange)="filterEntity.workshift = $event"
+			></ngx-select-ca-lam>
+			<ngx-select-nhan-vien
+				placerHolder="Tên nhân viên"
+				class="m-2"
+				(nhanVienSelected)="filterEntity.userId = $event"
+			></ngx-select-nhan-vien>
+			<div class="nut-loc">
+				<button
+					nbButton
+					[nbSpinner]="isThonKe"
+					[disabled]="isThonKe"
+					status="primary"
+					outline
+					(click)="thongKeNhanVien()"
+				>
+					Lọc
+				</button>
+			</div>
+		</div>
+		<ngx-charts-bar-vertical-2d
+			*ngIf="datas"
+			class="chart"
+			[animations]="true"
+			[showXAxisLabel]="true"
+			[showYAxisLabel]="true"
+			[xAxis]="true"
+			[yAxis]="true"
+			[showGridLines]="true"
+			[rotateXAxisTicks]="true"
+			[legend]="true"
+			[results]="datas"
+			[noBarWhenZero]="false"
+			[view]="[1000, 400]"
+		>
+		</ngx-charts-bar-vertical-2d>
+	</nb-card-body>
+</nb-card>

@@ -1,4 +1,5 @@
 import { RoleEntity } from '../role/role.interface';
+import { WorkshiftEntity } from '../workshift/workshift.interface';
 
 export class UserEntity {
   userId?: string;
@@ -10,4 +11,5 @@ export class UserEntity {
   address?: string;
   roleId?: string;
   role?: RoleEntity;
+  workshifts?: WorkshiftEntity[];
 }

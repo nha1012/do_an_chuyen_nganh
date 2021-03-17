@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { QuanLyHieuSuatComponent } from './quan-ly-hieu-suat/quan-ly-hieu-suat.component';
 
 @NgModule({
-  declarations: [QuanLyHieuSuatComponent],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild([
