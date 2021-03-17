@@ -86,7 +86,7 @@ export class QuanLyHieuSuatComponent implements OnInit {
     builder.select(['displayName', 'roleId', 'workshifts'] as Array<keyof UserEntity>);
     // tslint:disable-next-line:max-line-length
     builder.setJoin({ field: 'workshifts', select: ['date', 'status', 'workshift', 'user'] as Array<keyof WorkshiftEntity> });
-    builder.setFilter({ field: 'roleId', operator: '$eq', value: RoleEnum.Employee });
+    builder.setFilter({ field: 'roleId', operator: '$in', value: [RoleEnum.Employee, RoleEnum.Admin] });
 
     this.tgLamViec &&
       (this.tgLamViec as any).start &&

@@ -8,6 +8,7 @@ import { CaLamEnum } from 'app/shared/services/workshift/workshift.interface';
 import { WorkshiftService } from 'app/shared/services/workshift/workshift.service';
 import { mergeMap } from 'rxjs/operators';
 import { TypeEvent } from './type-event.interface';
+import viLocale from '@fullcalendar/core/locales/vi';
 
 @Component({
   selector: 'ngx-dang-ky-ca-lam',
@@ -42,6 +43,8 @@ export class DangKyCaLamComponent implements OnInit {
             initialView: 'dayGridMonth',
             dateClick: this.handleDateClick.bind(this),
             events: this.events,
+            height: 600,
+            locale: viLocale,
           };
           return data;
         }),
@@ -49,6 +52,6 @@ export class DangKyCaLamComponent implements OnInit {
   }
   ngOnInit(): void { }
   handleDateClick(arg) {
-    this.dialogService.open(DangKyCaLamDialogComponent, { context: { date: arg.date } });
+    this.dialogService.open(DangKyCaLamDialogComponent, { context: { date: arg.date, data: arg } });
   }
 }

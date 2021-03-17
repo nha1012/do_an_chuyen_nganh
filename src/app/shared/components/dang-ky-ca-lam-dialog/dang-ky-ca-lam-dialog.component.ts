@@ -15,9 +15,13 @@ export class DangKyCaLamDialogComponent implements OnInit {
   CaLamEnum = CaLamEnum;
   caLamSelected: CaLamEnum;
   date: Date;
+  data: any;
   isDangKy = false;
   constructor(private workshiftService: WorkshiftService, private toast: NbToastrService) { }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log(this.data);
+
+  }
   handleHuy() {
     this.handleClose.emit(true);
   }

@@ -57,6 +57,7 @@ export class QuanLyCaLamComponent {
     builder.select(['date', 'workshift', 'user', 'status'] as Array<keyof WorkshiftEntity>);
     // tslint:disable-next-line:max-line-length
     builder.setJoin({ field: 'user', select: ['username', 'displayName', 'phoneNumber', 'address'] as Array<keyof UserEntity> });
+    builder.sortBy([{ field: 'date', order: 'DESC' }]);
     this.tgLamViec &&
       (this.tgLamViec as any).start &&
       builder.setFilter({
