@@ -13,10 +13,12 @@ export class AuthService {
   public isAuthorized: boolean = false;
   constructor(private router: Router, private http: HttpClient) { }
   login(userName: string, password: string): Observable<boolean> {
-    return this.http.post<{ accessToken: string }>(`${rest}/login`, { username: userName, password: password })
+    // tslint:disable-next-line:max-line-length
+    return this.http.post<{ accessToken: string, userId: string }>(`${rest}/login`, { username: userName, password: password })
       .pipe(
         map(result => {
           localStorage.setItem('access_token', result.accessToken);
+          localStorage.setItem('userId', result.userId);
           return true;
         }),
       );

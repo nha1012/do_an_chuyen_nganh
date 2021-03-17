@@ -18,6 +18,7 @@ export class AddHeaderInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const isReqToUploadImage = req.url === 'https://api.cloudinary.com/v1_1/nha-nguyen/image/upload';
     let clonedRequest = req.clone();
+
     // Clone the request to add the new header
     if (!isReqToUploadImage) {
       clonedRequest = req.clone({

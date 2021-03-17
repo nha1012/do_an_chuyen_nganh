@@ -1,0 +1,34 @@
+<nb-card class="dialog__dang-ky-ca-lam">
+	<nb-card-header> Đăng ký ca làm ngày </nb-card-header>
+	<nb-card-body>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- <ngx-select-ca-lam></ngx-select-ca-lam> -->
+				<nb-select
+					placeholder="Chọn ca làm"
+					[fullWidth]="true"
+					(selectedChange)="caLamSelected = $event"
+				>
+					<nb-option [value]="CaLamEnum.SANG">Ca sáng</nb-option>
+					<nb-option [value]="CaLamEnum.CHIEU">Ca chiều</nb-option>
+					<nb-option [value]="CaLamEnum.TOI">Ca tối</nb-option>
+				</nb-select>
+				<div class="col-sm-12 btn__grp">
+					<div class="row">
+						<button
+							(click)="handleXacNhan()"
+							[disabled]="isDangKy"
+							[nbSpinner]="isDangKy"
+							status="primary"
+							class="btn__luu ml-2"
+							[fullWidth]="true"
+							nbButton
+						>
+							Đăng ký
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nb-card-body>
+</nb-card>

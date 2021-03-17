@@ -71,6 +71,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'dang-ky-ca-lam',
+        loadChildren: () =>
+          import('./dang-ky-ca-lam/dang-ky-ca-lam.module').then(
+            (m) => m.DangKyCaLamModule,
+          ),
+      },
+      {
         path: 'dashboard',
         component: ECommerceComponent,
       },
