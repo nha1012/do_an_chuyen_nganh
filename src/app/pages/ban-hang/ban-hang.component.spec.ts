@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DanhSachKhachHangComponent } from './danh-sach-khach-hang.component';
+import { BanHangComponent } from './ban-hang.component';
 
-describe('DanhSachKhachHangComponent', () => {
-  let component: DanhSachKhachHangComponent;
-  let fixture: ComponentFixture<DanhSachKhachHangComponent>;
+describe('BanHangComponent', () => {
+  let component: BanHangComponent;
+  let fixture: ComponentFixture<BanHangComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DanhSachKhachHangComponent ],
+      declarations: [ BanHangComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DanhSachKhachHangComponent);
+    fixture = TestBed.createComponent(BanHangComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
 
 const routes: Routes = [
   {
@@ -35,13 +34,6 @@ const routes: Routes = [
             (m) => m.QuanLyDonHangModule,
           ),
       },
-      // {
-      //   path: 'dang-ky-ca-lam',
-      //   loadChildren: () =>
-      //     import('./dang-ky-ca-lam/dang-ky-ca-lam.module').then(
-      //       (m) => m.DangKyCaLamModule,
-      //     ),
-      // },
       {
         path: 'quan-ly-danh-muc',
         loadChildren: () =>
@@ -78,8 +70,11 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'dashboard',
-        component: ECommerceComponent,
+        path: 'ban-hang',
+        loadChildren: () =>
+          import('./ban-hang/ban-hang.module').then(
+            (m) => m.BanHangModule,
+          ),
       },
       {
         path: '',

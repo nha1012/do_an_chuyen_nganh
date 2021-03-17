@@ -20,13 +20,6 @@ import { RouterModule } from '@angular/router';
           ),
       },
       {
-        path: 'danh-sach-khach-hang',
-        loadChildren: () =>
-          import('./danh-sach-khach-hang/danh-sach-khach-hang.module').then(
-            (m) => m.DanhSachKhachHangModule,
-          ),
-      },
-      {
         path: 'chi-tiet/:id',
         loadChildren: () =>
           import('./chi-tiet/chi-tiet.module').then(
@@ -36,4 +29,4 @@ import { RouterModule } from '@angular/router';
     ]),
   ],
 })
-export class QuanLyKhachHangModule {}
+export class QuanLyKhachHangModule { }

@@ -4,13 +4,13 @@ import { title } from 'process';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Thống kê',
+    title: 'Bán hàng',
     group: true,
   },
   {
-    title: 'Thống kê cửa hàng',
+    title: 'Trang bán hàng',
     icon: 'shopping-cart-outline',
-    link: '/pages/dashboard',
+    link: '/pages/ban-hang',
     home: true,
   },
   {
