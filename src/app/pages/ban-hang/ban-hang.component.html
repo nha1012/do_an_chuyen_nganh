@@ -1,1 +1,70 @@
-<p>ban-hang works!</p>
+<nb-card>
+	<nb-card-header
+		><span>Trang bán hàng</span
+		><span class="float-right"
+			><button nbButton status="success">Xuất hoá đơn</button></span
+		>
+	</nb-card-header>
+	<nb-card-body>
+		<nb-card>
+			<nb-card-header> Giỏ hàng </nb-card-header>
+			<nb-card-body>
+				<div class="row mb-3">
+					<div class="col-sm-3"><strong>Tên sản phẩm</strong></div>
+					<div class="col-sm-3"><strong>Giá sản phẩm</strong></div>
+					<div class="col-sm-3"><strong>Số lượng</strong></div>
+					<div class="col-sm-3"><strong>Thành tiền</strong></div>
+				</div>
+				<div *ngFor="let product of lstCart" class="row">
+					<div class="col-sm-3">{{ product.tenSanPham }}</div>
+					<div class="col-sm-3">{{ product.giaKhuyenMai }}</div>
+					<div class="col-sm-3">{{ product.soLuong }}</div>
+					<div class="col-sm-3">{{ product.thanhTien }}</div>
+				</div>
+			</nb-card-body>
+		</nb-card>
+		<nb-card>
+			<nb-card-header
+				><span> Chọn sản phẩm</span>
+				<div class="float-right">select-ten-san-pham</div>
+			</nb-card-header>
+			<nb-card-body>
+				<ngn-datatable
+					#table
+					selectionType="single"
+					[datatableService]="datatableService"
+					[externalPaging]="true"
+					[limit]="10"
+					[scrollbarH]="true"
+					class="material"
+					(activate)="clickRowHandle($event)"
+				>
+					<ngn-datatable-column
+						type="string"
+						name="Tên sản phẩm"
+						prop="tenSanPham"
+						[width]="200"
+					></ngn-datatable-column>
+					<ngn-datatable-column
+						name="Số lượng"
+						prop="soLuong"
+						type="number"
+						[width]="150"
+					></ngn-datatable-column>
+					<ngn-datatable-column
+						name="Giá khuyến mãi"
+						type="number"
+						prop="giaKhuyenMai"
+						[width]="150"
+					></ngn-datatable-column>
+					<ngn-datatable-column
+						name="Danh mục sản phẩm"
+						prop="danhMucSanPham.tenDanhMuc"
+						type="string"
+						[width]="250"
+					></ngn-datatable-column>
+				</ngn-datatable>
+			</nb-card-body>
+		</nb-card>
+	</nb-card-body>
+</nb-card>
