@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 const rest = `${environment.rest}/auth`;
 import * as _ from 'lodash';
 import { map } from 'rxjs/operators';
+import { UserEntity } from '../user/user.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +23,9 @@ export class AuthService {
           return true;
         }),
       );
+  }
+  register(user: UserEntity): Observable<UserEntity> {
+    return this.http.post(`${rest}/register`, user);
   }
   logout() {
     this.router.navigate(['auth']);

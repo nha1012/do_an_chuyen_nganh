@@ -1,0 +1,9 @@
+<nb-select
+	fullWidth
+	placeholder="Chọn tên sản phẩm"
+	(selectedChange)="productSelected.emit($event)"
+>
+	<nb-option *ngFor="let product of products" [value]="product.productId">{{
+		product.tenSanPham
+	}}</nb-option>
+</nb-select>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BanHangComponent } from './ban-hang.component';
+import { CellHinhAnhMinhHoaComponent } from './cell-hinh-anh-minh-hoa.component';
 
-describe('BanHangComponent', () => {
-  let component: BanHangComponent;
-  let fixture: ComponentFixture<BanHangComponent>;
+describe('CellHinhAnhMinhHoaComponent', () => {
+  let component: CellHinhAnhMinhHoaComponent;
+  let fixture: ComponentFixture<CellHinhAnhMinhHoaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BanHangComponent],
+      declarations: [CellHinhAnhMinhHoaComponent],
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BanHangComponent);
+    fixture = TestBed.createComponent(CellHinhAnhMinhHoaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

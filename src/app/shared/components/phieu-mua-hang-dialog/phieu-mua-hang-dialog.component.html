@@ -1,0 +1,104 @@
+<nb-card class="dialog__dang-ky-ca-lam">
+	<nb-card-header> Xác nhận đơn hàng </nb-card-header>
+	<nb-card-body>
+		<nb-tabset>
+			<nb-tab
+				[active]="!isActive"
+				[disabled]="isActive"
+				tabTitle="Users"
+				tabIcon="person-outline"
+				responsive
+			>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="mt-2 col-sm-5 mb-2">Tên khách hàng</div>
+							<div class="col-sm-7 mb-2">
+								<input
+									nbInput
+									type="text"
+									[fullWidth]="true"
+									[(ngModel)]="thongTinKhachHang.username"
+								/>
+							</div>
+
+							<div class="mt-2 col-sm-5">Số điện thoại</div>
+							<div class="col-sm-7">
+								<input
+									nbInput
+									type="text"
+									[fullWidth]="true"
+									[(ngModel)]="thongTinKhachHang.userPhone"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-12 btn__grp">
+							<div class="row">
+								<div class="col-sm-3">
+									<button
+										class="btn__huy"
+										nbButton
+										[fullWidth]="true"
+										(click)="handleHuy()"
+										status="danger"
+									>
+										Huỷ
+									</button>
+								</div>
+								<div class="col-sm-9">
+									<button
+										(click)="xacNhanGiaoDich()"
+										[disabled]="isGiaoDich"
+										[nbSpinner]="isGiaoDich"
+										status="primary"
+										class="btn__luu ml-2"
+										[fullWidth]="true"
+										nbButton
+									>
+										Chuyển đến hoá đơn
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nb-tab>
+			<nb-tab
+				[active]="isActive"
+				[disabled]="!isActive"
+				tabTitle="Transactions"
+				tabIcon="email-outline"
+				responsive
+			>
+				<nb-card #hoaDon id="hoaDon">
+					<nb-card-header> Sản phẩm đã mua </nb-card-header>
+					<nb-card-body>
+						<div class="row mb-3">
+							<div class="col-sm-3"><strong>Tên sản phẩm</strong></div>
+							<div class="col-sm-3"><strong>Giá sản phẩm</strong></div>
+							<div class="col-sm-3"><strong>Số lượng</strong></div>
+							<div class="col-sm-3"><strong>Thành tiền</strong></div>
+						</div>
+						<div *ngFor="let product of lstCart" class="row">
+							<div class="col-sm-3">{{ product.tenSanPham }}</div>
+							<div class="col-sm-3">{{ product.giaKhuyenMai }} VND</div>
+							<div class="col-sm-3">{{ product.soLuong }}</div>
+							<div class="col-sm-3">{{ product.thanhTien }} VND</div>
+						</div>
+					</nb-card-body>
+					<nb-card-footer>
+						<div class="row">
+							<div class="col-sm-5"><strong>Tổng tiền</strong></div>
+							<div class="col-sm-7">
+								<strong>{{ tongTien }} VND</strong>
+							</div>
+						</div>
+					</nb-card-footer>
+				</nb-card>
+				<button status="success" nbButton (click)="xuatHoaDonBanHang()">
+					Xuất hoá đơn
+				</button>
+			</nb-tab>
+		</nb-tabset>
+	</nb-card-body>
+</nb-card>

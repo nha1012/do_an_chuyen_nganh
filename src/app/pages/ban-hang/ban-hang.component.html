@@ -2,7 +2,9 @@
 	<nb-card-header
 		><span>Trang bán hàng</span
 		><span class="float-right"
-			><button nbButton status="success">Xuất hoá đơn</button></span
+			><button nbButton (click)="banHang()" status="success">
+				Xác nhận thông tin
+			</button></span
 		>
 	</nb-card-header>
 	<nb-card-body>
@@ -17,16 +19,20 @@
 				</div>
 				<div *ngFor="let product of lstCart" class="row">
 					<div class="col-sm-3">{{ product.tenSanPham }}</div>
-					<div class="col-sm-3">{{ product.giaKhuyenMai }}</div>
+					<div class="col-sm-3">{{ product.giaKhuyenMai }} VND</div>
 					<div class="col-sm-3">{{ product.soLuong }}</div>
-					<div class="col-sm-3">{{ product.thanhTien }}</div>
+					<div class="col-sm-3">{{ product.thanhTien }} VND</div>
 				</div>
 			</nb-card-body>
 		</nb-card>
 		<nb-card>
 			<nb-card-header
 				><span> Chọn sản phẩm</span>
-				<div class="float-right">select-ten-san-pham</div>
+				<div class="float-right">
+					<ngx-select-ten-san-pham
+						(productSelected)="loc($event)"
+					></ngx-select-ten-san-pham>
+				</div>
 			</nb-card-header>
 			<nb-card-body>
 				<ngn-datatable
@@ -45,6 +51,23 @@
 						prop="tenSanPham"
 						[width]="200"
 					></ngn-datatable-column>
+
+					<ngn-datatable-column
+						prop="anhMinhHoa"
+						[width]="150"
+						name="Hình ảnh"
+						[flexGrow]="3"
+					>
+						<ng-template
+							ngn-datatable-cell-template
+							let-value="value"
+							let-row="row"
+						>
+							<ngx-cell-hinh-anh-minh-hoa [hinhAnh]="value">
+							</ngx-cell-hinh-anh-minh-hoa>
+						</ng-template>
+					</ngn-datatable-column>
+
 					<ngn-datatable-column
 						name="Số lượng"
 						prop="soLuong"

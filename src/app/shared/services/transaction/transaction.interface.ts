@@ -2,7 +2,7 @@ import { OrderEntity } from '../order/order.interface';
 import { UserEntity } from '../user/user.interface';
 
 export interface TranSactionEntity {
-  tranSactionId?: string;
+  transactionId?: string;
   status?: boolean;
   userId?: string;
   user?: UserEntity;
@@ -15,4 +15,5 @@ export interface TranSactionEntity {
   createDate?: Date;
   updateDate?: Date;
   orders?: OrderEntity[];
+  qty?: number;
 }
