@@ -17,9 +17,6 @@ export class BanHangComponent implements OnInit {
   @ViewChild('table', { static: false })
   table: DatatableComponent<ProductEntity>;
 
-  @ViewChild('#cart', { static: false })
-  cart: DatatableComponent<ProductEntity>;
-
   datatableService: DatatableService<ProductEntity> = {
     service: this.productService,
     primaryField: 'productId',
