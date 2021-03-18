@@ -40,7 +40,6 @@ export class BanHangComponent implements OnInit {
 
   getBuilder(builder: RequestQueryBuilder) {
     builder.select(['anhMinhHoa', 'chuongTrinhKhuyenMai', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap'] as Array<keyof ProductEntity>);
-    // tslint:disable-next-line:max-line-length
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
   }
