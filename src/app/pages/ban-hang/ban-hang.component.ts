@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
+import { HandleCongTruEnum } from 'app/shared/components/cell-so-luong-san-pham/cell-so-luong-san-pham.component';
 import { PhieuMuaHangDialogComponent } from 'app/shared/components/phieu-mua-hang-dialog/phieu-mua-hang-dialog.component';
 import { OrderService } from 'app/shared/services/order/order.service';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
@@ -45,6 +46,21 @@ export class BanHangComponent implements OnInit {
   loc($event) {
     this.productId = $event;
     this.table.loadData();
+  }
+  handleActionSanPham($event, productId: string) {
+    this.lstCart.forEach((value, index) => {
+      if (productId === value.productId) {
+        if ($event === HandleCongTruEnum.CONG) {
+          value.thanhTien += value.giaKhuyenMai;
+          value.soLuong++;
+        } else if ($event === HandleCongTruEnum.TRU) {
+          value.thanhTien -= value.giaKhuyenMai;
+          value.soLuong--;
+        } else {
+          this.lstCart.splice(index, 1);
+        }
+      }
+    });
   }
   getBuilder(builder: RequestQueryBuilder) {
     builder.select(['anhMinhHoa', 'chuongTrinhKhuyenMai', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'anhMinhHoa'] as Array<keyof ProductEntity>);
