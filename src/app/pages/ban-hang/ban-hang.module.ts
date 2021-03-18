@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BanHangComponent } from './ban-hang.component';
 import { RouterModule } from '@angular/router';
-import { NbButtonModule, NbCardModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
 import { NgnDatatableModule } from 'ngn-datatable';
 import { CellHinhAnhMinhHoaModule } from 'app/shared/components/cell-hinh-anh-minh-hoa/cell-hinh-anh-minh-hoa.module';
 import { SelectTenSanPhamModule } from 'app/shared/components/select-ten-san-pham/select-ten-san-pham.module';
@@ -20,6 +20,7 @@ import { CellSoLuongSanPhamModule } from 'app/shared/components/cell-so-luong-sa
     CellHinhAnhMinhHoaModule,
     SelectTenSanPhamModule,
     CellSoLuongSanPhamModule,
+    NbIconModule,
     RouterModule.forChild([{ path: '', component: BanHangComponent }]),
   ],
 })

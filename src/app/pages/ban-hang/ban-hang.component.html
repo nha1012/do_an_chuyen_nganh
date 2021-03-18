@@ -14,13 +14,13 @@
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>Tên sản phẩm</strong></div>
 					<div class="col-sm-3"><strong>Giá sản phẩm</strong></div>
-					<div class="col-sm-3"><strong>Số lượng</strong></div>
+					<div class="col-sm-2"><strong>Số lượng</strong></div>
 					<div class="col-sm-3"><strong>Thành tiền</strong></div>
 				</div>
 				<div *ngFor="let product of lstCart" class="row">
 					<div class="col-sm-3">{{ product.tenSanPham }}</div>
 					<div class="col-sm-3">{{ product.giaKhuyenMai }} VND</div>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<ngx-cell-so-luong-san-pham
 							[soLuong]="product.soLuong"
 							(handerActionSanPham)="
@@ -29,6 +29,14 @@
 						></ngx-cell-so-luong-san-pham>
 					</div>
 					<div class="col-sm-3">{{ product.thanhTien }} VND</div>
+					<div class="col-sm-1">
+						<nb-icon
+							class="btn__trash"
+							(click)="handleXoaGioHang(product.productId)"
+							icon="trash-outline"
+							status="danger"
+						></nb-icon>
+					</div>
 				</div>
 			</nb-card-body>
 		</nb-card>

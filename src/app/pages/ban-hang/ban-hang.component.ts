@@ -62,6 +62,15 @@ export class BanHangComponent implements OnInit {
       }
     });
   }
+  handleXoaGioHang(productId: string) {
+    if (confirm('Bạn có chắc chắn muốn xoá')) {
+      this.lstCart.forEach((value, index) => {
+        if (productId === value.productId) {
+          this.lstCart.splice(index, 1);
+        }
+      });
+    }
+  }
   getBuilder(builder: RequestQueryBuilder) {
     builder.select(['anhMinhHoa', 'chuongTrinhKhuyenMai', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'anhMinhHoa'] as Array<keyof ProductEntity>);
     builder.setJoin({ field: 'danhMucSanPham' });
