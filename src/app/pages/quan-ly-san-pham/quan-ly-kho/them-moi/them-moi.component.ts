@@ -70,6 +70,7 @@ export class ThemMoiComponent implements OnInit {
         this.productService.create(this.thongTinSanPham)
           .subscribe(async value => {
             await this.onSaveHinhAnh(value.productId).then(done => {
+              this.loading = true;
               this.toast.success(CRUD_MESSAGES.SUCCESS_ADD);
             });
           });
@@ -77,7 +78,6 @@ export class ThemMoiComponent implements OnInit {
     } catch (error) {
       this.toast.warning(error);
     } finally {
-      this.loading = false;
     }
   }
   uploadImage(files: FileList) {

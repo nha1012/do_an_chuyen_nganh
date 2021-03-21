@@ -1,9 +1,55 @@
 <nb-card>
-  <nb-card-header>
-    Thống kê sản phẩm
-  </nb-card-header>
-  <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source">
-    </ng2-smart-table>
-  </nb-card-body>
+	<nb-card-header> Thống kê sản phẩm </nb-card-header>
+	<nb-card-body>
+		<div class="row">
+			<div class="col-sm-12">
+				<nb-card>
+					<nb-card-header>
+						Top sản phẩm được đặt hàng nhiều nhất
+					</nb-card-header>
+					<nb-card-body>
+						<div class="row">
+							<strong class="col-sm-3 mb-3">Tên sản phẩm</strong>
+							<strong class="col-sm-3 mb-3">Số lượng còn lại</strong>
+							<strong class="col-sm-3 mb-3">Số đơn đã đặt</strong>
+							<strong class="col-sm-3 mb-3">Tổng doanh thu</strong>
+						</div>
+						<div *ngFor="let product of getSanPhamsMuaNhieu()" class="row">
+							<span class="col-sm-3 mb-2">{{ product.tenSanPham }}</span>
+							<span class="col-sm-3 mb-2">{{ product.soLuong }}</span>
+							<span class="col-sm-3 mb-2">{{ product.soDon }}</span>
+
+							<span class="col-sm-3 mb-2"
+								>{{ changeTypeTien(product.tongTienDaBan) }} VND</span
+							>
+						</div>
+					</nb-card-body>
+				</nb-card>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<nb-card>
+					<nb-card-header> Top sản phẩm ít được lựa chọn </nb-card-header>
+					<nb-card-body>
+						<div class="row">
+							<strong class="col-sm-3 mb-3">Tên sản phẩm</strong>
+							<strong class="col-sm-3 mb-3">Số lượng còn lại</strong>
+							<strong class="col-sm-3 mb-3">Số đơn đã đặt</strong>
+							<strong class="col-sm-3 mb-3">Tổng doanh thu</strong>
+						</div>
+						<div *ngFor="let product of getSanPhamsItMua()" class="row">
+							<span class="col-sm-3 mb-2">{{ product.tenSanPham }}</span>
+							<span class="col-sm-3 mb-2">{{ product.soLuong }}</span>
+							<span class="col-sm-3 mb-2">{{ product.soDon }}</span>
+
+							<span class="col-sm-3 mb-2"
+								>{{ changeTypeTien(product.tongTienDaBan) }} VND</span
+							>
+						</div>
+					</nb-card-body>
+				</nb-card>
+			</div>
+		</div>
+	</nb-card-body>
 </nb-card>

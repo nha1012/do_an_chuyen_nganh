@@ -42,16 +42,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/quan-ly-san-pham',
     children: [
       {
-        title: 'Thêm mới',
-        link: '/pages/quan-ly-san-pham/them-moi',
+        title: 'Quản lý kho',
+        link: '/pages/quan-ly-san-pham/quan-ly-kho',
+        children: [
+          {
+            title: 'Nhập kho',
+            link: '/pages/quan-ly-san-pham/quan-ly-kho/them-moi',
+          },
+          {
+            title: 'Danh sách ',
+            link: '/pages/quan-ly-san-pham/quan-ly-kho/danh-sach',
+          },
+        ],
       },
       {
         title: 'Danh sách sản phẩm',
         link: '/pages/quan-ly-san-pham/danh-sach',
-      },
-      {
-        title: 'Quản lý kho',
-        link: '/pages/quan-ly-san-pham/quan-ly-kho',
       },
       {
         title: 'Thống kê sản phẩm',

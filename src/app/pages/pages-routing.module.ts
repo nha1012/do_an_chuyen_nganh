@@ -11,7 +11,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'quan-ly-nhan-vien',
+        redirectTo: 'ban-hang',
       },
       {
         path: 'quan-ly-khach-hang',
@@ -75,11 +75,6 @@ const routes: Routes = [
           import('./ban-hang/ban-hang.module').then(
             (m) => m.BanHangModule,
           ),
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
       },
     ],
   },

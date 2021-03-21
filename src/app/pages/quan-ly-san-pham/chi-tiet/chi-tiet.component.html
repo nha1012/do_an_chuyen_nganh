@@ -1,1 +1,98 @@
-<p>{{product}}</p>
+<nb-card>
+	<nb-card-header><span>Thông tin sản phẩm</span><button status="success" nbButton class="float-right" (click)="luuThongTinSanPham()">Lưu</button> </nb-card-header>
+	<nb-card-body>
+		<div class="row" *ngIf="product">
+			<div class="col-md-6">
+				<img src="{{ product.anhMinhHoa }}" width="100%" alt="" />
+			</div>
+			<div class="col-md-6">
+        <div class="mb-2">
+          <span class="col-md-4">Tên sản phẩm</span>
+          <input type="text" nbInput fieldSize="small" value="{{ product.tenSanPham }}" />
+        </div>
+        <div class="mb-2">
+          <span class="col-md-4">Giá sản phẩm</span>
+          <input type="text" nbInput fieldSize="small" value="{{ product.giaSanPham }}" />
+        </div>
+        <div class="mb-2">
+          <span class="col-md-4">Giá khuyến mãi</span>
+          <input type="text" nbInput fieldSize="small" value="{{ product.giaKhuyenMai }}" />
+        </div>
+        <div class="mb-2">
+          <span class="col-md-4">Số lượng</span>
+          <input type="text" nbInput fieldSize="small" value="{{ product.giaKhuyenMai }}" />
+        </div>
+        <div class="mb-2">
+          <span class="col-md-4">Danh mục</span>
+          <ngx-select-loai-san-pham></ngx-select-loai-san-pham>
+        </div>
+        <div class="mb-2">
+          <span class="col-md-4">Nhà cung cấp</span>
+          <ngx-select-nha-cung-cap></ngx-select-nha-cung-cap>
+        </div>
+        <nb-tabset>
+          <nb-tab tabTitle="Mô tả">
+            <div [innerHtml]="product.moTa"></div>
+          </nb-tab>
+          <nb-tab tabTitle="Reviews">
+            <div class="row">
+              <div *ngFor="let review of product.reviewSanPhams" class="col-md-6">
+                <div>
+                  <strong>{{review.user?.displayName}}</strong>
+                </div>
+                <div>
+                  <div *ngIf="review?.soSao === 5" class="group__start">
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                  </div>
+                  <div *ngIf="review?.soSao === 4" class="group__start">
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                  </div>
+                  <div *ngIf="review?.soSao === 3" class="group__start">
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                  </div>
+                  <div *ngIf="review?.soSao === 2 " class="group__start">
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                  </div>
+                  <div *ngIf="review?.soSao === 1 " class="group__start">
+                    <nb-icon icon="star"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+
+                  </div>
+                  <div *ngIf="review?.soSao === 0 " class="group__start">
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                    <nb-icon icon="star-outline"></nb-icon>
+                  </div>
+                  <strong>{{review?.danhGia}}</strong>
+                </div>
+                <hr>
+              </div>
+            </div>
+          </nb-tab>
+
+        </nb-tabset>
+			</div>
+		</div>
+	</nb-card-body>
+</nb-card>
