@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuanLyTaiKhoanComponent } from './quan-ly-tai-khoan.component';
 
-describe('QuanLyTaiKhoanComponent', () => {
-  let component: QuanLyTaiKhoanComponent;
-  let fixture: ComponentFixture<QuanLyTaiKhoanComponent>;
+import { SelectKhachHangComponent } from './select-khach-hang.component';
+
+describe('SelectKhachHangComponent', () => {
+  let component: SelectKhachHangComponent;
+  let fixture: ComponentFixture<SelectKhachHangComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuanLyTaiKhoanComponent ],
+      declarations: [ SelectKhachHangComponent ],
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuanLyTaiKhoanComponent);
+    fixture = TestBed.createComponent(SelectKhachHangComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

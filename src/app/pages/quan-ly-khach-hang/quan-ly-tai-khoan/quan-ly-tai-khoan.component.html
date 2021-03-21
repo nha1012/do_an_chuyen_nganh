@@ -2,11 +2,11 @@
 	<nb-card-header> Quản lý tài khoản </nb-card-header>
 	<nb-card-body>
 		<div class="row d-flex">
-			<ngx-select-nhan-vien
+			<ngx-select-khach-hang
 				[placerHolder]="'Khách hàng'"
 				class="m-2"
-				(nhanVienSelected)="getNhanVien($event)"
-			></ngx-select-nhan-vien>
+				(KhachHangSelected)="getkhachhang($event)"
+			></ngx-select-khach-hang>
 			<div class="nut-loc">
 				<button nbButton status="primary" outline (click)="loadDataTable()">
 					Lọc

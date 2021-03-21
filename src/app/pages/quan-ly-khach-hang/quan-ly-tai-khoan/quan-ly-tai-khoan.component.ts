@@ -37,7 +37,7 @@ export class QuanLyTaiKhoanComponent {
   loadDataTable() {
     this.table.loadData();
   }
-  getNhanVien($event) {
+  getkhachhang($event) {
     this.filterEntity.userId = $event;
   }
   getBuilder(builder: RequestQueryBuilder) {

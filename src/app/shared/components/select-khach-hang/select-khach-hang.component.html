@@ -1,0 +1,9 @@
+<nb-select
+	[placeholder]="placerHolder"
+	fullWidth
+	(selectedChange)="KhachHangSelected.emit($event)"
+>
+	<nb-option *ngFor="let user of khachhangs" [value]="user.userId">{{
+		user.displayName
+	}}</nb-option>
+</nb-select>
