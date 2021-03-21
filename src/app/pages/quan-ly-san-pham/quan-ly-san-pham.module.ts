@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { EditerComponent } from './editer/editer.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [EditerComponent],
+  declarations: [],
   imports: [
     CommonModule,
     NgxEditorModule,
@@ -25,7 +24,7 @@ import { FormsModule } from '@angular/forms';
       {
         path: 'them-moi',
         loadChildren: () =>
-          import('./them-moi/them-moi.module').then((m) => m.ThemMoiModule),
+          import('./quan-ly-kho/them-moi/them-moi.module').then((m) => m.ThemMoiModule),
       },
       {
         path: 'quan-ly-kho',

@@ -10,5 +10,4 @@ export interface OrderEntity {
   status?: boolean;
   qty?: number;
   tongTien?: number;
-
 }

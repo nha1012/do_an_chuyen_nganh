@@ -16,6 +16,7 @@ export interface ProductEntity {
   danhMucSanPhamId?: string;
   danhMucSanPham?: DanhMucSanPhamEntity;
   createDate?: Date;
+  status?: boolean;
   updateDate?: Date;
   anhMinhHoa?: string;
   hinhAnhSamPhams?: HinhAnhSanPhamEntity[];
