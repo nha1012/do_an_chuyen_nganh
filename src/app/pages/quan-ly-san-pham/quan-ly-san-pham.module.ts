@@ -34,13 +34,6 @@ import { FormsModule } from '@angular/forms';
           ),
       },
       {
-        path: 'thong-ke-san-pham',
-        loadChildren: () =>
-          import('./thong-ke-san-pham/thong-ke-san-pham.module').then(
-            (m) => m.ThongKeSanPhamModule,
-          ),
-      },
-      {
         path: 'chi-tiet',
         loadChildren: () =>
           import('./chi-tiet/chi-tiet.module').then((t) => t.ChiTietModule),

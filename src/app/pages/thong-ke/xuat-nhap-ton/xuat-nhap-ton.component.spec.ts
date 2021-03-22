@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuanLyHieuSuatComponent } from './quan-ly-hieu-suat.component';
+import { XuatNhapTonComponent } from './xuat-nhap-ton.component';
 
-describe('QuanLyHieuSuatComponent', () => {
-  let component: QuanLyHieuSuatComponent;
-  let fixture: ComponentFixture<QuanLyHieuSuatComponent>;
+describe('XuatNhapTonComponent', () => {
+  let component: XuatNhapTonComponent;
+  let fixture: ComponentFixture<XuatNhapTonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QuanLyHieuSuatComponent ]
+      declarations: [ XuatNhapTonComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuanLyHieuSuatComponent);
+    fixture = TestBed.createComponent(XuatNhapTonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

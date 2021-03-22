@@ -76,6 +76,13 @@ const routes: Routes = [
             (m) => m.BanHangModule,
           ),
       },
+      {
+        path: 'thong-ke-cua-hang',
+        loadChildren: () =>
+          import('./thong-ke/thong-ke.module').then(
+            (m) => m.ThongKeModule,
+          ),
+      },
     ],
   },
 ];

@@ -43,17 +43,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/quan-ly-san-pham/quan-ly-kho/danh-sach',
   },
   {
-    title: 'Báo cáo doanh thu',
+    title: 'Thống kê của hàng',
     icon: 'alert-triangle-outline',
-    link: '/pages/bao-cao-doanh-thu',
+    link: '/pages/thong-ke-cua-hang',
     children: [
       {
-        title: 'Báo cáo xuất nhập tồn',
-        link: '/pages/bao-cao-doanh-thu/xuat-nhap-ton-kho',
+        title: 'Thống kê đơn hàng',
+        link: '/pages/thong-ke-cua-hang/don-hang',
       },
       {
-        title: 'Báo cáo nhân sự',
-        link: '/pages/bao-cao-doanh-thu/bao-cao-nhan-su',
+        title: 'Báo cáo xuất nhập tồn',
+        link: '/pages/thong-ke-cua-hang/xuat-nhap-ton',
+      },
+      {
+        title: 'Thống kê nhân sự',
+        link: '/pages/thong-ke-cua-hang/nhan-su',
+      },
+      {
+        title: 'Thống kê sản phẩm',
+        link: '/pages/thong-ke-cua-hang/san-pham',
       },
     ],
   },
