@@ -104,10 +104,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Quản lý tài khoản',
         link: '/pages/quan-ly-khach-hang/quan-ly-tai-khoan',
       },
-      {
-        title: 'Danh sách khách hàng',
-        link: '/pages/quan-ly-khach-hang/danh-sach-khach-hang',
-      },
     ],
   },
   {
