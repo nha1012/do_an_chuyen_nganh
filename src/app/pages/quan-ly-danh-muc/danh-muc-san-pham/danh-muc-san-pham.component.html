@@ -1,10 +1,44 @@
 <nb-card>
-  <nb-card-header>
-    Danh sách sản phẩm
-  </nb-card-header>
-  <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="onSaveConfirm($event)"
-      (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
-  </nb-card-body>
+	<nb-card-header> Danh mục sản phẩm</nb-card-header>
+	<nb-card-body class="row">
+    <div class="col-sm-4">
+      <nb-card>
+        <nb-card-body>
+          <div>
+            <span>Tên danh mục</span>
+            <input type="text" [fullWidth]="true" nbInput (change)="thongTinDanhMuc.tenDanhMuc=$event.target.value" placeholder="Nhập tên danh mục">
+          </div>
+        </nb-card-body>
+        <nb-card-footer>
+          <button nbButton>Huỷ</button>
+          <button nbButton [disabled]="isThemDanhMucSanPham" [nbSpinner]="isThemDanhMucSanPham" [status]="'primary'" (click)="themMoiDanhMuc()">Thêm mới</button>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+    <div class="col-sm-8">
+      <ngn-datatable
+			#table
+			selectionType="single"
+			[datatableService]="datatableService"
+			[externalPaging]="true"
+			[limit]="10"
+			[scrollbarH]="true"
+			class="material"
+			[actions]="actions"
+		>
+			<ngn-datatable-column
+      name="Danh mục Id"
+      prop="danhMucSanPhamId"
+      type="string"
+      [width]="350"
+    ></ngn-datatable-column>
+			<ngn-datatable-column
+				name="Tên danh mục"
+				prop="tenDanhMuc"
+				type="string"
+				[width]="350"
+			></ngn-datatable-column>
+		</ngn-datatable>
+    </div>
+	</nb-card-body>
 </nb-card>

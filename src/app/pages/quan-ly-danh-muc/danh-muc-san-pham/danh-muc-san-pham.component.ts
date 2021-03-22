@@ -1,114 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
-import { CRUDBaseService } from 'app/shared/services/crud-base.service';
-import { environment } from 'environments/environment.prod';
-import { LocalDataSource } from 'ng2-smart-table';
+import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
+import { DatatableAction, DatatableComponent, DatatableService } from 'ngn-datatable';
+import { DanhMucSanPhamEntity } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.interface';
+import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
 
 @Component({
-  selector: 'ngx-danh-muc-san-pham',
+  selector: 'ngx-quan-ly-tai-khoan',
   templateUrl: './danh-muc-san-pham.component.html',
   styleUrls: ['./danh-muc-san-pham.component.scss'],
 })
 export class DanhMucSanPhamComponent {
-  settings = {
-    pager: {
-      display: true,
-      perPage: 7,
-    },
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      name: {
-        title: 'Tên loại sản phẩm',
-        type: 'string',
-      },
-    },
+  @ViewChild('table', { static: false })
+  table: DatatableComponent<DanhMucSanPhamEntity>;
+  thongTinDanhMuc: DanhMucSanPhamEntity = {};
+  isThemDanhMucSanPham = false;
+  datatableService: DatatableService<DanhMucSanPhamEntity> = {
+    service: this.danhMucSanPhamService,
+    primaryField: 'danhMucSanPhamId',
+    builder: this.getBuilder.bind(this),
   };
-
-  source: LocalDataSource = new LocalDataSource();
-  loadDataTable() {
-    this.crudBaseService
-      .get(`${environment.rest}/product-type`)
-      .subscribe((value: { allProductType: [] }) => {
-        this.source.load(value.allProductType);
-      });
-  }
+  actions: DatatableAction<DanhMucSanPhamEntity>[] = [
+    { name: 'quick-edit' },
+    { name: 'delete' },
+  ];
   constructor(
-    private crudBaseService: CRUDBaseService,
     private toast: NbToastrService,
+    private danhMucSanPhamService: DanhMucSanPhamService,
   ) {
-    this.loadDataTable();
   }
+  loadDataTable() {
+    this.table.loadData();
+  }
+  valid() {
+    if (!this.thongTinDanhMuc.tenDanhMuc) {
+      throw new Error('Vui lòng nhập tên danh mục');
+    }
+    return true;
+  }
+  themMoiDanhMuc() {
+    try {
+      this.valid();
+      this.isThemDanhMucSanPham = true;
+      this.danhMucSanPhamService.create(this.thongTinDanhMuc).subscribe(value => {
+        this.isThemDanhMucSanPham = false;
 
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      this.crudBaseService
-        .delete(`${environment.rest}/product-type/${event.data.id}`)
-        .subscribe(
-          (values: { message: string }) => {
-            if (values) {
-              this.toast.success(values.message);
-            }
-          },
-          (err) => {
-            this.loadDataTable();
-            this.toast.danger(err.error.message);
-          },
-          () => {
-            this.loadDataTable();
-          },
-        );
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
+        this.toast.success('Thêm danh mục sản phẩm thành công');
+      });
+    } catch (error) {
+      this.toast.danger(error);
+
     }
   }
-  onCreateConfirm(event) {
-    this.crudBaseService
-      .post(`${environment.rest}/product-type`, event.newData)
-      .subscribe(
-        (value: { message: string }) => {
-          this.toast.success(value.message);
-        },
-        (err) => {
-          this.toast.danger(err.error.message);
-        },
-        () => {
-          this.loadDataTable();
-        },
-      );
-  }
-  onSaveConfirm(event) {
-    this.crudBaseService
-      .put(`${environment.rest}/product-type/${event.data.id}`, event.newData)
-      .subscribe(
-        (value: { message: string }) => {
-          this.toast.success(value.message);
-        },
-        (err) => {
-          this.toast.danger(err.error.message);
-        },
-        () => {
-          this.loadDataTable();
-        },
-      );
+  getBuilder(builder: RequestQueryBuilder) {
+    builder.select(['tenDanhMuc'] as Array<keyof DanhMucSanPhamEntity>);
+
   }
 }

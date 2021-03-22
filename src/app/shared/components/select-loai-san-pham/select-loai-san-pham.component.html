@@ -1,8 +1,10 @@
 <nb-select
-	placeholder="Chọn loại sản phẩm"
+	[placeholder]="placerholder"
 	(selectedChange)="setSelectedItem($event)"
-	size="small"
+	[size]="size"
 	[selected]="value"
+	[fullWidth]="fullWidth"
+
 >
 	<nb-option
 		*ngFor="let productType of lstLoaiSanPham"

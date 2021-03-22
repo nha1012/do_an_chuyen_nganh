@@ -38,6 +38,6 @@ export class DanhSachComponent {
   }
   getBuilder(builder: RequestQueryBuilder) {
     // tslint:disable-next-line:max-line-length
-    builder.select(['tenNhaCungCap', 'url','phoneNumber', 'address']);   
+    builder.select(['tenNhaCungCap', 'url', 'phoneNumber', 'address']);
   }
 }

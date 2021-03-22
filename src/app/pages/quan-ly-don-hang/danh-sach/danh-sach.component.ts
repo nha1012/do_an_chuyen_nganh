@@ -1,134 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
-import { CRUDBaseService } from 'app/shared/services/crud-base.service';
-import { environment } from 'environments/environment.prod';
-import { LocalDataSource } from 'ng2-smart-table';
+import { LocalDataSource, ViewCell } from 'ng2-smart-table';
+import { UsersService } from 'app/shared/services/user/user.service';
+import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
+import { UserEntity } from 'app/shared/services/user/user.interface';
+import { DatatableAction, DatatableComponent, DatatableService } from 'ngn-datatable';
+import { RoleEnum } from 'app/shared/services/role/role.interface';
+import { NhaCungCapEntity } from 'app/shared/services/nha-cung-cap/nha-cung-cap.interface';
+import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap.service';
 
 @Component({
-  selector: 'ngx-danh-sach',
+  selector: 'ngx-quan-ly-tai-khoan',
   templateUrl: './danh-sach.component.html',
   styleUrls: ['./danh-sach.component.scss'],
 })
 export class DanhSachComponent {
-  settings = {
-    pager: {
-      display: true,
-      perPage: 7,
-    },
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      user_name: {
-        title: 'Tên sản phẩm',
-        type: 'string',
-      },
-      user_email: {
-        title: 'Email',
-        type: 'string',
-      },
-      user_id: {
-        title: 'ID khách hàng',
-        type: 'string',
-      },
-      user_phone: {
-        title: 'Số điện thoại',
-        type: 'string',
-      },
-      amount: {
-        title: 'Số tiền phải trả',
-        type: 'string',
-      },
-      status: {
-        title: 'Trạng thái',
-        type: 'number',
-      },
-      message: {
-        title: 'Ghi chú',
-        type: 'number',
-      },
-      payment_info: {
-        title: 'Phương thức thanh toán',
-        type: 'string',
-      },
-    },
-  };
-  source: LocalDataSource = new LocalDataSource();
-  loadDataTable() {
-    this.crudBaseService
-      .get(`${environment.rest}/transaction`)
-      .subscribe((value: { allTransaction: [] }) => {
-        this.source.load(value.allTransaction);
-      });
-  }
-  constructor(
-    private crudBaseService: CRUDBaseService,
-    private toast: NbToastrService,
-  ) {
-    this.loadDataTable();
-  }
+  @ViewChild('table', { static: false })
+  table: DatatableComponent<NhaCungCapEntity>;
 
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      this.crudBaseService
-        .delete(`${environment.rest}/transaction/${event.data.id}`)
-        .subscribe((values: { message: string }) => {
-          if (values) {
-            this.toast.success(values.message);
-          }
-        });
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
+
+  datatableService: DatatableService<NhaCungCapEntity> = {
+    service: this.nhaCungCapService,
+    primaryField: 'nhaCungCapId',
+    builder: this.getBuilder.bind(this),
+  };
+  actions: DatatableAction<NhaCungCapEntity>[] = [
+    { name: 'quick-edit' },
+    { name: 'delete' },
+  ];
+  constructor(
+    private toast: NbToastrService,
+    private nhaCungCapService: NhaCungCapService,
+  ) {
   }
-  onCreateConfirm(event: { newData: { product_type: any; }; }) {
-    delete event.newData.product_type;
-    this.crudBaseService
-      .post(`${environment.rest}/product`, event.newData)
-      .subscribe(
-        (value: { message: string }) => {
-          this.toast.success(value.message);
-        },
-        (err) => {
-          this.toast.danger(err.message);
-        },
-        () => {
-          this.loadDataTable();
-        },
-      );
+  loadDataTable() {
+    this.table.loadData();
   }
-  onSaveConfirm(event: { newData: { product_type: any; }; data: { id: any; }; }) {
-    delete event.newData.product_type;
-    this.crudBaseService
-      .put(`${environment.rest}/product/${event.data.id}`, event.newData)
-      .subscribe(
-        (value: { message: string }) => {
-          this.toast.success(value.message);
-        },
-        (err) => {
-          this.toast.danger(err.message);
-        },
-        () => {
-          this.loadDataTable();
-        },
-      );
+  getBuilder(builder: RequestQueryBuilder) {
+    // tslint:disable-next-line:max-line-length
+    builder.select(['tenNhaCungCap', 'url', 'phoneNumber', 'address']);
   }
 }

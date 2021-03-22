@@ -11,6 +11,9 @@ import { environment } from 'environments/environment.prod';
 })
 export class SelectLoaiSanPhamComponent implements OnInit {
   @Input() value: string;
+  @Input() placerholder: string;
+  @Input() fullWidth: boolean;
+  @Input() size: string;
   @Output() selectedItem = new EventEmitter();
 
   lstLoaiSanPham: DanhMucSanPhamEntity[];

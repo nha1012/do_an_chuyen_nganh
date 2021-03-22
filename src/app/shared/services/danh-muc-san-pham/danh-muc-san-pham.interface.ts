@@ -6,4 +6,5 @@ export interface DanhMucSanPhamEntity {
   danhMucCha?: DanhMucSanPhamEntity;
   productId?: string;
   product?: ProductEntity;
+  tenDanhMuc?: string;
 }
