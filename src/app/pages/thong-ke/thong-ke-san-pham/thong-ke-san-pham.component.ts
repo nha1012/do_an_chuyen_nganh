@@ -25,32 +25,23 @@ export class ThongKeSanPhamComponent implements OnInit {
       products.sort((pre, cur) => cur.orders.length - pre.orders.length);
       products.forEach(product => {
         const { orders } = product;
-        let tongTien = 0;
+        let soLuong = 0;
         orders.forEach(value => {
-          if (value.qty && value.tongTien) {
-            tongTien += value.qty * value.tongTien;
+          if (value.qty) {
+            soLuong += value.qty;
           } else {
-            tongTien = tongTien;
+            soLuong = soLuong;
           }
         });
         const thongKeSanPham: ThongKeSanPhamType = {
-          tenSanPham: product.tenSanPham,
-          soLuong: product.soLuong,
-          soDon: orders.length,
-          tongTienDaBan: tongTien,
+          name: product.tenSanPham,
+          value: soLuong,
         };
         this.products.push(thongKeSanPham);
       });
     });
   }
-  getSanPhamsItMua(): ThongKeSanPhamType[] {
-    if (this.products.length >= 10) {
-      return this.products.reverse().splice(9, this.products.length - 9);
-    } else {
-      return this.products.reverse();
-    }
-  }
-  getSanPhamsMuaNhieu(): ThongKeSanPhamType[] {
+  getSanPham(): ThongKeSanPhamType[] {
     if (this.products.length >= 10) {
       return this.products.splice(9, this.products.length - 9);
     } else {

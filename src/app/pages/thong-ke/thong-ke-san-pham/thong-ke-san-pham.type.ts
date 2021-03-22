@@ -1,6 +1,4 @@
 export interface ThongKeSanPhamType {
-  tenSanPham: string;
-  tongTienDaBan: number;
-  soLuong?: number;
-  soDon?: number;
+  name: string;
+  value?: number;
 }

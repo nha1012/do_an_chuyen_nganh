@@ -2,6 +2,58 @@
 	<nb-card-header> Thống kê sản phẩm </nb-card-header>
 	<nb-card-body>
 		<div class="row">
+			<nb-card class="col-sm-12">
+				<nb-card-header>
+					Các sản phẩm ít được quan tâm
+				</nb-card-header>
+				<nb-card-body>
+					<ngx-charts-bar-vertical
+						*ngIf="getSanPham().length>0"
+						[animations]="true"
+						[showx]="true"
+						[results]="getSanPham()"
+						class="chart"
+						[animations]="true"
+						[showXAxisLabel]="true"
+						[showYAxisLabel]="true"
+						[xAxis]="true"
+						[yAxis]="true"
+						[showGridLines]="true"
+						[rotateXAxisTicks]="true"
+						[legend]="true"
+						[noBarWhenZero]="false"
+						[view]="[1000, 400]"
+					></ngx-charts-bar-vertical>
+				</nb-card-body>
+			</nb-card>
+		</div>
+		<div class="row">
+			<nb-card class="col-sm-12">
+				<nb-card-header>
+					Top sản phẩm được đặt hàng nhiều nhất
+				</nb-card-header>
+				<nb-card-body>
+					<ngx-charts-bar-vertical
+						*ngIf="getSanPham().reverse().length>0"
+						[animations]="true"
+						[showx]="true"
+						[results]="getSanPham().reverse()"
+						class="chart"
+						[animations]="true"
+						[showXAxisLabel]="true"
+						[showYAxisLabel]="true"
+						[xAxis]="true"
+						[yAxis]="true"
+						[showGridLines]="true"
+						[rotateXAxisTicks]="true"
+						[legend]="true"
+						[noBarWhenZero]="false"
+						[view]="[1000, 400]"
+					></ngx-charts-bar-vertical>
+				</nb-card-body>
+			</nb-card>
+		</div>
+		<!-- <div class="row">
 			<div class="col-sm-12">
 				<nb-card>
 					<nb-card-header>
@@ -50,6 +102,6 @@
 					</nb-card-body>
 				</nb-card>
 			</div>
-		</div>
+		</div> -->
 	</nb-card-body>
 </nb-card>

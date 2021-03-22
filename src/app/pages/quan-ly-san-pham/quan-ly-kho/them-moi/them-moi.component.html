@@ -16,6 +16,8 @@
 				<p class="row">
 					<strong class="col-md-3">Loại sản phẩm: </strong>
 					<ngx-select-loai-san-pham
+						[size]="'small'"
+						[placerholder]="'Chọn loại sản phẩm'"
 						(selectedItem)="thongTinSanPham.danhMucSanPhamId = $event"
 					></ngx-select-loai-san-pham>
 				</p>

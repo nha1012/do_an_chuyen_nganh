@@ -6,6 +6,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { NbCardModule, NbInputModule } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [ThongKeSanPhamComponent],
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     NbInputModule,
     ThemeModule,
     Ng2SmartTableModule,
+    NgxChartsModule,
     RouterModule.forChild([
       {
         path: '',
@@ -25,4 +27,4 @@ import { HttpClientModule } from '@angular/common/http';
     ]),
   ],
 })
-export class ThongKeSanPhamModule {}
+export class ThongKeSanPhamModule { }

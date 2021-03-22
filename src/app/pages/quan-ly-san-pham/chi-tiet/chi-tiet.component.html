@@ -54,7 +54,7 @@
         </div>
         <div class="mb-2">
           <span class="col-md-4">Danh mục</span>
-          <ngx-select-loai-san-pham (selectedItem)="thongTinSanPham.danhMucSanPhamId = $event" [value]="product.danhMucSanPhamId"></ngx-select-loai-san-pham>
+          <ngx-select-loai-san-pham [placerholder]="'Danh mục sản phẩm'" [size]="'small'" (selectedItem)="thongTinSanPham.danhMucSanPhamId = $event" [value]="product.danhMucSanPhamId"></ngx-select-loai-san-pham>
         </div>
         <div class="mb-2">
           <span class="col-md-4">Nhà cung cấp</span>
