@@ -8,9 +8,6 @@ import { SelectNhaCungCapModule } from 'app/shared/components/select-nha-cung-ca
 import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
-
-
 @NgModule({
   declarations: [ChiTietComponent],
   imports: [

@@ -1,7 +1,34 @@
 <nb-card>
 	<nb-card-header> Quản lý nhà cung cấp </nb-card-header>
-	<nb-card-body>
-		<ngn-datatable
+	<nb-card-body class="row">
+			<div class="col-sm-4">
+				<nb-card>
+					<nb-card-body>
+						<div>
+							<span>Tên nhà cung cấp</span>
+							<input type="text" [fullWidth]="true" nbInput (change)="thongTinNhaCungCap.tenNhaCungCap=$event.target.value" placeholder="Nhập tên nhà cung cấp">
+						</div>
+						<div>
+							<span>Đường dẫn</span>
+							<input type="text" [fullWidth]="true" nbInput (change)="thongTinNhaCungCap.url=$event.target.value" placeholder="Nhập đường dẫn">
+						</div>
+						<div>
+							<span>SĐT</span>
+							<input type="text" [fullWidth]="true" nbInput (change)="thongTinNhaCungCap.phoneNumber=$event.target.value" placeholder="Nhập SĐT">
+						</div>
+						<div>
+							<span>Địa chỉ</span>
+							<input type="text" [fullWidth]="true" nbInput (change)="thongTinNhaCungCap.address=$event.target.value" placeholder="Nhập địa chỉ">
+						</div>
+					</nb-card-body>
+					<nb-card-footer>
+						<button (click)="thongTinNhaCungCap = {}" nbButton>Huỷ</button>
+						<button nbButton [disabled]="isThemNhaCungCap" [nbSpinner]="isThemNhaCungCap" [status]="'primary'" (click)="themNhaCungCap()">Thêm mới</button>
+					</nb-card-footer>
+				</nb-card>
+			</div>
+		<div class="col-sm-8">
+			<ngn-datatable
 			#table
 			selectionType="single"
 			[datatableService]="datatableService"
@@ -35,7 +62,9 @@
 				type="string"
 				[width]="100"
 			></ngn-datatable-column>
-			
+
 		</ngn-datatable>
+		</div>
+
 	</nb-card-body>
 </nb-card>
