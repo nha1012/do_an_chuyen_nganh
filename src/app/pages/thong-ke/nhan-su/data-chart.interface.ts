@@ -14,3 +14,7 @@ export enum NameSeriesEnum {
   KDL = 'Không đi làm',
   DL = 'Có đi làm',
 }
+export interface DataChartLineEntity {
+  name: Date;
+  value: number;
+}
