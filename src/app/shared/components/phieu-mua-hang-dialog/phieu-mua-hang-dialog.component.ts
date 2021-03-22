@@ -26,10 +26,9 @@ export class PhieuMuaHangDialogComponent implements OnInit {
   data: any;
   isGiaoDich = false;
   lstCart: CartItem[] = [];
-  thongTinKhachHang: TranSactionEntity = {
-  };
   isActive = false;
   tongTien = 0;
+  khachHangId: string;
   constructor(
     private toast: NbToastrService,
     protected ref: NbDialogRef<PhieuMuaHangDialogComponent>,
@@ -43,12 +42,6 @@ export class PhieuMuaHangDialogComponent implements OnInit {
     this.ref.close();
   }
   checkValid() {
-    if (!this.thongTinKhachHang.username) {
-      throw new Error('Vui lòng nhập tên khách hàng');
-    }
-    if (!this.thongTinKhachHang.userPhone) {
-      throw new Error('Vui lòng nhập sdt khách hàng');
-    }
     this.toast.info('Đang xử lý, vui lòng chờ');
     return true;
   }
@@ -56,16 +49,8 @@ export class PhieuMuaHangDialogComponent implements OnInit {
     try {
       this.checkValid();
       this.isGiaoDich = true;
-      const { username, userPhone } = this.thongTinKhachHang;
-      const userEntity: UserEntity = {
-        username,
-        phoneNumber: userPhone,
-        password: 'matkhaumd',
-        roleId: RoleEnum.User,
-      };
-      const user = await this.authService.register(userEntity).toPromise();
       let newTransaction = await this.transactionService
-        .create({ userId: user.userId, payment: TypeTransaction.TAIQUAY }).toPromise();
+        .create({ userId: this.khachHangId, payment: TypeTransaction.TAIQUAY }).toPromise();
       this.lstCart.forEach(async (value: CartItem) => {
         if (value.tongSoLuong < value.soLuong) {
           this.isGiaoDich = false;

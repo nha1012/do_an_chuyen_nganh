@@ -8,6 +8,7 @@ import { SelectCaLamModule } from 'app/shared/components/select-ca-lam/select-ca
 import { PhieuMuaHangDialogComponent } from './phieu-mua-hang-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { SelectKhachHangModule } from '../select-khach-hang/select-khach-hang.module';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -29,6 +30,7 @@ FullCalendarModule.registerPlugins([
     NbSpinnerModule,
     FormsModule,
     NbTabsetModule,
+    SelectKhachHangModule,
   ],
   exports: [PhieuMuaHangDialogComponent],
 })

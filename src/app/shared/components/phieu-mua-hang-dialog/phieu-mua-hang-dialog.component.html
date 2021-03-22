@@ -12,25 +12,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="row">
-							<div class="mt-2 col-sm-5 mb-2">Tên khách hàng</div>
-							<div class="col-sm-7 mb-2">
-								<input
-									nbInput
-									type="text"
-									[fullWidth]="true"
-									[(ngModel)]="thongTinKhachHang.username"
-								/>
-							</div>
-
-							<div class="mt-2 col-sm-5">Số điện thoại</div>
-							<div class="col-sm-7">
-								<input
-									nbInput
-									type="text"
-									[fullWidth]="true"
-									[(ngModel)]="thongTinKhachHang.userPhone"
-								/>
-							</div>
+							<ngx-select-khach-hang [fullWidth]="true" [placerHolder]="'Chọn khách hàng'" (KhachHangSelected)="khachHangId = $event"></ngx-select-khach-hang>
 						</div>
 						<div class="col-sm-12 btn__grp">
 							<div class="row">

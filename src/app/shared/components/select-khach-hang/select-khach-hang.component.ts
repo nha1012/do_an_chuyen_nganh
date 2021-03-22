@@ -12,6 +12,7 @@ import { RoleEnum } from 'app/shared/services/role/role.interface';
 export class SelectKhachHangComponent implements OnInit {
   @Output() KhachHangSelected = new EventEmitter();
   @Input() placerHolder: string = '';
+  @Input() fullWidth: boolean = false;
   khachhangs: UserEntity[];
   constructor(private userService: UsersService) {
     this.userService.getMany(this.getBuilder()).subscribe(value => this.khachhangs = value);
