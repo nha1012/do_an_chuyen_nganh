@@ -31,10 +31,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Quản lý ca làm',
         link: '/pages/quan-ly-nhan-vien/quan-ly-ca-lam',
       },
-      {
-        title: 'Quản lý hiệu suất',
-        link: '/pages/quan-ly-nhan-vien/quan-ly-hieu-suat',
-      },
     ],
   },
   {
@@ -96,10 +92,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách sản phẩm',
         link: '/pages/quan-ly-san-pham/danh-sach',
-      },
-      {
-        title: 'Thống kê sản phẩm',
-        link: '/pages/quan-ly-san-pham/thong-ke-san-pham',
       },
     ],
   },
