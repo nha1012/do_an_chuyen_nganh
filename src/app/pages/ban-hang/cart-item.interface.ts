@@ -6,3 +6,8 @@ export interface CartItem {
   thanhTien: number;
   tongSoLuong?: number;
 }
+
+export enum TypeTransaction {
+  TAIQUAY = 'TT_TAI_QUAY',
+  ONLINE = 'TT_ONLINE',
+}

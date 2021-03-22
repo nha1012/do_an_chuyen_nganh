@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
-import { CartItem } from 'app/pages/ban-hang/cart-item.interface';
+import { CartItem, TypeTransaction } from 'app/pages/ban-hang/cart-item.interface';
 import { AuthService } from 'app/shared/services/auth/auth.service';
 import { OrderEntity } from 'app/shared/services/order/order.interface';
 import { OrderService } from 'app/shared/services/order/order.service';
@@ -64,7 +64,8 @@ export class PhieuMuaHangDialogComponent implements OnInit {
         roleId: RoleEnum.User,
       };
       const user = await this.authService.register(userEntity).toPromise();
-      let newTransaction = await this.transactionService.create({ userId: user.userId }).toPromise();
+      let newTransaction = await this.transactionService
+        .create({ userId: user.userId, payment: TypeTransaction.TAIQUAY }).toPromise();
       this.lstCart.forEach(async (value: CartItem) => {
         if (value.tongSoLuong < value.soLuong) {
           this.isGiaoDich = false;

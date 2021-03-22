@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgnDatatableModule } from 'ngn-datatable';
-import { NbButtonModule, NbCardModule, NbInputModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,8 @@ import { DanhSachComponent } from './danh-sach.component';
     FormsModule,
     SelectNhanVienModule,
     NbButtonModule,
+    NbDatepickerModule,
+    NbCheckboxModule,
     SelectRoleModule,
     RouterModule.forChild([{ path: '', component: DanhSachComponent }]),
   ],

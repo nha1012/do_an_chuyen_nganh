@@ -8,6 +8,8 @@ import { DatatableAction, DatatableComponent, DatatableService } from 'ngn-datat
 import { RoleEnum } from 'app/shared/services/role/role.interface';
 import { NhaCungCapEntity } from 'app/shared/services/nha-cung-cap/nha-cung-cap.interface';
 import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap.service';
+import { TranSactionEntity } from 'app/shared/services/transaction/transaction.interface';
+import { TransactionService } from 'app/shared/services/transaction/transaction.service';
 
 @Component({
   selector: 'ngx-quan-ly-tai-khoan',
@@ -16,21 +18,21 @@ import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap
 })
 export class DanhSachComponent {
   @ViewChild('table', { static: false })
-  table: DatatableComponent<NhaCungCapEntity>;
+  table: DatatableComponent<TranSactionEntity>;
+  tgNhanDon: any;
 
-
-  datatableService: DatatableService<NhaCungCapEntity> = {
-    service: this.nhaCungCapService,
-    primaryField: 'nhaCungCapId',
+  datatableService: DatatableService<TranSactionEntity> = {
+    service: this.transactionService,
+    primaryField: 'transactionId',
     builder: this.getBuilder.bind(this),
   };
-  actions: DatatableAction<NhaCungCapEntity>[] = [
+  actions: DatatableAction<TranSactionEntity>[] = [
     { name: 'quick-edit' },
     { name: 'delete' },
   ];
   constructor(
     private toast: NbToastrService,
-    private nhaCungCapService: NhaCungCapService,
+    private transactionService: TransactionService,
   ) {
   }
   loadDataTable() {
@@ -38,6 +40,25 @@ export class DanhSachComponent {
   }
   getBuilder(builder: RequestQueryBuilder) {
     // tslint:disable-next-line:max-line-length
-    builder.select(['tenNhaCungCap', 'url', 'phoneNumber', 'address']);
+    builder.select(['createDate', 'message', 'payment', 'user', 'tongTien', 'status', 'qty', 'orders'] as Array<keyof TranSactionEntity>);
+    builder.setJoin({ field: 'orders' });
+    builder.setJoin({ field: 'user' });
+    this.tgNhanDon &&
+      (this.tgNhanDon as any).start &&
+      builder.setFilter({
+        field: 'createDate',
+        operator: '$gte',
+        value: ((this.tgNhanDon as any).start as Date).toJSON(),
+      });
+    this.tgNhanDon &&
+      (this.tgNhanDon as any).end &&
+      builder.setFilter({
+        field: 'createDate',
+        operator: '$lte',
+        value: ((this.tgNhanDon as any).end as Date).toJSON(),
+      });
+  }
+  duyetDonHang($event) {
+    // console.log($event);
   }
 }

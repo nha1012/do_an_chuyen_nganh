@@ -17,6 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Danh mục quản lý',
     group: true,
   },
+
   {
     title: 'Quản lý nhân viên',
     icon: 'people-outline',
@@ -35,6 +36,35 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/quan-ly-nhan-vien/quan-ly-hieu-suat',
       },
     ],
+  },
+  {
+    title: 'Duyệt sản phẩm trong kho',
+    icon: 'done-all-outline',
+    link: '/pages/quan-ly-san-pham/quan-ly-kho/danh-sach',
+  },
+  {
+    title: 'Báo cáo doanh thu',
+    icon: 'alert-triangle-outline',
+    link: '/pages/bao-cao-doanh-thu',
+    children: [
+      {
+        title: 'Báo cáo xuất nhập tồn',
+        link: '/pages/bao-cao-doanh-thu/xuat-nhap-ton-kho',
+      },
+      {
+        title: 'Báo cáo nhân sự',
+        link: '/pages/bao-cao-doanh-thu/bao-cao-nhan-su',
+      },
+    ],
+  },
+  {
+    title: 'Danh mục nhân viên',
+    group: true,
+  },
+  {
+    title: 'Đăng ký ca làm',
+    link: '/pages/dang-ky-ca-lam',
+    icon: 'calendar-outline',
   },
   {
     title: 'Quản lý sản phẩm',
@@ -115,10 +145,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Danh sách ',
         link: '/pages/quan-ly-don-hang/danh-sach',
       },
-      {
-        title: 'Báo cáo',
-        link: '/pages/quan-ly-don-hang/bao-cao',
-      },
     ],
   },
   {
@@ -131,29 +157,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/quan-ly-danh-muc/danh-muc-san-pham',
       },
     ],
-  },
-  {
-    title: 'Báo cáo doanh thu',
-    icon: 'alert-triangle-outline',
-    link: '/pages/bao-cao-doanh-thu',
-    children: [
-      {
-        title: 'Báo cáo xuất nhập tồn',
-        link: '/pages/bao-cao-doanh-thu/xuat-nhap-ton-kho',
-      },
-      {
-        title: 'Báo cáo nhân sự',
-        link: '/pages/bao-cao-doanh-thu/bao-cao-nhan-su',
-      },
-    ],
-  },
-  {
-    title: 'Danh mục nhân viên',
-    group: true,
-  },
-  {
-    title: 'Đăng ký ca làm',
-    link: '/pages/dang-ky-ca-lam',
-    icon: 'calendar-outline',
   },
 ];

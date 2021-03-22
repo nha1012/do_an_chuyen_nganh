@@ -1,6 +1,22 @@
 <nb-card>
 	<nb-card-header> Quản lý đơn hàng </nb-card-header>
 	<nb-card-body>
+    <div class="row d-flex">
+			<input
+				class="m-2"
+				nbInput
+				placeholder="Thời gian nhận đơn"
+				[(ngModel)]="tgNhanDon"
+				[nbDatepicker]="dpkHSTrongThang"
+			/>
+			<nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
+			<div class="nut-loc">
+				<button nbButton status="primary" outline (click)="loadDataTable()">
+					Lọc
+				</button>
+			</div>
+		</div>
+
 		<ngn-datatable
 			#table
 			selectionType="single"
@@ -12,29 +28,63 @@
 			[actions]="actions"
 		>
 			<ngn-datatable-column
-				name="Tên nhà cung cấp"
-				prop="tenNhaCungCap"
+				name="Tên người dùng"
+				prop="user.username"
 				type="string"
 				[width]="150"
 			></ngn-datatable-column>
 			<ngn-datatable-column
-				name="Đường dẫn"
-				prop="url"
+				name="Tổng tiền"
+				prop="tongTien"
 				type="string"
 				[width]="150"
 			></ngn-datatable-column>
 			<ngn-datatable-column
-				name="Sđt"
-				prop="phoneNumber"
-				type="string"
+				name="Số lượng đơn"
+				prop="qty"
+				type="number"
 				[width]="150"
 			></ngn-datatable-column>
-			<ngn-datatable-column
-				name="Địa chỉ"
-				prop="address"
+      <ngn-datatable-column
+				name="Ngày mua hàng"
+				prop="createDate"
 				type="string"
 				[width]="100"
 			></ngn-datatable-column>
+			<ngn-datatable-column
+				name="Thanh toán"
+				prop="payment"
+				type="string"
+				[width]="100"
+			></ngn-datatable-column>
+      <ngn-datatable-column
+      name="Ghi chú"
+      prop="message"
+      type="string"
+      [width]="100"
+    ></ngn-datatable-column>
+    <ngn-datatable-column name="Trạng thái" prop="status" [width]="200">
+      <ng-template
+        ngn-datatable-cell-template
+        let-row="row"
+        let-value="value"
+      >
+        <nb-checkbox
+          status="warning"
+          *ngIf="!value"
+          (change)="duyetDonHang(row)"
+          [checked]="value"
+          >Đang giao</nb-checkbox
+        >
+        <nb-checkbox
+          status="primary"
+          *ngIf="value"
+          (change)="duyetDonHang(row)"
+          [checked]="value"
+          >Đã giao</nb-checkbox
+        >
+      </ng-template>
+    </ngn-datatable-column>
 
 		</ngn-datatable>
 	</nb-card-body>
