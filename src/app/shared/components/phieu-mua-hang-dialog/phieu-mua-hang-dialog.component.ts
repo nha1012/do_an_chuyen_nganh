@@ -50,7 +50,7 @@ export class PhieuMuaHangDialogComponent implements OnInit {
       this.checkValid();
       this.isGiaoDich = true;
       let newTransaction = await this.transactionService
-        .create({ userId: this.khachHangId, payment: TypeTransaction.TAIQUAY }).toPromise();
+        .create({ userId: this.khachHangId, payment: TypeTransaction.TAIQUAY, status: true }).toPromise();
       this.lstCart.forEach(async (value: CartItem) => {
         if (value.tongSoLuong < value.soLuong) {
           this.isGiaoDich = false;
