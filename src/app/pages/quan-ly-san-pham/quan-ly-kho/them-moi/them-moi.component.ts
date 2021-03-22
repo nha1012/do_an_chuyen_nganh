@@ -70,7 +70,7 @@ export class ThemMoiComponent implements OnInit {
         this.productService.create(this.thongTinSanPham)
           .subscribe(async value => {
             await this.onSaveHinhAnh(value.productId).then(done => {
-              this.loading = true;
+              this.loading = false;
               this.toast.success(CRUD_MESSAGES.SUCCESS_ADD);
             });
           });

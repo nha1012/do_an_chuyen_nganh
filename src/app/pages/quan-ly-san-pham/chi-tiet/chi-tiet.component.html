@@ -1,38 +1,75 @@
 <nb-card>
-	<nb-card-header><span>Thông tin sản phẩm</span><button status="success" nbButton class="float-right" (click)="luuThongTinSanPham()">Lưu</button> </nb-card-header>
+	<nb-card-header><span>Thông tin sản phẩm</span><button status="success" nbButton class="float-right" [nbSpinner]="isLuuTTSP" [disabled]="isLuuTTSP" (click)="luuThongTinSanPham()">Lưu</button> </nb-card-header>
 	<nb-card-body>
 		<div class="row" *ngIf="product">
-			<div class="col-md-6">
+			<div class="col-md-6 group__image">
 				<img src="{{ product.anhMinhHoa }}" width="100%" alt="" />
+        <div class="group__image-nho mt-2">
+          <img *ngFor="let img of product.hinhAnhSanPhams" (click)="product.anhMinhHoa = img.url" src="{{img.url}}" width="80px" height="80px" alt="">
+        </div>
+        <div class="group__image-tai-hinh-anh">
+          <div
+					class="custom-dropzone"
+					ngx-dropzone
+					[accept]="'image/*'"
+					(change)="onSelect($event)">
+					<ngx-dropzone-label>
+						<div>
+							<p>
+								Tải lên hình ảnh sản phẩm
+							</p>
+						</div>
+					</ngx-dropzone-label>
+					<ngx-dropzone-image-preview
+						ngProjectAs="ngx-dropzone-preview"
+						type="image"
+						*ngFor="let f of files"
+						[file]="f"
+						[removable]="true"
+						(removed)="onRemove(f)"
+
+					>
+						<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+					</ngx-dropzone-image-preview>
+				</div>
+
+        </div>
 			</div>
 			<div class="col-md-6">
         <div class="mb-2">
           <span class="col-md-4">Tên sản phẩm</span>
-          <input type="text" nbInput fieldSize="small" value="{{ product.tenSanPham }}" />
+          <input type="text" nbInput fieldSize="small" (change)="thongTinSanPham.tenSanPham =$event.target.value" value="{{ product.tenSanPham }}" />
         </div>
         <div class="mb-2">
           <span class="col-md-4">Giá sản phẩm</span>
-          <input type="text" nbInput fieldSize="small" value="{{ product.giaSanPham }}" />
+          <input type="text" nbInput fieldSize="small" (change)="thongTinSanPham.giaSanPham =$event.target.value" value="{{ product.giaSanPham }}" />
         </div>
         <div class="mb-2">
           <span class="col-md-4">Giá khuyến mãi</span>
-          <input type="text" nbInput fieldSize="small" value="{{ product.giaKhuyenMai }}" />
+          <input type="text" nbInput fieldSize="small" (change)="thongTinSanPham.giaKhuyenMai =$event.target.value" value="{{ product.giaKhuyenMai }}" />
         </div>
         <div class="mb-2">
           <span class="col-md-4">Số lượng</span>
-          <input type="text" nbInput fieldSize="small" value="{{ product.giaKhuyenMai }}" />
+          <input type="text" nbInput fieldSize="small" (change)="thongTinSanPham.soLuong =$event.target.value" value="{{ product.soLuong }}" />
         </div>
         <div class="mb-2">
           <span class="col-md-4">Danh mục</span>
-          <ngx-select-loai-san-pham></ngx-select-loai-san-pham>
+          <ngx-select-loai-san-pham (selectedItem)="thongTinSanPham.danhMucSanPhamId = $event" [value]="product.danhMucSanPhamId"></ngx-select-loai-san-pham>
         </div>
         <div class="mb-2">
           <span class="col-md-4">Nhà cung cấp</span>
-          <ngx-select-nha-cung-cap></ngx-select-nha-cung-cap>
+          <ngx-select-nha-cung-cap (selectedItem)="thongTinSanPham.nhaCungCapId = $event" [value]="product.nhaCungCapId"></ngx-select-nha-cung-cap>
         </div>
         <nb-tabset>
           <nb-tab tabTitle="Mô tả">
-            <div [innerHtml]="product.moTa"></div>
+            <ckeditor
+            [(ngModel)]="product.moTa"
+            #myckeditor="ngModel"
+            name="myckeditor"
+            required
+            (change)="thongTinSanPham.moTa = $event"
+            debounce="500">
+          </ckeditor>
           </nb-tab>
           <nb-tab tabTitle="Reviews">
             <div class="row">

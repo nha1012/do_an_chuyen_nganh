@@ -2,6 +2,7 @@
 	placeholder="Chọn nhà cung cấp"
 	(selectedChange)="setSelectedItem($event)"
 	size="small"
+	[selected]="value"
 >
 	<nb-option
 		*ngFor="let nhaCungCap of lstNhaCungCap"

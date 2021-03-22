@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { DanhMucSanPhamEntity } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.interface';
 import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
@@ -10,6 +10,7 @@ import { environment } from 'environments/environment.prod';
   styleUrls: ['./select-loai-san-pham.component.scss'],
 })
 export class SelectLoaiSanPhamComponent implements OnInit {
+  @Input() value: string;
   @Output() selectedItem = new EventEmitter();
 
   lstLoaiSanPham: DanhMucSanPhamEntity[];

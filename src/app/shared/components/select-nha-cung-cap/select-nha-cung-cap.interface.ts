@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CRUDBaseService } from 'app/shared/services/crud-base.service';
 import { DanhMucSanPhamEntity } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.interface';
 import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
@@ -11,6 +11,7 @@ import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap
   styleUrls: ['./select-nha-cung-cap.component.scss'],
 })
 export class SelectNhaCungCapComponent implements OnInit {
+  @Input() value;
   @Output() selectedItem = new EventEmitter();
 
   lstNhaCungCap: NhaCungCapEntity[];

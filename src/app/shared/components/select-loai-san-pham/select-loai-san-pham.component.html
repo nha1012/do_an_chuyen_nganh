@@ -2,6 +2,7 @@
 	placeholder="Chọn loại sản phẩm"
 	(selectedChange)="setSelectedItem($event)"
 	size="small"
+	[selected]="value"
 >
 	<nb-option
 		*ngFor="let productType of lstLoaiSanPham"
