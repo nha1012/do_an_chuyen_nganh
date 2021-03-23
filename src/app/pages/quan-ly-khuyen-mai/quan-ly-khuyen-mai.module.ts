@@ -17,7 +17,8 @@ import { DanhSachComponent } from './danh-sach/danh-sach.component';
       },
       {
       path: 'danh-sach',
-      component: DanhSachComponent,
+      loadChildren: () =>
+      import('./danh-sach/danh-sach.module').then((m) => m.DanhSachModule),
     }]),
   ],
 })

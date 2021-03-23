@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
-import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { UsersService } from 'app/shared/services/user/user.service';
 import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
 import { UserEntity } from 'app/shared/services/user/user.interface';
@@ -46,6 +45,5 @@ export class QuanLyTaiKhoanComponent {
     builder.setFilter({ field: 'roleId', operator: '$in', value: [RoleEnum.User] });
     this.filterEntity && this.filterEntity.userId &&
       builder.setFilter({ field: 'userId', operator: '$eq', value: this.filterEntity.userId });
-
-  }
+   }
 }
