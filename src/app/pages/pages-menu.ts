@@ -24,9 +24,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/quan-ly-nhan-vien',
     children: [
       {
+        title: 'Thêm nhân viên',
+        link: '/pages/quan-ly-nhan-vien/them-nhan-vien',
+      },
+      {
         title: 'Quản lý tài khoản',
         link: '/pages/quan-ly-nhan-vien/quan-ly-tai-khoan',
       },
+      
       {
         title: 'Quản lý ca làm',
         link: '/pages/quan-ly-nhan-vien/quan-ly-ca-lam',
