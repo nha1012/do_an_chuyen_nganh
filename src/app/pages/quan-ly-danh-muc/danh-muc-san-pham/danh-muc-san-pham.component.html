@@ -8,6 +8,10 @@
             <span>Tên danh mục</span>
             <input type="text" [fullWidth]="true" nbInput (change)="thongTinDanhMuc.tenDanhMuc=$event.target.value" placeholder="Nhập tên danh mục">
           </div>
+          <div>
+            <span>Hình ảnh danh mục</span>
+            <input type="text" [fullWidth]="true" nbInput (change)="thongTinDanhMuc.url=$event.target.value" placeholder="Nhập đường dẫn hình ảnh danh mục">
+          </div>
         </nb-card-body>
         <nb-card-footer>
           <button nbButton>Huỷ</button>

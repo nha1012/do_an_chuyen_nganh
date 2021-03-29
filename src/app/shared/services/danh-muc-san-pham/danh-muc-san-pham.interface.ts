@@ -7,4 +7,5 @@ export interface DanhMucSanPhamEntity {
   productId?: string;
   product?: ProductEntity;
   tenDanhMuc?: string;
+  url?: string;
 }
