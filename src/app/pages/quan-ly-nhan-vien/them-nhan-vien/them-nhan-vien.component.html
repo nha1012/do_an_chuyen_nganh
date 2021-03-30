@@ -1,0 +1,30 @@
+<nb-card>
+    <nb-card-header><span>Thêm nhân viên</span>
+         <button [nbSpinner]="isLoadThemNhanVien" [disabled]="isLoadThemNhanVien" (click)="themNhanVien()" class="float-right" nbButton status="success">Thêm nhân viên</button> </nb-card-header>
+    <nb-card-body class="row">
+      <div class="col-sm-6">
+          <span>Tài khoản</span>
+          <input [(ngModel)]="thongTinNhanVien.username" nbInput type="text" placeholder="Nhập tài khoản">
+      </div>
+      <div class="col-sm-6">
+        <span>Mật khẩu</span>
+        <input [(ngModel)]="thongTinNhanVien.password"nbInput type="text" placeholder="Nhập mật khẩu ">
+      </div>
+      <div class="col-sm-6">
+        <span>Tên nhân viên</span>
+        <input [(ngModel)]="thongTinNhanVien.displayName"nbInput type="text" placeholder="Nhập tên nhân viên">
+      </div>
+     <div class="col-sm-6">
+        <span>Số điện thoại</span>
+        <input [(ngModel)]="thongTinNhanVien.phoneNumber" nbInput type="text" placeholder="Nhập số điện thoại">
+      </div>
+      <div class="col-sm-6">
+        <span>Địa chỉ</span>
+        <input [(ngModel)]="thongTinNhanVien.address"nbInput type="text" placeholder="Nhập địa chỉ">
+      </div>
+      <div class="col-sm-6">
+        <span>Email</span>
+        <input [(ngModel)]="thongTinNhanVien.email"nbInput type="text" placeholder="Nhập email">
+    </div>
+    </nb-card-body>
+  </nb-card>

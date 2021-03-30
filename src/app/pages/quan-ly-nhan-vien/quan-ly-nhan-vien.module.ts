@@ -20,6 +20,13 @@ import { Router, RouterModule } from '@angular/router';
           ),
       },
       {
+        path: 'them-nhan-vien',
+        loadChildren: () =>
+          import('./them-nhan-vien/them-nhan-vien.module').then(
+            (m) => m.ThemNhanVienModule,
+          ),
+      },
+      {
         path: 'quan-ly-ca-lam',
         loadChildren: () =>
           import('./quan-ly-ca-lam/quan-ly-ca-lam.module').then(

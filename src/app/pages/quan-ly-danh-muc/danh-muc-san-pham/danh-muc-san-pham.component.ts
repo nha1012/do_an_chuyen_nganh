@@ -13,7 +13,8 @@ import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/dan
 export class DanhMucSanPhamComponent {
   @ViewChild('table', { static: false })
   table: DatatableComponent<DanhMucSanPhamEntity>;
-  thongTinDanhMuc: DanhMucSanPhamEntity = {};
+  thongTinDanhMuc: DanhMucSanPhamEntity = {
+  };
   isThemDanhMucSanPham = false;
   datatableService: DatatableService<DanhMucSanPhamEntity> = {
     service: this.danhMucSanPhamService,
