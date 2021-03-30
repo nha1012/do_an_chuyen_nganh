@@ -9,6 +9,8 @@ import { WorkshiftService } from 'app/shared/services/workshift/workshift.servic
 import { mergeMap } from 'rxjs/operators';
 import { TypeEvent } from './type-event.interface';
 import viLocale from '@fullcalendar/core/locales/vi';
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 @Component({
   selector: 'ngx-dang-ky-ca-lam',
@@ -17,9 +19,16 @@ import viLocale from '@fullcalendar/core/locales/vi';
 })
 export class DangKyCaLamComponent implements OnInit {
   events: TypeEvent[];
-  calendarOptions: CalendarOptions;
   CaLamEnum = CaLamEnum;
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin],
+    initialView: 'dayGridMonth',
+    height: 600,
+    locale: viLocale,
+  };
   constructor(private dialogService: NbDialogService, private workshiftService: WorkshiftService) {
+    const name = Calendar.name;
+
     this.workshiftService.getMany({ filter: { field: 'userId', operator: '$eq', value: getUserId() } })
       .pipe(
         mergeMap(value => {
@@ -39,13 +48,7 @@ export class DangKyCaLamComponent implements OnInit {
             data.push(typeEvent);
           });
           this.events = data;
-          this.calendarOptions = {
-            initialView: 'dayGridMonth',
-            dateClick: this.handleDateClick.bind(this),
-            events: this.events,
-            height: 600,
-            locale: viLocale,
-          };
+          this.calendarOptions.events = this.events;
           return data;
         }),
       ).toPromise();
