@@ -15,11 +15,12 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) { }
   login(userName: string, password: string): Observable<boolean> {
     // tslint:disable-next-line:max-line-length
-    return this.http.post<{ accessToken: string, userId: string }>(`${rest}/login`, { username: userName, password: password })
+    return this.http.post<{ accessToken: string, userId: string, displayName: string }>(`${rest}/login`, { username: userName, password: password })
       .pipe(
         map(result => {
           localStorage.setItem('access_token', result.accessToken);
           localStorage.setItem('userId', result.userId);
+          localStorage.setItem('displayName', result.displayName);
           return true;
         }),
       );

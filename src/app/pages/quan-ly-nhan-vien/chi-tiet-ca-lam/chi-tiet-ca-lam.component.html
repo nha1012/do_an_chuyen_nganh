@@ -1,0 +1,9 @@
+<nb-card>
+    <nb-card-header><span>Chi tiết ca làm</span></nb-card-header>
+    <nb-card-body>
+        <full-calendar
+            *ngIf="calendarOptions"
+            [(options)]="calendarOptions"
+        ></full-calendar>
+    </nb-card-body>
+</nb-card>

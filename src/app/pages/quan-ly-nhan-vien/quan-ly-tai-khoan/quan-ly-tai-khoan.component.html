@@ -26,6 +26,7 @@
 			[scrollbarH]="true"
 			class="material"
 			[actions]="actions"
+			(activate)="clickRowHandle($event)"
 		>
 			<ngn-datatable-column
 				name="Tài khoản"
