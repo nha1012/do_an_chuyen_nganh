@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
-import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { UsersService } from 'app/shared/services/user/user.service';
 import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
 import { UserEntity } from 'app/shared/services/user/user.interface';
 import { DatatableAction, DatatableComponent, DatatableService } from 'ngn-datatable';
 import { RoleEnum } from 'app/shared/services/role/role.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-quan-ly-tai-khoan',
@@ -31,6 +31,7 @@ export class QuanLyTaiKhoanComponent {
   ];
   constructor(
     private toast: NbToastrService,
+    private router: Router,
     private userService: UsersService,
   ) {
   }
@@ -39,6 +40,12 @@ export class QuanLyTaiKhoanComponent {
   }
   getNhanVien($event) {
     this.filterEntity.userId = $event;
+  }
+  clickRowHandle($event: any) {
+    if ($event.type === 'dblclick') {
+      const id = ($event.row as UserEntity).userId;
+      this.router.navigate([`/pages/quan-ly-nhan-vien/chi-tiet-ca-lam/${id}`]);
+    }
   }
   getBuilder(builder: RequestQueryBuilder) {
     // tslint:disable-next-line:max-line-length

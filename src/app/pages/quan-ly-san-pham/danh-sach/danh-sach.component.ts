@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbToastrService } from '@nebular/theme';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
 import { ProductService } from 'app/shared/services/product/product.service';
 import { WorkshiftEntity } from 'app/shared/services/workshift/workshift.interface';

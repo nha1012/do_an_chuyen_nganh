@@ -26,6 +26,12 @@ import { Router, RouterModule } from '@angular/router';
             (m) => m.QuanLyCaLamModule,
           ),
       },
+      {
+        path: 'chi-tiet-ca-lam',
+        loadChildren: () =>
+          import('./chi-tiet-ca-lam/chi-tiet-ca-lam.module').then(
+            (m) => m.ChiTietCaLamModule),
+      },
     ]),
   ],
 })
