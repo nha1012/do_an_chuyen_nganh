@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
   user: any;
-
+  displayName: string;
   themes = [
     {
       value: 'default',
@@ -54,10 +54,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private breakpointService: NbMediaBreakpointsService,
     private authService: AuthService,
     private nbMenuService: NbMenuService,
-  ) {}
+  ) {
+    this.displayName = localStorage.getItem('displayName');
+  }
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
     this.userService
       .getUsers()
       .pipe(takeUntil(this.destroy$))
