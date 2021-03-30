@@ -1,3 +1,4 @@
+import { AttributeValueEntity } from '../atrribute-value/atrribute-value.interface';
 import { ChuongTrinhKhuyenMaiEntity } from '../chuong-trinh-khuyen-mai/chuong-trinh-khuyen-mai.interface';
 import { DanhMucSanPhamEntity } from '../danh-muc-san-pham/danh-muc-san-pham.interface';
 import { HinhAnhSanPhamEntity } from '../ha-san-pham/ha-san-pham.interface';
@@ -25,4 +26,5 @@ export interface ProductEntity {
   orders?: OrderEntity[];
   chuongTrinhKhuyenMaiId?: string;
   chuongTrinhKhuyenMai?: ChuongTrinhKhuyenMaiEntity;
+  attributeValues?: AttributeValueEntity[];
 }
