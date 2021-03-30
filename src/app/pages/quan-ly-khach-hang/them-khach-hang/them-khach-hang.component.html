@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header><span>Thêm khách hàng</span>
+         <button [nbSpinner]="isLoadThemKhachHang" [disabled]="isLoadThemKhachHang" (click)="themkhachhang()" class="float-right" nbButton status="success">Thêm khách hàng</button> </nb-card-header>
+    <nb-card-body class="row">
+        <div class="col-sm-6">
+             <span>Tài khoản</span>
+             <input [(ngModel)]="thongTinKhachHang.username" nbInput type="text" placeholder="Nhập tài khoản">
+        </div>
+     <div class="col-sm-6">
+           <span>Mật khẩu</span>
+           <input [(ngModel)]="thongTinKhachHang.password"nbInput type="text" placeholder="Nhập mật khẩu ">
+         </div>
+         <div class="col-sm-6">
+      <div class="col-sm-6">
+        <span>Tên khách hàng</span>
+        <input [(ngModel)]="thongTinKhachHang.displayName"nbInput type="text" placeholder="Nhập tên khách hàng">
+      </div>
+     <div class="col-sm-6">
+        <span>Số điện thoại</span>
+        <input [(ngModel)]="thongTinKhachHang.phoneNumber" nbInput type="text" placeholder="Nhập số điện thoại">
+      </div>
+      <div class="col-sm-6">
+        <span>Địa chỉ</span>
+        <input [(ngModel)]="thongTinKhachHang.address"nbInput type="text" placeholder="Nhập địa chỉ">
+      </div>
+      <div class="col-sm-6">
+        <span>Email</span>
+        <input [(ngModel)]="thongTinKhachHang.email"nbInput type="text" placeholder="Nhập email">
+    </div> 
+    
+  
+

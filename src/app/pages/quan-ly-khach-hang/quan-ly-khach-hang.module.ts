@@ -13,12 +13,20 @@ import { RouterModule } from '@angular/router';
         redirectTo: 'quan-ly-tai-khoan',
       },
       {
+        path: 'them-khach-hang',
+        loadChildren: () =>
+          import('./them-khach-hang/them-khach-hang.module').then(
+            (m) => m.ThemKhachHangModule,
+          ),
+      },
+      {
         path: 'quan-ly-tai-khoan',
         loadChildren: () =>
           import('./quan-ly-tai-khoan/quan-ly-tai-khoan.module').then(
             (m) => m.QuanLyTaiKhoanModule,
           ),
       },
+
       {
         path: 'chi-tiet/:id',
         loadChildren: () =>
