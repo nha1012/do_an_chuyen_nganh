@@ -60,7 +60,7 @@ export class PhieuMuaHangDialogComponent implements OnInit {
         const order: OrderEntity = {
           productId: value.productId,
           transactionId: newTransaction.transactionId,
-          status: false,
+          status: true,
           qty: value.soLuong,
           tongTien: value.thanhTien,
         };
