@@ -17,9 +17,9 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     NbSpinnerModule,
     RouterModule.forChild([{
-      path:'',
-      component: ThemKhachHangComponent
-    }])
-  ]
+      path: '',
+      component: ThemKhachHangComponent,
+    }]),
+  ],
 })
 export class ThemKhachHangModule { }
