@@ -8,6 +8,7 @@ import { SelectNhaCungCapModule } from 'app/shared/components/select-nha-cung-ca
 import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SelectThuocTinhModule } from 'app/shared/components/select-thuoc-tinh/select-thuoc-tinh.module';
 @NgModule({
   declarations: [ChiTietComponent],
   imports: [
@@ -23,6 +24,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     NgxDropzoneModule,
     NbSpinnerModule,
     CKEditorModule,
+    SelectThuocTinhModule,
     RouterModule.forChild([
       {
         path: ':id',

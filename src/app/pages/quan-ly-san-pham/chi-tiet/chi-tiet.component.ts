@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NbToastrService } from '@nebular/theme';
+import { CRUD_MESSAGES } from 'app/shared/messages/crud.messages';
+import { AttributeValueEntity } from 'app/shared/services/atrribute-value/atrribute-value.interface';
+import { AttributeValueService } from 'app/shared/services/atrribute-value/atrribute-value.service';
 import { HinhAnhSanPhamCloudinaryService } from 'app/shared/services/ha-san-pham/ha-san-pham-cloudinary.service';
 import { HinhAnhSanPhamService } from 'app/shared/services/ha-san-pham/ha-san-pham.service';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
@@ -22,13 +25,20 @@ export class ChiTietComponent implements OnInit {
   files = [];
   isUploadHinhAnh = false;
   isLuuTTSP = false;
+  attributesId: string;
+  attributeValue: AttributeValueEntity = {
+    value: '',
+  };
+  isLuuTTTT = false;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private toast: NbToastrService,
+    private attributeValueService: AttributeValueService,
     private hinhAnhSanPhamCloudinaryService: HinhAnhSanPhamCloudinaryService,
     private hinhAnhSanPhamSevice: HinhAnhSanPhamService) {
     this.maSanPham = this.route.snapshot.paramMap.get('id');
+    this.attributeValue.productId = this.maSanPham;
     this.productService.getOne(this.maSanPham, this.getBuilder()).subscribe(value => {
       this.hinhAnhReview = value.anhMinhHoa;
       this.product = value;
@@ -44,7 +54,6 @@ export class ChiTietComponent implements OnInit {
     } catch (error) {
       this.isLuuTTSP = false;
       this.toast.danger(error);
-
     }
   }
   ngOnInit(): void {
@@ -58,6 +67,11 @@ export class ChiTietComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     builder.setJoin({ field: 'reviewSanPhams', select: ['danhGia', 'soSao', 'user', 'userId'] as Array<keyof ReviewSanPhamEntity> });
     builder.setJoin({ field: 'reviewSanPhams.user', select: ['displayName'] as Array<keyof UserEntity> });
+    // tslint:disable-next-line:max-line-length
+    builder.setJoin({ field: 'attributeValues', select: ['attributesId', 'value', 'productId', 'attributes'] as Array<keyof AttributeValueEntity> });
+    builder.setJoin({ field: 'attributeValues.attributes', select: ['name'] });
+
+
     return builder;
   }
 
@@ -88,5 +102,40 @@ export class ChiTietComponent implements OnInit {
   }
   onRemove(event) {
     this.files.splice(this.files.indexOf(event), 1);
+  }
+  isValid() {
+    if (!this.attributeValue.value) {
+      throw new Error('Vui lòng nhập thuộc tính');
+    }
+    if (!this.attributeValue.attributesId) {
+      throw new Error('Vui lòng chọn tên thuộc tính');
+    }
+    return true;
+  }
+  luuThongTinThuocTin() {
+    try {
+      this.isValid();
+      this.isLuuTTTT = true;
+      this.attributeValueService.create(this.attributeValue).subscribe(value => {
+        this.toast.success(CRUD_MESSAGES.SUCCESS_ADD);
+        this.isLuuTTTT = false;
+        this.product.attributeValues.push(value);
+        this.attributeValue.value = '';
+      },
+        err => {
+          this.isLuuTTTT = false;
+          this.toast.warning(err);
+        });
+    } catch (error) {
+      this.isLuuTTTT = false;
+      this.toast.warning(error);
+    }
+  }
+  xoaThuocTinh(attributeValueId: string) {
+    this.attributeValueService.delete(attributeValueId).subscribe(value => {
+      // tslint:disable-next-line:max-line-length
+      this.product.attributeValues = this.product.attributeValues.filter(attribute => attribute.attributeValueId !== attributeValueId),
+        this.toast.success(CRUD_MESSAGES.SUCCESS_DELETE);
+    });
   }
 }

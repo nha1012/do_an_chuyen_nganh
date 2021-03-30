@@ -1,0 +1,13 @@
+<nb-select
+	placeholder="Chọn thuộc tính sản phẩm"
+	(selectedChange)="setSelectedItem($event)"
+	[fullWidth]="true"
+	[selected]="value"
+	[disabled]="disabled"
+>
+	<nb-option
+		*ngFor="let attr of lstThuocTinh"
+		value="{{ attr.attributesId }}"
+		>{{ attr.name }}</nb-option
+	>
+</nb-select>
