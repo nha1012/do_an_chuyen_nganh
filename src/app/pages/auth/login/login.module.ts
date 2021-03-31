@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule, FormsModule,
     NbButtonModule,
     NbCardModule,
+    FormsModule,
     NbInputModule,
     NbSpinnerModule,
     NbToastrModule,

@@ -1,12 +1,15 @@
+
 <nb-card [nbSpinner]="status.loadLogin">
     <nb-card-header>Đăng nhập</nb-card-header>
     <nb-card-body>
-        <input nbInput value="amin" type="username" [(ngModel)]="username" placeholder="Tên đăng nhập" required
+        <form (ngSubmit)="login(f)" #f="ngForm">
+        <input nbInput name="username" type="username" [(ngModel)]="username"  placeholder="Tên đăng nhập" required
             fullWidth title="Nhập tên đăng nhập" />
-        <input value="admin" nbInput type="password" [(ngModel)]="password" placeholder="Mật khẩu" required fullWidth
+        <input name="password" nbInput type="password" [(ngModel)]="password" placeholder="Mật khẩu" required fullWidth
             title="Nhập mật khẩu" />
+            <button nbButton submit fullWidth status="primary" type="submit">Đăng nhập</button>
+        </form>
     </nb-card-body>
-    <nb-card-footer>
-        <button nbButton submit fullWidth status="primary" (click)="login()">Đăng nhập</button>
-    </nb-card-footer>
 </nb-card>
+    
+

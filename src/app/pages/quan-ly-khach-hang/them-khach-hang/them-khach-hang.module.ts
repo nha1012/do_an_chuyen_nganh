@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
     NbSpinnerModule,
     RouterModule.forChild([{
       path:'',
-      component: ThemKhachHangComponent
+      component: ThemKhachHangComponent,
     }])
   ]
 })
