@@ -13,6 +13,7 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import * as moment from 'moment';
+import { CRUD_MESSAGES } from 'app/shared/messages/crud.messages';
 
 @Component({
   selector: 'ngx-dang-ky-ca-lam',
@@ -28,8 +29,9 @@ export class DangKyCaLamComponent implements OnInit {
     dateClick: this.handleDateClick.bind(this),
     height: 600,
     locale: viLocale,
+    eventClick: this.handleEventClick.bind(this),
   };
-
+  isClick = false;
   constructor(
     private dialogService: NbDialogService,
     private workshiftService: WorkshiftService,
@@ -37,7 +39,7 @@ export class DangKyCaLamComponent implements OnInit {
     const name = Calendar.name;
     this.loadData();
   }
-  loadData() {
+  async loadData() {
     this.workshiftService.getMany({ filter: { field: 'userId', operator: '$eq', value: getUserId() } })
       .pipe(
         mergeMap(value => {
@@ -50,6 +52,7 @@ export class DangKyCaLamComponent implements OnInit {
               color = 'black';
             }
             const typeEvent: TypeEvent = {
+              id: event.workshiftId,
               title: event.workshift,
               date: event.date,
               color: color,
@@ -62,11 +65,11 @@ export class DangKyCaLamComponent implements OnInit {
         }),
       ).toPromise();
   }
-  isValid(date: string) {
+  isValid(date: string, message: string) {
     const dateNow = moment(new Date()).format('YYYY-MM-DD');
     const coditionDate = moment(date).isBefore(dateNow);
     if (coditionDate) {
-      throw new Error('Không được đăng ký lại ngày ' + date);
+      throw new Error(message);
     }
     return true;
   }
@@ -74,13 +77,31 @@ export class DangKyCaLamComponent implements OnInit {
   handleDateClick(arg) {
     const date = arg.dateStr;
     try {
-      this.isValid(date);
+      this.isValid(date, 'Không được đăng ký lại ngày ');
       this.dialogService.open(DangKyCaLamDialogComponent, { context: { date: arg.date, data: arg } }).onClose
         .subscribe(value => {
           this.loadData();
         });
     } catch (error) {
       this.toast.warning(error);
+    }
+  }
+  async handleEventClick(event) {
+    if (this.isClick) {
+      return;
+    }
+    try {
+      const { startStr } = event.event;
+      this.isValid(startStr, 'Không thể xoá ca làm này ');
+      this.isClick = true;
+      event.jsEvent.preventDefault();
+      const { id } = event.event;
+      await this.workshiftService.delete(id).toPromise();
+      await this.loadData();
+      this.isClick = false;
+      this.toast.success(CRUD_MESSAGES.SUCCESS_DELETE);
+    } catch (error) {
+      this.toast.danger(error);
     }
   }
 }
