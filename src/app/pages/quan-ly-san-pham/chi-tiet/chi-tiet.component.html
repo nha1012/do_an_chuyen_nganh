@@ -152,28 +152,28 @@
             </div>
           </nb-tab>
 
-          <nb-tab tabTitle="Thuộc tính sản phẩm">
-            <div class="row mt-1" *ngFor="let attribute of product.attributeValues">
+          <nb-tab tabTitle="Khuyễn mãi">
+            <div class="row mt-1" *ngFor="let ctkm of product.chuongTrinhKhuyenMaiValues">
               <div class="col-sm-5">
-                <ngx-select-thuoc-tinh [value]="attribute.attributesId" [disabled]="true" (selectedItem)="attributeValue.attributesId=$event"></ngx-select-thuoc-tinh>
+                <ngx-select-ctkm  [value]="ctkm.chuongTrinhKhuyenMai.chuongTrinhKhuyenMaiId" [disabled]="true" (selectedItem)="ctkmValue.chuongTrinhKhuyenMaiId=$event"></ngx-select-ctkm>
               </div>
               <div class="col-sm-5">
-                <input [fullWidth]="true" [value]="attribute.value" size="small" type="text" [disabled]="true" nbInput placeholder="Tên thuộc tính">
+                <input [fullWidth]="true" size="small" [value]="ctkm.giaKhuyenMai" disabled type="number" nbInput placeholder="Giá khuyến mãi">
               </div>
               <div class="col-sm-2">
-                <button [fullWidth]="true" nbButton (click)="xoaThuocTinh(attribute.attributeValueId)" status="danger">Xoá</button>
+                <button [fullWidth]="true" nbButton (click)="xoaCTKM(ctkm.chuongTrinhKhuyenMaiValueId)" status="danger">Xoá</button>
               </div>
             </div>
 
             <div class="row mt-1">
               <div class="col-sm-5">
-                <ngx-select-thuoc-tinh (selectedItem)="attributeValue.attributesId=$event"></ngx-select-thuoc-tinh>
+                <ngx-select-ctkm (selectedItem)="ctkmValue.chuongTrinhKhuyenMaiId=$event"></ngx-select-ctkm>
               </div>
               <div class="col-sm-5">
-                <input [fullWidth]="true" size="small" type="text" nbInput placeholder="Tên thuộc tính" [(ngModel)]="attributeValue.value">
+                <input [fullWidth]="true" size="small" type="number" nbInput placeholder="Giá khuyến mãi" [(ngModel)]="ctkmValue.giaKhuyenMai">
               </div>
               <div class="col-sm-2">
-                <button [fullWidth]="true" nbButton (click)="luuThongTinThuocTin()" [nbSpinner]="isLuuTTTT" [disabled]="isLuuTTTT" status="success">Lưu</button>
+                <button [fullWidth]="true" nbButton (click)="luuThongTinCTKM()" [nbSpinner]="isLuuTTKM" [disabled]="isLuuTTKM" status="success">Lưu</button>
               </div>
             </div>
           </nb-tab>

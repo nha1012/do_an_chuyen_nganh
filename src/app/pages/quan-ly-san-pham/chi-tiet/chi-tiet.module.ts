@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SelectThuocTinhModule } from 'app/shared/components/select-thuoc-tinh/select-thuoc-tinh.module';
+import { SelectCTKMModule } from 'app/shared/components/select-ctkm/select-ctkm.module';
 @NgModule({
   declarations: [ChiTietComponent],
   imports: [
@@ -25,6 +26,7 @@ import { SelectThuocTinhModule } from 'app/shared/components/select-thuoc-tinh/s
     NbSpinnerModule,
     CKEditorModule,
     SelectThuocTinhModule,
+    SelectCTKMModule,
     RouterModule.forChild([
       {
         path: ':id',

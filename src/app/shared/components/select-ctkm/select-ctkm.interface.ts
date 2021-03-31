@@ -3,7 +3,7 @@ import { ChuongTrinhKhuyenMaiEntity } from 'app/shared/services/chuong-trinh-khu
 import { ChuongTrinhKhuyenMaiService } from 'app/shared/services/chuong-trinh-khuyen-mai/chuong-trinh-khuyen-mai.service';
 
 @Component({
-  selector: 'ngx-select-thuoc-tinh',
+  selector: 'ngx-select-ctkm',
   templateUrl: './select-ctkm.component.html',
   styleUrls: ['./select-ctkm.component.scss'],
 })

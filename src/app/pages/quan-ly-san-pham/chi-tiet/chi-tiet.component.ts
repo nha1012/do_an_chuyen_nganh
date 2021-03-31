@@ -4,6 +4,8 @@ import { NbToastrService } from '@nebular/theme';
 import { CRUD_MESSAGES } from 'app/shared/messages/crud.messages';
 import { AttributeValueEntity } from 'app/shared/services/atrribute-value/atrribute-value.interface';
 import { AttributeValueService } from 'app/shared/services/atrribute-value/atrribute-value.service';
+import { ChuongTrinhKhuyenMaiValueEntity } from 'app/shared/services/chuong-trinh-khuyen-mai-value/chuong-trinh-khuyen-mai-value.interface';
+import { ChuongTrinhKhuyenMaiValueService } from 'app/shared/services/chuong-trinh-khuyen-mai-value/chuong-trinh-khuyen-mai-value.service';
 import { HinhAnhSanPhamCloudinaryService } from 'app/shared/services/ha-san-pham/ha-san-pham-cloudinary.service';
 import { HinhAnhSanPhamService } from 'app/shared/services/ha-san-pham/ha-san-pham.service';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
@@ -29,16 +31,23 @@ export class ChiTietComponent implements OnInit {
   attributeValue: AttributeValueEntity = {
     value: '',
   };
+  ctkmValue: ChuongTrinhKhuyenMaiValueEntity = {
+    giaKhuyenMai: 0,
+  };
   isLuuTTTT = false;
+  isLuuTTKM = false;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private toast: NbToastrService,
     private attributeValueService: AttributeValueService,
     private hinhAnhSanPhamCloudinaryService: HinhAnhSanPhamCloudinaryService,
-    private hinhAnhSanPhamSevice: HinhAnhSanPhamService) {
+    private hinhAnhSanPhamSevice: HinhAnhSanPhamService,
+    private ctkmValueService: ChuongTrinhKhuyenMaiValueService,
+  ) {
     this.maSanPham = this.route.snapshot.paramMap.get('id');
     this.attributeValue.productId = this.maSanPham;
+    this.ctkmValue.productId = this.maSanPham;
     this.productService.getOne(this.maSanPham, this.getBuilder()).subscribe(value => {
       this.hinhAnhReview = value.anhMinhHoa;
       this.product = value;
@@ -70,6 +79,10 @@ export class ChiTietComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     builder.setJoin({ field: 'attributeValues', select: ['attributesId', 'value', 'productId', 'attributes'] as Array<keyof AttributeValueEntity> });
     builder.setJoin({ field: 'attributeValues.attributes', select: ['name'] });
+    // tslint:disable-next-line:max-line-length
+    builder.setJoin({ field: 'chuongTrinhKhuyenMaiValues', select: ['chuongTrinhKhuyenMai', 'giaKhuyenMai'] as Array<keyof ChuongTrinhKhuyenMaiValueEntity> });
+    builder.setJoin({ field: 'chuongTrinhKhuyenMaiValues.chuongTrinhKhuyenMai', select: ['tenChuongTrinh'] });
+
 
 
     return builder;
@@ -137,5 +150,37 @@ export class ChiTietComponent implements OnInit {
       this.product.attributeValues = this.product.attributeValues.filter(attribute => attribute.attributeValueId !== attributeValueId),
         this.toast.success(CRUD_MESSAGES.SUCCESS_DELETE);
     });
+  }
+  xoaCTKM(ctkmValueId: string) {
+    try {
+      this.ctkmValueService.delete(ctkmValueId).subscribe(value => {
+        // tslint:disable-next-line:max-line-length
+        this.product.chuongTrinhKhuyenMaiValues = this.product.chuongTrinhKhuyenMaiValues.filter(ctkmValue => ctkmValue.chuongTrinhKhuyenMaiValueId !== ctkmValueId),
+          this.toast.success(CRUD_MESSAGES.SUCCESS_DELETE);
+      });
+    } catch (error) {
+      this.toast.warning(CRUD_MESSAGES.FAIL_DELETE);
+    }
+  }
+  isValidCTKM() {
+    if (!this.ctkmValue.chuongTrinhKhuyenMaiId) {
+      throw new Error('Vui lòng chọn chương trình khuyến mãi');
+    }
+    if (!this.ctkmValue.giaKhuyenMai) {
+      throw new Error('Vui lòng nhập giá khuyến mãi');
+    }
+    return true;
+  }
+  async luuThongTinCTKM() {
+    try {
+      this.isLuuTTKM = true;
+      this.isValidCTKM();
+      await this.ctkmValueService.create(this.ctkmValue).toPromise();
+      this.toast.success(CRUD_MESSAGES.SUCCESS_ADD);
+      this.isLuuTTKM = false;
+    } catch (error) {
+      this.isLuuTTKM = false;
+      this.toast.warning(CRUD_MESSAGES.FAIL_ADD);
+    }
   }
 }
