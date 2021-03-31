@@ -1,0 +1,14 @@
+
+<nb-select
+	placeholder="Chọn chương trình khuyến mãi"
+	(selectedChange)="setSelectedItem($event)"
+	[fullWidth]="true"
+	[selected]="value"
+	[disabled]="disabled"
+>
+	<nb-option
+		*ngFor="let ctkm of lstCTKM"
+		value="{{ ctkm.chuongTrinhKhuyenMaiId }}"
+		>{{ ctkm.tenChuongTrinh }}</nb-option
+	>
+</nb-select>

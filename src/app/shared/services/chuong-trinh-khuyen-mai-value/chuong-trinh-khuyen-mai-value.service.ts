@@ -12,7 +12,7 @@ export class ChuongTrinhKhuyenMaiValueService extends CrudBaseService<ChuongTrin
     super(
       {
         apiUrl: environment.rest,
-        entity: 'chuong-trinh-khuyen-mai',
+        entity: 'chuong-trinh-khuyen-mai-value',
       },
       httpClient,
     );
