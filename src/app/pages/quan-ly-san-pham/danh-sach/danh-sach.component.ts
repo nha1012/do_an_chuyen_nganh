@@ -24,6 +24,7 @@ export class DanhSachComponent implements OnInit {
     workshift: undefined,
     userId: '',
   };
+  locTenSanPham: string;
   actions: DatatableAction<WorkshiftEntity>[] = [
     { name: 'quick-edit' },
     { name: 'delete' },
@@ -37,7 +38,11 @@ export class DanhSachComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  getProductId(event){
+    console.log(event)
+  }
   loadDataTable() {
+    console.log(this.locTenSanPham);
     this.table.loadData();
   }
   clickRowHandle($event: any) {
@@ -51,6 +56,5 @@ export class DanhSachComponent implements OnInit {
     builder.setFilter({ field: 'status', operator: '$eq', value: true });
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
-
   }
 }

@@ -1,7 +1,20 @@
 <nb-card>
 	<nb-card-header> Quản lý sản phẩm </nb-card-header>
 	<nb-card-body>
-		<div class="row d-flex"></div>
+		<div class="row d-flex">
+			<ngx-select-ten-san-pham class="tenSP"> 
+				(productSelected)="getProductId($event)"
+			</ngx-select-ten-san-pham>
+			<ngx-select-nha-cung-cap class="nhaCC">
+				(setSelectedItem)="getproduct($event)"
+			</ngx-select-nha-cung-cap>
+			<!-- <ngx-select-ctkm class="ctkm">
+				(setSelectedItem)=""
+			</ngx-select-ctkm> -->
+				<div class="nut-loc">
+					<button nbButton status="primary" outline (click)="loadDataTable()">Lọc</button>
+				</div>
+		</div>
 		<ngn-datatable
 			#table
 			selectionType="single"
