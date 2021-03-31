@@ -59,6 +59,7 @@
     "@nebular/security": "6.0.0",
     "@nebular/theme": "6.0.0",
     "@swimlane/ngx-charts": "^14.0.0",
+    "@types/ckeditor": "^4.9.10",
     "angular2-chartjs": "0.4.1",
     "bootstrap": "4.3.1",
     "chart.js": "2.7.1",
