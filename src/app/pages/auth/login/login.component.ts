@@ -4,6 +4,7 @@ import { NbToastrService } from '@nebular/theme';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
+import {  FormControl, FormGroup, NgForm } from '@angular/forms';
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
@@ -14,6 +15,11 @@ export function tokenGetter() {
 })
 
 export class LoginComponent implements OnInit {
+  form = new FormGroup({
+    first: new FormControl('Nancy'),
+    last: new FormControl('Drew'),
+  });
+
   username: string;
   password: string;
   isLoging = false;
@@ -33,10 +39,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  async login() {
+  async login(f: NgForm) {
     try {
+      const {username, password} = f.value;
       this.status.loadLogin = true;
-      this.authService.login(this.username, this.password)
+      this.authService.login(username, password)
         .pipe(first())
         .subscribe(
           result => {
