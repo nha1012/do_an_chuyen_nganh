@@ -6,7 +6,7 @@ import { WorkshiftEntity } from 'app/shared/services/workshift/workshift.interfa
 import { WorkshiftService } from 'app/shared/services/workshift/workshift.service';
 import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
 import { DatatableAction, DatatableComponent, DatatableService } from 'ngn-datatable';
-
+import * as moment from 'moment';
 @Component({
   selector: 'ngx-quan-ly-ca-lam',
   templateUrl: './quan-ly-ca-lam.component.html',
@@ -49,9 +49,9 @@ export class QuanLyCaLamComponent {
 
   }
   checkDate(date: string): boolean {
-    const currentDate = new Date();
-    const workshiftDate = new Date(date);
-    return !(currentDate <= workshiftDate);
+    const dateNow = moment(new Date()).format('YYYY-MM-DD');
+    const workshiftDate = moment(new Date(date)).format('YYYY-MM-DD');
+    return moment(workshiftDate).isBefore(dateNow);
   }
   getBuilder(builder: RequestQueryBuilder) {
     builder.select(['date', 'workshift', 'user', 'status'] as Array<keyof WorkshiftEntity>);

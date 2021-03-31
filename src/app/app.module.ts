@@ -13,7 +13,6 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtModule } from '@auth0/angular-jwt';
-
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -23,8 +22,9 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-
 import { AddHeaderInterceptor } from './shared/interceptor/add-header.interceptor';
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -36,6 +36,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FullCalendarModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),

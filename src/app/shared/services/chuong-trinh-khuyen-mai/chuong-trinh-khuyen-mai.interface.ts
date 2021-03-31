@@ -1,9 +1,9 @@
-import { ProductEntity } from '../product/product.interface';
+import { ChuongTrinhKhuyenMaiValueEntity } from '../chuong-trinh-khuyen-mai-value/chuong-trinh-khuyen-mai-value.interface';
 
 export interface ChuongTrinhKhuyenMaiEntity {
   chuongTrinhKhuyenMaiId?: string;
   startDate?: Date;
   endDate?: Date;
-  phanTramGiamGia?: number;
-  products?: ProductEntity[];
+  tenChuongTrinh?: string;
+  chuongTrinhKhuyenMaiValues?: ChuongTrinhKhuyenMaiValueEntity[];
 }

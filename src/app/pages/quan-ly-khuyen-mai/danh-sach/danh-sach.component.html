@@ -1,42 +1,88 @@
 <nb-card>
     <nb-card-header> Danh sách chương trình khuyến mãi </nb-card-header>
 	<nb-card-body>
-		<div class="row d-flex">
-			
+		<div class="row d-flex mb-2">
+			<input
+			class="m-2"
+			nbInput
+			placeholder="Thời gian làm việc"
+			[(ngModel)]="tgKhuyenMai"
+			[nbDatepicker]="dpkHSTrongThang"
+		/>
+		<nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
 			<div class="nut-loc">
 				<button nbButton status="primary" outline (click)="loadDataTable()">
 					Lọc
 				</button>
 			</div>
 		</div>
-		<ngn-datatable
+		<div class="row">
+			<nb-card class="col-md-3">
+				<nb-card-header>
+					Thêm mới
+				</nb-card-header>
+				<nb-card-body class="row">
+				<input
+					nbInput
+					class="mt-1"
+					placeholder="Ngày bắt đầu"
+					[(ngModel)]="chuongTrinhKhuyenMai.startDate"
+					[nbDatepicker]="ngayBatDau"
+					[fullWidth]="true"/>
+				<nb-datepicker #ngayBatDau></nb-datepicker>
+				<input
+					nbInput
+					class="mt-1"
+					placeholder="Ngày kết thúc"
+					[(ngModel)]="chuongTrinhKhuyenMai.endDate"
+					[nbDatepicker]="ngayKetThuc"
+					[fullWidth]="true"/>
+				<nb-datepicker #ngayKetThuc></nb-datepicker>
+				<input [fullWidth]="true" class="mt-1" type="text" nbInput [(ngModel)]="chuongTrinhKhuyenMai.tenChuongTrinh" placeholder="Tên chương trình">
+				<div class="btn-group row mt-2">
+					<div class="col-md-4">
+						<button nbButton status="warning" (click)="this.chuongTrinhKhuyenMai = {}">Xoá</button>
+
+					</div>
+					<div class="col-md-8">
+						<button nbButton status="primary" [fullWidth]="true" (click)="themCTKM()">Thêm</button>
+					</div>
+
+				</div>
+				</nb-card-body>
+			</nb-card>
+			<ngn-datatable
 			#table
 			selectionType="single"
 			[datatableService]="datatableService"
 			[externalPaging]="true"
 			[limit]="10"
 			[scrollbarH]="true"
-			class="material"
+			class="material col-sm-9"
 			[actions]="actions"
 		>
+			<ngn-datatable-column
+			name="Tên chương trình"
+			prop="tenChuongTrinh"
+			type="string"
+			[width]="250"
+		></ngn-datatable-column>
 			<ngn-datatable-column
 				name="Ngày bắt đầu"
 				prop="startDate"
 				type="string"
-				[width]="500"
+				[width]="250"
 			></ngn-datatable-column>
 			<ngn-datatable-column
 				name="Ngày kết thúc"
 				prop="endDate"
 				type="string"
-				[width]="500"
+				[width]="250"
 			></ngn-datatable-column>
-			<ngn-datatable-column
-				name="Phần trăm giảm giá"
-				prop="phamTramGiamGia"
-				type="string"
-				[width]="500"
-			></ngn-datatable-column>
+
 		</ngn-datatable>
+		</div>
+
+
   </nb-card-body>
 </nb-card>

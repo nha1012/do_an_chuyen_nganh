@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { NbButtonModule, NbCardModule, NbInputModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDatepickerModule, NbInputModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DanhSachComponent } from './danh-sach.component';
 import { SelectRoleModule } from 'app/shared/components/select-role/select-role.module';
 import { NgnDatatableModule } from 'ngn-datatable';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DanhSachComponent],
@@ -18,11 +18,12 @@ import { NgnDatatableModule } from 'ngn-datatable';
     NbCardModule,
     NbInputModule,
     ThemeModule,
-    Ng2SmartTableModule,
     SelectKhachHangModule,
     SelectRoleModule,
     NgnDatatableModule,
     NbButtonModule,
+    FormsModule,
+    NbDatepickerModule,
     RouterModule.forChild([{ path: '', component: DanhSachComponent }]),
   ],
 })
