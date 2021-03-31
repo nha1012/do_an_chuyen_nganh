@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/common';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 // tslint:disable-next-line:max-line-length
 import { DangKyCaLamDialogComponent } from 'app/shared/components/dang-ky-ca-lam-dialog/dang-ky-ca-lam-dialog.component';
 import { getUserId } from 'app/shared/services/app.service';
@@ -11,6 +11,8 @@ import { TypeEvent } from './type-event.interface';
 import viLocale from '@fullcalendar/core/locales/vi';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-dang-ky-ca-lam',
@@ -21,14 +23,21 @@ export class DangKyCaLamComponent implements OnInit {
   events: TypeEvent[];
   CaLamEnum = CaLamEnum;
   calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin],
+    plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
+    dateClick: this.handleDateClick.bind(this),
     height: 600,
     locale: viLocale,
   };
-  constructor(private dialogService: NbDialogService, private workshiftService: WorkshiftService) {
-    const name = Calendar.name;
 
+  constructor(
+    private dialogService: NbDialogService,
+    private workshiftService: WorkshiftService,
+    private toast: NbToastrService) {
+    const name = Calendar.name;
+    this.loadData();
+  }
+  loadData() {
     this.workshiftService.getMany({ filter: { field: 'userId', operator: '$eq', value: getUserId() } })
       .pipe(
         mergeMap(value => {
@@ -53,12 +62,25 @@ export class DangKyCaLamComponent implements OnInit {
         }),
       ).toPromise();
   }
+  isValid(date: string) {
+    const dateNow = moment(new Date()).format('YYYY-MM-DD');
+    const coditionDate = moment(date).isBefore(dateNow);
+    if (coditionDate) {
+      throw new Error('Không được đăng ký lại ngày ' + date);
+    }
+    return true;
+  }
   ngOnInit(): void { }
   handleDateClick(arg) {
-    this.dialogService.open(DangKyCaLamDialogComponent, { context: { date: arg.date, data: arg } }).onClose
-      .subscribe(value => {
-        this.events.push(value);
-        this.calendarOptions.events = this.events;
-      });
+    const date = arg.dateStr;
+    try {
+      this.isValid(date);
+      this.dialogService.open(DangKyCaLamDialogComponent, { context: { date: arg.date, data: arg } }).onClose
+        .subscribe(value => {
+          this.loadData();
+        });
+    } catch (error) {
+      this.toast.warning(error);
+    }
   }
 }
