@@ -12,6 +12,8 @@ import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap
 })
 export class SelectNhaCungCapComponent implements OnInit {
   @Input() value;
+  @Input() size = 'small';
+
   @Output() selectedItem = new EventEmitter();
 
   lstNhaCungCap: NhaCungCapEntity[];

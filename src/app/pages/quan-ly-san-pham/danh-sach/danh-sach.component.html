@@ -2,10 +2,8 @@
 	<nb-card-header> Quản lý sản phẩm </nb-card-header>
 	<nb-card-body>
 		<div class="row d-flex">
-			<ngx-select-ten-san-pham class="tenSP"> 
-				(productSelected)="getProductId($event)"
-			</ngx-select-ten-san-pham>
-			<ngx-select-nha-cung-cap class="nhaCC">
+			<ngx-select-ten-san-pham (productSelected)="getProductId($event)"></ngx-select-ten-san-pham>
+			<ngx-select-nha-cung-cap class="nhaCC" [size]="'medium'">
 				(setSelectedItem)="getproduct($event)"
 			</ngx-select-nha-cung-cap>
 			<!-- <ngx-select-ctkm class="ctkm">

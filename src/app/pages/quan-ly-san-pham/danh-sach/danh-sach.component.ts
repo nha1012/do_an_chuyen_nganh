@@ -38,11 +38,10 @@ export class DanhSachComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  getProductId(event){
-    console.log(event)
+  getProductId(event: string) {
+    this.locTenSanPham = event;
   }
   loadDataTable() {
-    console.log(this.locTenSanPham);
     this.table.loadData();
   }
   clickRowHandle($event: any) {
@@ -56,5 +55,7 @@ export class DanhSachComponent implements OnInit {
     builder.setFilter({ field: 'status', operator: '$eq', value: true });
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
+    this.locTenSanPham &&
+      builder.setFilter({ field: 'productId', operator: '$eq', value: this.locTenSanPham });
   }
 }

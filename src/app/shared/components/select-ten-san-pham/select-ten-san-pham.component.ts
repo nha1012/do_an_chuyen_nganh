@@ -10,6 +10,7 @@ import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
 })
 export class SelectTenSanPhamComponent implements OnInit {
   @Output() productSelected = new EventEmitter<string>();
+  @Input() size: string = 'medium';
   products: ProductEntity[];
   constructor(private productService: ProductService) {
     this.productService
