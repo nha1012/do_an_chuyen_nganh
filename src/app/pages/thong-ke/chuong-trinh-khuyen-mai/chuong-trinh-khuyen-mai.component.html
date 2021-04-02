@@ -1,1 +1,24 @@
-<p>chuong-trinh-khuyen-mai works!</p>
+<nb-card>
+  <nb-card-header>
+    Thống kê chương trình khuyến mãi
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <ngx-select-ctkm class="ml-2" (selectedItem)="chuongTrinhKhuyenMaiId=$event"></ngx-select-ctkm>
+			<div class="nut-loc ml-2">
+				<button nbButton status="primary" outline (click)="xemThongKe()">
+					Xem thống kê
+				</button>
+			</div>
+		</div>
+    <nb-alert class="mt-2" accent="info" *ngIf="baoCaoCTKM.length === 0">Không có dữ liệu thống kê</nb-alert>
+    <ngx-charts-pie-chart
+      *ngIf="baoCaoCTKM.length >0"
+      [results]="baoCaoCTKM"
+      [animations]="true"
+      [legend]="true"
+      [view]="[1000, 400]"
+    >
+    </ngx-charts-pie-chart>
+  </nb-card-body>
+</nb-card>
