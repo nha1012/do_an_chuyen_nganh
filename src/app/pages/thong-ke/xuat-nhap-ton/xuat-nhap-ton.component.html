@@ -1,1 +1,58 @@
-Đang phát triển
+<nb-card>
+  <nb-card-header>
+    Thống kê kho
+  </nb-card-header>
+  <nb-card-body>
+    <nb-card>
+      <nb-card-header>
+        Sản phẩm tồn kho
+      </nb-card-header>
+      <nb-card-body>
+        <ngx-charts-bar-vertical
+						*ngIf="sanPhamTonKho.length > 0"
+						[animations]="true"
+						[showx]="true"
+						[results]="sanPhamTonKho"
+						class="chart"
+						[animations]="true"
+						[showXAxisLabel]="true"
+						[showYAxisLabel]="true"
+						[xAxis]="true"
+						[yAxis]="true"
+						[showGridLines]="true"
+						[rotateXAxisTicks]="true"
+						[legend]="true"
+						[noBarWhenZero]="false"
+						[view]="[1000, 400]"
+					></ngx-charts-bar-vertical>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- số tiền tồn kho theo sản phẩm  -->
+
+    <nb-card>
+      <nb-card-header>
+        Số tiền tồn kho theo sản phẩm
+      </nb-card-header>
+      <nb-card-body>
+        <ngx-charts-bar-vertical
+						*ngIf="soTienTonKho.length > 0"
+						[animations]="true"
+						[showx]="true"
+						[results]="soTienTonKho"
+						class="chart"
+						[animations]="true"
+						[showXAxisLabel]="true"
+						[showYAxisLabel]="true"
+						[xAxis]="true"
+						[yAxis]="true"
+						[showGridLines]="true"
+						[rotateXAxisTicks]="true"
+						[legend]="true"
+						[noBarWhenZero]="false"
+						[view]="[1000, 400]"
+					></ngx-charts-bar-vertical>
+      </nb-card-body>
+    </nb-card>
+  </nb-card-body>
+</nb-card>

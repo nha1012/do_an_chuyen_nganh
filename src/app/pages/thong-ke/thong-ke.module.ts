@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
           import('./don-hang/don-hang.module').then((m) => m.DonHangModule),
       },
       {
-        path: 'xuat-nhap-ton',
+        path: 'kho',
         loadChildren: () =>
           import('./xuat-nhap-ton/xuat-nhap-ton.module').then((m) => m.XuatNhapTonModule),
       },

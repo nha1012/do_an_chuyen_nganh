@@ -53,8 +53,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/thong-ke-cua-hang/don-hang',
       },
       {
-        title: 'Thống kê xuất nhập tồn',
-        link: '/pages/thong-ke-cua-hang/xuat-nhap-ton',
+        title: 'Thống kê kho',
+        link: '/pages/thong-ke-cua-hang/kho',
       },
       {
         title: 'Thống kê nhân sự',
