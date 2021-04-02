@@ -31,7 +31,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Quản lý tài khoản',
         link: '/pages/quan-ly-nhan-vien/quan-ly-tai-khoan',
       },
-      
+
       {
         title: 'Quản lý ca làm',
         link: '/pages/quan-ly-nhan-vien/quan-ly-ca-lam',
@@ -45,7 +45,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Thống kê của hàng',
-    icon: 'alert-triangle-outline',
+    icon: 'bar-chart-2-outline',
     link: '/pages/thong-ke-cua-hang',
     children: [
       {
@@ -64,7 +64,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Thống kê sản phẩm',
         link: '/pages/thong-ke-cua-hang/san-pham',
       },
+      {
+        title: 'Báo cáo chương trình khuyến mãi',
+        link: '/pages/thong-ke-cua-hang/bao-cao-ctkm',
+      },
     ],
+  },
+  {
+    title: 'Báo cáo doanh thu',
+    icon: 'alert-triangle-outline',
+    link: '/pages/bao-cao-doanh-thu',
   },
   {
     title: 'Danh mục nhân viên',
@@ -113,7 +122,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Quản lý tài khoản',
         link: '/pages/quan-ly-khach-hang/quan-ly-tai-khoan',
       },
-     
+
     ],
   },
   {
@@ -135,10 +144,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách ',
         link: '/pages/quan-ly-khuyen-mai/danh-sach',
-      },
-      {
-        title: 'Báo cáo từng chương trình khuyến mãi',
-        link: '/pages/quan-ly-khuyen-mai/bao-cao',
       },
     ],
   },

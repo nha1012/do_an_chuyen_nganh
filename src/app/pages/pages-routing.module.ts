@@ -83,6 +83,13 @@ const routes: Routes = [
             (m) => m.ThongKeModule,
           ),
       },
+      {
+        path: 'bao-cao-doanh-thu',
+        loadChildren: () =>
+          import('./bao-cao-doanh-thu/bao-cao-doanh-thu.module').then(
+            (m) => m.BaoCaoDoanhThuModule,
+          ),
+      },
     ],
   },
 ];
