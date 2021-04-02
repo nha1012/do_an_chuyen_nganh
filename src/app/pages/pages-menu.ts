@@ -66,7 +66,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'Thống kê chương trình khuyến mãi',
-        link: '/pages/thong-ke-cua-hang/bao-cao-ctkm',
+        link: '/pages/thong-ke-cua-hang/ct-khuyen-mai',
       },
     ],
   },

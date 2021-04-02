@@ -38,6 +38,13 @@ import { RouterModule } from '@angular/router';
             (m) => m.ThongKeSanPhamModule,
           ),
       },
+      {
+        path: 'ct-khuyen-mai',
+        loadChildren: () =>
+          import('./chuong-trinh-khuyen-mai/chuong-trinh-khuyen-mai.module').then(
+            (m) => m.ChuongTrinhKhuyenMaiModule,
+          ),
+      },
     ]),
   ],
 })
