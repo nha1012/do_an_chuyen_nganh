@@ -17,3 +17,8 @@ export interface TranSactionEntity {
   orders?: OrderEntity[];
   qty?: number;
 }
+
+export enum TypeTGBaoCao {
+  TUAN = 'TUAN',
+  THANG = 'THANG',
+}

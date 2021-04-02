@@ -3,19 +3,28 @@
     Thống kê đơn hàng
   </nb-card-header>
   <nb-card-body>
-    <ngx-charts-bar-vertical
-    [animations]="true"
-    [showXAxisLabel]="true"
-    [showYAxisLabel]="true"
-    [xAxis]="true"
-    [yAxis]="true"
-    [showGridLines]="true"
-    [rotateXAxisTicks]="true"
-    [yScaleMax]="true"
-    [yScaleMin]="true"
-    [results]="transactions"
+    <input
+				class="m-2"
+				nbInput
+				placeholder="Thời gian đặt hàng"
+				[(ngModel)]="tgMuaHang"
+				[nbDatepicker]="dpkHSTrongThang"
+			/>
+			<nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
+    <button nbButton status="primary" (click)="baoCao()">Xem thống kê</button>
+    <ngx-charts-line-chart
+      [animations]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showGridLines]="true"
+      [autoScale]="true"
+      [results]="transactions"
+      [view]="[1000, 400]"
+      [legend]="true"
     >
 
-    </ngx-charts-bar-vertical>
+    </ngx-charts-line-chart>
   </nb-card-body>
 </nb-card>

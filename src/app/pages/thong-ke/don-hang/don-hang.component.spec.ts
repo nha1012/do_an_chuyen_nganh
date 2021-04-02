@@ -8,9 +8,9 @@ describe('DonHangComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DonHangComponent ]
+      declarations: [DonHangComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
