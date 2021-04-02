@@ -44,7 +44,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/quan-ly-san-pham/quan-ly-kho/danh-sach',
   },
   {
-    title: 'Thống kê của hàng',
+    title: 'Thống kê cửa hàng',
     icon: 'bar-chart-2-outline',
     link: '/pages/thong-ke-cua-hang',
     children: [
@@ -53,7 +53,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/thong-ke-cua-hang/don-hang',
       },
       {
-        title: 'Báo cáo xuất nhập tồn',
+        title: 'Thống kê xuất nhập tồn',
         link: '/pages/thong-ke-cua-hang/xuat-nhap-ton',
       },
       {
@@ -65,7 +65,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/thong-ke-cua-hang/san-pham',
       },
       {
-        title: 'Báo cáo chương trình khuyến mãi',
+        title: 'Thống kê chương trình khuyến mãi',
         link: '/pages/thong-ke-cua-hang/bao-cao-ctkm',
       },
     ],
