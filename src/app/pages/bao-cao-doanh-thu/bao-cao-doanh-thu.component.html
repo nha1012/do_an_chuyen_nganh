@@ -1,1 +1,47 @@
-<p>bao-cao-doanh-thu works!</p>
+<nb-card>
+  <nb-card-header>
+    Báo cáo doanh thu
+  </nb-card-header>
+  <nb-card-body class="row">
+    <!-- Doanh thu theo nha cung cap (%) -->
+    <nb-card class="col-md-6">
+      <nb-card-header>
+        Doanh thu theo nhà cung cấp
+      </nb-card-header>
+      <nb-card-body>
+        <ngx-charts-pie-chart
+          [results]="thongKeTheoNhaCungCap"
+          [animations]="true"
+          [legend]="true"
+          [view]="[500, 400]"
+        >
+        </ngx-charts-pie-chart>
+      </nb-card-body>
+    </nb-card>
+    <!-- Doanh thu theo thời gian (%)-->
+    <nb-card class="col-md-6">
+      <nb-card-header>
+        Doanh thu theo thời gian
+      </nb-card-header>
+      <nb-card-body>
+        <input
+          class="m-2"
+          nbInput
+          placeholder="Thời gian đặt hàng"
+          [(ngModel)]="tgMuaHang"
+          [nbDatepicker]="dpkHSTrongThang"
+        />
+      <nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
+      <button nbButton size="medium" status="primary" (click)="baoCao()">Xem thống kê</button>
+      <nb-alert accent="info" *ngIf="thongKeTheoNgay.length === 0">Không có dữ liệu</nb-alert>
+      <ngx-charts-pie-chart
+        [results]="thongKeTheoNgay"
+        [animations]="true"
+        [legend]="true"
+        [view]="[500, 400]"
+      >
+      </ngx-charts-pie-chart>
+      </nb-card-body>
+    </nb-card>
+  </nb-card-body>
+</nb-card>
