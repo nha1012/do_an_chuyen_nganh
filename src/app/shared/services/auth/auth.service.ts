@@ -30,7 +30,7 @@ export class AuthService {
     return this.http.post(`${rest}/register`, user);
   }
   logout() {
-    localStorage.seremoveItemtItem('access_token');
+    localStorage.removeItem('access_token');
     localStorage.removeItem('userId');
     localStorage.removeItem('displayName');
     localStorage.removeItem('roleId');
