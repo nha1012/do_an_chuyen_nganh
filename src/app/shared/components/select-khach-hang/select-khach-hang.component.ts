@@ -15,15 +15,16 @@ export class SelectKhachHangComponent implements OnInit {
   @Input() fullWidth: boolean = false;
   khachhangs: UserEntity[];
   constructor(private userService: UsersService) {
-    this.userService.getMany(this.getBuilder()).subscribe(value => this.khachhangs = value);
+    this.userService.getMany(this.getBuilder()).subscribe(value=>this.khachhangs)
   }
   ngOnInit(): void {
 
   }
-  getBuilder() {
+  getBuilder(){
     const builder = new RequestQueryBuilder();
     builder.select(['userId', 'displayName', 'roleId'] as Array<keyof UserEntity>);
     builder.setFilter({ field: 'roleId', operator: '$in', value: [RoleEnum.User] });
+    builder.sortBy({field:'displayName', order: 'ASC'})
     return builder;
   }
 
