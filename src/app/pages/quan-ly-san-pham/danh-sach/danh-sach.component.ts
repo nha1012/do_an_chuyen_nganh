@@ -44,11 +44,11 @@ export class DanhSachComponent implements OnInit {
   getProductId(event: string) {
     this.locTenSanPham = event;
   }
-  getTenNhaCungCap(event: string){
-    console.log('called')
+  getTenNhaCungCap(event: string) {
+    console.log('called');
     this.locNhaCungCap = event;
   }
-  getCTKM(event: string){
+  getCTKM(event: string) {
     this.locCTKM = event;
   }
   loadDataTable() {
@@ -61,7 +61,7 @@ export class DanhSachComponent implements OnInit {
     }
   }
   getBuilder(builder: RequestQueryBuilder) {
-    builder.select(['anhMinhHoa', 'chuongTrinhKhuyenMai', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'status', 'chuongTrinhKhuyenMaiValues', 'nhaCungCapId'] as Array<keyof ProductEntity>);
+    builder.select(['anhMinhHoa', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'status', 'chuongTrinhKhuyenMaiValues', 'nhaCungCapId'] as Array<keyof ProductEntity>);
     builder.setFilter({ field: 'status', operator: '$eq', value: true });
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
@@ -71,7 +71,7 @@ export class DanhSachComponent implements OnInit {
       builder.setFilter({ field: 'productId', operator: '$eq', value: this.locTenSanPham });
     this.locNhaCungCap &&
       builder.setFilter({ field: 'nhaCungCap.nhaCungCapId', operator: '$eq', value: this.locNhaCungCap });
-    this.locCTKM && 
-      builder.setFilter({ field: 'chuongTrinhKhuyenMaiValues.chuongTrinhKhuyenMaiId', operator: '$eq', value: this.locCTKM});
+    this.locCTKM &&
+      builder.setFilter({ field: 'chuongTrinhKhuyenMaiValues.chuongTrinhKhuyenMaiId', operator: '$eq', value: this.locCTKM });
   }
 }
