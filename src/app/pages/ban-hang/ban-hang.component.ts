@@ -72,7 +72,7 @@ export class BanHangComponent implements OnInit {
     }
   }
   getBuilder(builder: RequestQueryBuilder) {
-    builder.select(['anhMinhHoa', 'chuongTrinhKhuyenMai', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'anhMinhHoa', 'status'] as Array<keyof ProductEntity>);
+    builder.select(['anhMinhHoa', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'anhMinhHoa', 'status'] as Array<keyof ProductEntity>);
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
     builder.setFilter({ field: 'status', operator: '$eq', value: true });

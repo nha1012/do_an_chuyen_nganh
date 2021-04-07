@@ -23,6 +23,7 @@ export class SelectTenSanPhamComponent implements OnInit {
   getBuilder() {
     const builder = new RequestQueryBuilder();
     builder.select(['tenSanPham'] as Array<keyof ProductEntity>);
+    builder.sortBy({field:'tenSanPham', order: 'ASC'})
     return builder;
   }
 }

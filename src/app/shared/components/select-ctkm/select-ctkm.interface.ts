@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChuongTrinhKhuyenMaiEntity } from 'app/shared/services/chuong-trinh-khuyen-mai/chuong-trinh-khuyen-mai.interface';
 import { ChuongTrinhKhuyenMaiService } from 'app/shared/services/chuong-trinh-khuyen-mai/chuong-trinh-khuyen-mai.service';
+import { RequestQueryBuilder } from 'nest-crud-typeorm-client';
 
 @Component({
   selector: 'ngx-select-ctkm',
@@ -14,11 +15,16 @@ export class SelectCTKMComponent implements OnInit {
 
   lstCTKM: ChuongTrinhKhuyenMaiEntity[];
   constructor(private ctkmService: ChuongTrinhKhuyenMaiService) {
-    this.ctkmService.getMany()
+    this.ctkmService.getMany(this.getBuilder())
       .subscribe(value => this.lstCTKM = value);
   }
 
   ngOnInit(): void {
+  }
+  getBuilder(): RequestQueryBuilder {
+    const builder = new RequestQueryBuilder();
+    builder.sortBy({field:"tenChuongTrinh", order: 'ASC'})
+    return builder;
   }
   setSelectedItem(event: string | symbol) {
     this.selectedItem.emit(event);

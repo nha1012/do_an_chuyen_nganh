@@ -15,6 +15,7 @@ export class DanhSachComponent implements OnInit {
   tgLamViec: any;
   @ViewChild('table', { static: false })
   table: DatatableComponent<ProductEntity>;
+
   datatableService: DatatableService<ProductEntity> = {
     service: this.productService,
     primaryField: 'productId',
@@ -25,6 +26,8 @@ export class DanhSachComponent implements OnInit {
     userId: '',
   };
   locTenSanPham: string;
+  locNhaCungCap: string;
+  locCTKM: string;
   actions: DatatableAction<WorkshiftEntity>[] = [
     { name: 'quick-edit' },
     { name: 'delete' },
@@ -41,6 +44,13 @@ export class DanhSachComponent implements OnInit {
   getProductId(event: string) {
     this.locTenSanPham = event;
   }
+  getTenNhaCungCap(event: string) {
+    console.log('called');
+    this.locNhaCungCap = event;
+  }
+  getCTKM(event: string) {
+    this.locCTKM = event;
+  }
   loadDataTable() {
     this.table.loadData();
   }
@@ -51,11 +61,17 @@ export class DanhSachComponent implements OnInit {
     }
   }
   getBuilder(builder: RequestQueryBuilder) {
-    builder.select(['anhMinhHoa', 'chuongTrinhKhuyenMai', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'status'] as Array<keyof ProductEntity>);
+    builder.select(['anhMinhHoa', 'danhMucSanPham', 'giaKhuyenMai', 'giaSanPham', 'moTa', 'soLuong', 'tenSanPham', 'nhaCungCap', 'status', 'chuongTrinhKhuyenMaiValues', 'nhaCungCapId'] as Array<keyof ProductEntity>);
     builder.setFilter({ field: 'status', operator: '$eq', value: true });
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
+    builder.setJoin({ field: 'chuongTrinhKhuyenMaiValues' });
+
     this.locTenSanPham &&
       builder.setFilter({ field: 'productId', operator: '$eq', value: this.locTenSanPham });
+    this.locNhaCungCap &&
+      builder.setFilter({ field: 'nhaCungCap.nhaCungCapId', operator: '$eq', value: this.locNhaCungCap });
+    this.locCTKM &&
+      builder.setFilter({ field: 'chuongTrinhKhuyenMaiValues.chuongTrinhKhuyenMaiId', operator: '$eq', value: this.locCTKM });
   }
 }

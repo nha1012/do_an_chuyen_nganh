@@ -2,30 +2,65 @@
     <nb-card-header><span>Thêm khách hàng</span>
          <button [nbSpinner]="isLoadThemKhachHang" [disabled]="isLoadThemKhachHang" (click)="themkhachhang()" class="float-right" nbButton status="success">Thêm khách hàng</button> </nb-card-header>
     <nb-card-body class="row">
-        <div class="col-sm-6">
-             <span>Tài khoản</span>
-             <input [(ngModel)]="thongTinKhachHang.username" nbInput type="text" placeholder="Nhập tài khoản">
+      <div class="col-sm-6 mb-2">
+        <div class="row">
+          <div class="col-sm-4">
+            <span>Tài khoản</span>
+          </div>
+          <div class="col-sm-8">
+            <input [(ngModel)]="thongTinKhachHang.username" nbInput type="text" placeholder="Nhập tài khoản">
+          </div>
         </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <span>Mật khẩu</span>
+          </div>
+        <div class="col-sm-6">
+          <input [(ngModel)]="thongTinKhachHang.password" nbInput type="text" placeholder="Nhập mật khẩu ">
+        </div>
+        </div>
+    </div>
+      <div class="col-sm-6 mb-2">
+        <div class="row">
+          <div class="col-sm-4">
+            <span>Tên khách hàng</span>
+          </div>
+            <div class="col-sm-8">
+              <input [(ngModel)]="thongTinKhachHang.displayName" nbInput type="text" placeholder="Nhập tên khách hàng">
+            </div>
+          </div>
+          </div>
      <div class="col-sm-6">
-           <span>Mật khẩu</span>
-           <input [(ngModel)]="thongTinKhachHang.password"nbInput type="text" placeholder="Nhập mật khẩu ">
-         </div>
-         <div class="col-sm-6">
-      <div class="col-sm-6">
-        <span>Tên khách hàng</span>
-        <input [(ngModel)]="thongTinKhachHang.displayName"nbInput type="text" placeholder="Nhập tên khách hàng">
+      <div class="row">
+        <div class="col-sm-4">
+          <span>Số điện thoại</span>
+        </div>
+          <div class="col-sm-8">
+            <input  [(ngModel)]="thongTinKhachHang.phoneNumber" nbInput type="text" placeholder="Nhập số điện thoại">
+          </div>
       </div>
-     <div class="col-sm-6">
-        <span>Số điện thoại</span>
-        <input [(ngModel)]="thongTinKhachHang.phoneNumber" nbInput type="text" placeholder="Nhập số điện thoại">
+     </div>
+      <div class="col-sm-6 mb-2">
+        <div class="row">
+          <div class="col-sm-4">
+            <span>Địa chỉ</span>
+          </div>
+            <div class="col-sm-8">
+              <input [(ngModel)]="thongTinKhachHang.address" nbInput type="text" placeholder="Nhập địa chỉ">
+            </div>
+        </div>
       </div>
       <div class="col-sm-6">
-        <span>Địa chỉ</span>
-        <input [(ngModel)]="thongTinKhachHang.address"nbInput type="text" placeholder="Nhập địa chỉ">
-      </div>
-      <div class="col-sm-6">
-        <span>Email</span>
-        <input [(ngModel)]="thongTinKhachHang.email"nbInput type="text" placeholder="Nhập email">
+        <div class="row">
+          <div class="col-sm-4">
+            <span>Email</span>
+          </div>
+            <div class="col-sm-8">
+              <input [(ngModel)]="thongTinKhachHang.email" nbInput type="text" placeholder="Nhập email">
+            </div>
+        </div>
     </div> 
     
   

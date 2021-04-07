@@ -3,12 +3,8 @@
 	<nb-card-body>
 		<div class="row d-flex">
 			<ngx-select-ten-san-pham (productSelected)="getProductId($event)"></ngx-select-ten-san-pham>
-			<ngx-select-nha-cung-cap class="nhaCC" [size]="'medium'">
-				(setSelectedItem)="getproduct($event)"
-			</ngx-select-nha-cung-cap>
-			<!-- <ngx-select-ctkm class="ctkm">
-				(setSelectedItem)=""
-			</ngx-select-ctkm> -->
+			<ngx-select-nha-cung-cap (selectedItem)="getTenNhaCungCap($event)" [size]="'medium'"></ngx-select-nha-cung-cap>
+			<ngx-select-ctkm (selectedItem)="getCTKM($event)"></ngx-select-ctkm>
 				<div class="nut-loc">
 					<button nbButton status="primary" outline (click)="loadDataTable()">Lọc</button>
 				</div>

@@ -74,14 +74,14 @@
           *ngIf="!value"
           (change)="duyetDonHang(row)"
           [checked]="value"
-          >Đang giao</nb-checkbox
+          >Chưa thanh toán</nb-checkbox
         >
         <nb-checkbox
           status="primary"
           *ngIf="value"
           (change)="duyetDonHang(row)"
           [checked]="value"
-          >Đã giao</nb-checkbox
+          >Đã thanh toán</nb-checkbox
         >
       </ng-template>
     </ngn-datatable-column>

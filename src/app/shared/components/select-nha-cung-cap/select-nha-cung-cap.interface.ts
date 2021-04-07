@@ -4,6 +4,7 @@ import { DanhMucSanPhamEntity } from 'app/shared/services/danh-muc-san-pham/danh
 import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
 import { NhaCungCapEntity } from 'app/shared/services/nha-cung-cap/nha-cung-cap.interface';
 import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap.service';
+import { RequestQueryBuilder } from 'nest-crud-client';
 
 @Component({
   selector: 'ngx-select-nha-cung-cap',
@@ -18,11 +19,15 @@ export class SelectNhaCungCapComponent implements OnInit {
 
   lstNhaCungCap: NhaCungCapEntity[];
   constructor(private nhaCungCapService: NhaCungCapService) {
-    this.nhaCungCapService.getMany()
+    this.nhaCungCapService.getMany(this.getBuilder())
       .subscribe(value => this.lstNhaCungCap = value);
   }
-
   ngOnInit(): void {
+  }
+  getBuilder():  RequestQueryBuilder {
+    const builder = new RequestQueryBuilder();
+    builder.sortBy({field:"tenNhaCungCap", order: 'ASC'})
+    return builder;
   }
   setSelectedItem(event: string | symbol) {
     this.selectedItem.emit(event);

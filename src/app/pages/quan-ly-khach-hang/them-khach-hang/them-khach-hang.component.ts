@@ -48,7 +48,7 @@ export class ThemKhachHangComponent implements OnInit {
     try {
       this.isLoadThemKhachHang = true;
       this.isValid();
-      this.thongTinKhachHang.roleId = RoleEnum.Employee;
+      this.thongTinKhachHang.roleId = RoleEnum.User;
       this.authService.register(this.thongTinKhachHang).subscribe(value => {
         this.toast.success(CRUD_MESSAGES.SUCCESS_ADD);
         this.isLoadThemKhachHang = false;
