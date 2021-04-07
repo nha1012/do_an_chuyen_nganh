@@ -1,0 +1,46 @@
+<nb-card>
+	<nb-card-header> Thuộc Tính Sản Phẩm </nb-card-header>
+	<nb-card-body class="row">
+		<div class="col-sm-4">
+			<nb-card>
+				<nb-card-body>
+					<div>
+						<span>Tên thuộc tính</span>
+						<input type="text"	[fullWidth]="true" nbInput (change)="thongTinThuocTinh.name=$event.target.value" placeholder="Nhập tên thuộc tính">
+					</div>
+				</nb-card-body>
+				<nb-card-footer>
+					<button nbButton>Huỷ</button>
+					<button nbButton [disabled]="isThemThuocTinhSanPham" [nbSpinner]="isThemThuocTinhSanPham"  [status]="'primary'" (click)="themMoiThuocTinh()">Thêm mới</button>
+				</nb-card-footer>
+			</nb-card>
+		</div>
+		<div class="col-sm-8">
+			<ngn-datatable
+				  #table
+				  selectionType="single"
+				  [datatableService]="datatableService"
+				  [externalPaging]="true"
+				  [limit]="10"
+				  [scrollbarH]="true"
+				  class="material"
+				  [actions]="actions"
+			  >
+				  <ngn-datatable-column
+			name="Thuộc tính ID"
+			prop="attributesId"
+			type="string"
+			[width]="350"
+		  ></ngn-datatable-column>
+		  <ngn-datatable-column
+		  name="Tên thuộc tính"
+		  prop="name"
+		  type="string"
+		  [width]="350"
+		></ngn-datatable-column>
+	  
+			  </ngn-datatable>
+		  </div>
+	</nb-card-body>	
+</nb-card>
+	

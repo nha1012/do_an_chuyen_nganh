@@ -169,4 +169,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Quản lý thuộc tính',
+    icon: 'bookmark-outline',
+    link: '/pages/quan-ly-thuoc-tinh',
+    children: [
+      {
+        title: 'Thuộc tính sản phẩm',
+        link: '/pages/quan-ly-thuoc-tinh/thuoc-tinh-san-pham',
+      },
+    ],
+  },
 ];

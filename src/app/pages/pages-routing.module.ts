@@ -90,6 +90,13 @@ const routes: Routes = [
             (m) => m.BaoCaoDoanhThuModule,
           ),
       },
+      {
+        path: 'quan-ly-thuoc-tinh',
+        loadChildren: () =>
+          import('./quan-ly-thuoc-tinh/quan-ly-thuoc-tinh.module').then(
+            (m) => m.QuanLyThuocTinhModule,
+          ),
+      },
     ],
   },
 ];
