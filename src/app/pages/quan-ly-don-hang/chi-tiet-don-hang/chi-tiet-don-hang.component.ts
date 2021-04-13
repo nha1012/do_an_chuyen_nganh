@@ -44,11 +44,9 @@ export class ChiTietDonHangComponent implements OnInit {
      * rồi từ product lấy tiếp nhà cung cấp từ server về xem diagrams để hiểu
      */
     this.transaction.orders.map(async order => {
-      return order.product.nhaCungCap = await this.nhaCungCapService.getOne(order.product.nhaCungCapId).toPromise();
+      order.product.nhaCungCap = await this.nhaCungCapService.getOne(order.product.nhaCungCapId).toPromise();
       // Làm tương tự với danhMucSanPham
-    });
-    this.transaction.orders.map(async order =>{
-      return order.product.danhMucSanPham = await this.danhMucSanPhamService.getOne(order.product.danhMucSanPhamId).toPromise();
+      order.product.danhMucSanPham = await this.danhMucSanPhamService.getOne(order.product.danhMucSanPhamId).toPromise();
     });
   }
 

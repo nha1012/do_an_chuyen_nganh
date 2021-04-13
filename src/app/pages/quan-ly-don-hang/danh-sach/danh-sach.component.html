@@ -68,25 +68,19 @@
       <ng-template
         ngn-datatable-cell-template
         let-row="row"
-        let-value="value"
-      >
+        let-value="value">
         <nb-checkbox
           status="warning"
           *ngIf="!value"
           (change)="duyetDonHang(row)"
-          [checked]="value"
-          >Chưa thanh toán</nb-checkbox
-        >
+          [checked]="value">Chưa thanh toán</nb-checkbox>
         <nb-checkbox
           status="primary"
           *ngIf="value"
           (change)="duyetDonHang(row)"
-          [checked]="value"
-          >Đã thanh toán</nb-checkbox
-        >
+          [checked]="value">Đã thanh toán</nb-checkbox>
       </ng-template>
     </ngn-datatable-column>
-
 		</ngn-datatable>
 	</nb-card-body>
 </nb-card>
