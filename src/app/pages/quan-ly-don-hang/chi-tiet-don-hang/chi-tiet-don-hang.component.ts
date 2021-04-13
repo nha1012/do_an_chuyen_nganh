@@ -1,10 +1,11 @@
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from 'app/shared/services/transaction/transaction.service';
 import { TranSactionEntity } from 'app/shared/services/transaction/transaction.interface';
 import { RequestQueryBuilder } from 'nest-crud-client';
 import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap.service';
+import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
 
 @Component({
   selector: 'ngx-chi-tiet-don-hang',
@@ -18,6 +19,7 @@ export class ChiTietDonHangComponent implements OnInit {
     private transactionService: TransactionService,
     private router: ActivatedRoute,
     private nhaCungCapService: NhaCungCapService,
+    private danhMucSanPhamService: DanhMucSanPhamService,
     ){}
   buider():RequestQueryBuilder{
     const builder = new RequestQueryBuilder();
@@ -27,7 +29,7 @@ export class ChiTietDonHangComponent implements OnInit {
     return builder;
   }
   async ngOnInit() {
-    // lấy id transaction từ đuonwgf dẫn trình duyệt
+    // lấy id transaction từ đường dẫn trình duyệt
     this.tranSactionId = this.router.snapshot.paramMap.get('id')
     // lấy 1 transaction với điều kiện id = this.trấnctionId
     /**
@@ -44,6 +46,9 @@ export class ChiTietDonHangComponent implements OnInit {
     this.transaction.orders.map(async order => {
       return order.product.nhaCungCap = await this.nhaCungCapService.getOne(order.product.nhaCungCapId).toPromise();
       // Làm tương tự với danhMucSanPham
+    });
+    this.transaction.orders.map(async order =>{
+      return order.product.danhMucSanPham = await this.danhMucSanPhamService.getOne(order.product.danhMucSanPhamId).toPromise();
     });
   }
 

@@ -12,11 +12,11 @@
                     <nb-card-body>
                         <div *ngFor="let order of transaction.orders"  class="row">
                             <div class="col-md-2">
-                                <img src="{{order?.product.anhMinhHoa}}" width="100%" height="70px" alt="">
+                                <img src="{{order?.product.anhMinhHoa}}" width="100%" height="90px" alt="">
                             </div>
                             <div class="col-md-4">
                                 <p>{{order?.product.tenSanPham}}</p>
-                                <!-- <p>{{order?.product.danhMucSanPham.tenDanhMuc}}</p> -->
+                                <p>{{order?.product.danhMucSanPham.tenDanhMuc}}</p>
                                 <p>{{order?.product?.nhaCungCap?.tenNhaCungCap}}</p>
                             </div>
                             <div class="col-md-4">
