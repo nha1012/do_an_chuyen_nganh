@@ -17,24 +17,34 @@ export class ChiTietDonHangComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private router: ActivatedRoute,
-    ){
-    this.tranSactionId = this.router.snapshot.paramMap.get('id')
-    this.transactionService.getOne(this.tranSactionId, this.buider() ).subscribe(value=>{
-      this.transaction = value;
-    })
-  }
+    private nhaCungCapService: NhaCungCapService,
+    ){}
   buider():RequestQueryBuilder{
     const builder = new RequestQueryBuilder();
     builder.setJoin({field:'user'});
     builder.setJoin({field:'orders'});
     builder.setJoin({field:'orders.product'});
-    // builder.setJoin({field:'orders.product.danhMucSanPham'});
-    // builder.setJoin({field:'orders.product.nhaCungCap'});
     return builder;
   }
-  ngOnInit(): void {
-    console.log(this.transaction);
-    
+  async ngOnInit() {
+    // lấy id transaction từ đuonwgf dẫn trình duyệt
+    this.tranSactionId = this.router.snapshot.paramMap.get('id')
+    // lấy 1 transaction với điều kiện id = this.trấnctionId
+    /**
+      * await và toPromise dùng để xữ lý bất đồng bộ, 
+      * có nghĩa là 1 cái gì đó lấy từ server sẽ có khoảng thời gian nhất định(tuỳ vào mạng mạnh hay yếu)
+      * dừng await để đợi nó về trả về két quả mới thực hiện cái tiếp theo
+      */
+    // 
+    this.transaction = await this.transactionService.getOne(this.tranSactionId, this.buider()).toPromise();
+    /**
+     * Khi có kết quả thì dùng vòng lặp để lấy được product trong mảng orders
+     * rồi từ product lấy tiếp nhà cung cấp từ server về xem diagrams để hiểu
+     */
+    this.transaction.orders.map(async order => {
+      return order.product.nhaCungCap = await this.nhaCungCapService.getOne(order.product.nhaCungCapId).toPromise();
+      // Làm tương tự với danhMucSanPham
+    });
   }
 
 }
