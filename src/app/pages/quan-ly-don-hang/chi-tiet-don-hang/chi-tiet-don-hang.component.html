@@ -20,10 +20,10 @@
                                 <p>{{order?.product.nhaCungCap.tenNhaCungCap}}</p> -->
                             </div>
                             <div class="col-md-4">
-                                <span>{{order?.product.giaKhuyenMai}} VND x {{order?.qty}}</span>
+                                <span>{{order?.product.giaKhuyenMai}} VNĐ x {{order?.qty}}</span>
                             </div>
                             <div class="col-md-2">
-                                <span>{{order?.tongTien}} VND</span>
+                                <span>{{order?.tongTien}} VNĐ</span>
                             </div>
                         </div>
                         <div class="row">
@@ -37,9 +37,9 @@
                                 <p>Số tiền phải thanh toán:</p>
                             </div>
                             <div class="col-md-2">
-                                <p>{{transaction.tongTien}} VND</p>
-                                <p *ngIf="transaction.payment !== 'TT_TAI_QUAY'">30.000 VND</p>
-                                <p>{{transaction?.tongTien}} VND</p>
+                                <p>{{transaction.tongTien}} VNĐ</p>
+                                <p *ngIf="transaction.payment !== 'TT_TAI_QUAY'">30.000 VNĐ</p>
+                                <p>{{transaction?.tongTien}} VNĐ</p>
                             </div>
                         </div>
                     </nb-card-body>
