@@ -17,6 +17,12 @@ import { RouterModule } from '@angular/router';
       path: 'danh-sach',
       loadChildren: () => import('./danh-sach/danh-sach.module').then(m => m.DanhSachModule),
     },
+    {
+      path: 'chi-tiet-don-hang',
+      loadChildren: () =>
+      import('./chi-tiet-don-hang/chi-tiet-don-hang.module').then(
+        (m) => m.ChiTietDonHangModule),
+    },
     ]),
   ],
 })

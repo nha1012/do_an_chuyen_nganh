@@ -2,8 +2,7 @@
 	fullWidth
 	placeholder="Chọn tên sản phẩm"
 	(selectedChange)="productSelected.emit($event)"
-	[size]="size"
->
+	[size]="size">
 	<nb-option *ngFor="let product of products" [value]="product.productId">{{
 		product.tenSanPham
 	}}</nb-option>

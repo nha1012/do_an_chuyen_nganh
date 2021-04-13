@@ -1,3 +1,6 @@
+import { routes } from './../../../app-routing.module';
+import { Router } from '@angular/router';
+import { OrderEntity } from './../../../shared/services/order/order.interface';
 import { Component, ViewChild } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
@@ -33,10 +36,17 @@ export class DanhSachComponent {
   constructor(
     private toast: NbToastrService,
     private transactionService: TransactionService,
+    private router: Router,
   ) {
   }
   loadDataTable() {
     this.table.loadData();
+  }
+  clickRowHandle($event: any){
+    if($event.type === 'dblclick'){
+      const id = ($event.row as TranSactionEntity).transactionId;
+      this.router.navigate([`/pages/quan-ly-don-hang/chi-tiet-don-hang/${id}`]);
+    }
   }
   getBuilder(builder: RequestQueryBuilder) {
     // tslint:disable-next-line:max-line-length
