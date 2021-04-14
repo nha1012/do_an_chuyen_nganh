@@ -44,8 +44,7 @@
                     </nb-card-body>
                     <nb-card-footer>
                         <div class="col-md-2 ml-auto">
-                            <span *ngIf="transaction.status"></span>
-                            <span *ngIf="!transaction.status"><button nbButton status="primary" (click)="onClickButton($event)">Xác thực</button></span>
+                            <button [nbSpinner]="loading" [disabled]="loading" *ngIf="!transaction.status" nbButton status="primary" (click)="onClickButton()">Xác thực</button>
                         </div>
                     </nb-card-footer>
                 </nb-card>
