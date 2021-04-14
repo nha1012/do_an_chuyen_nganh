@@ -16,6 +16,7 @@ import { NbToastrService } from '@nebular/theme';
 export class ChiTietDonHangComponent implements OnInit {
   tranSactionId: string;
   transaction:TranSactionEntity;
+  loading=false;
   constructor(
     private transactionService: TransactionService,
     private router: ActivatedRoute,
@@ -30,15 +31,11 @@ export class ChiTietDonHangComponent implements OnInit {
     builder.setJoin({field:'orders.product'});
     return builder;
   }
-  hamSomething(){
-    if(true){
-      throw new Error("Lou gi do");
-    }
-  }
   async onClickButton(){
     try {
-      this.hamSomething();
-     this.transactionService.put(this.tranSactionId, {status: true}); 
+    this.loading = true;
+      this.transaction.status = await (await this.transactionService.put(this.tranSactionId, {status: true}).toPromise()).status;
+      this.loading = false;
     } catch (error) {
       this.toast.warning(error)
     }
