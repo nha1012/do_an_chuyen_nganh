@@ -6,6 +6,7 @@ import { TranSactionEntity } from 'app/shared/services/transaction/transaction.i
 import { RequestQueryBuilder } from 'nest-crud-client';
 import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap.service';
 import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-chi-tiet-don-hang',
@@ -20,6 +21,7 @@ export class ChiTietDonHangComponent implements OnInit {
     private router: ActivatedRoute,
     private nhaCungCapService: NhaCungCapService,
     private danhMucSanPhamService: DanhMucSanPhamService,
+    private toast: NbToastrService,
     ){}
   buider():RequestQueryBuilder{
     const builder = new RequestQueryBuilder();
@@ -27,6 +29,19 @@ export class ChiTietDonHangComponent implements OnInit {
     builder.setJoin({field:'orders'});
     builder.setJoin({field:'orders.product'});
     return builder;
+  }
+  hamSomething(){
+    if(true){
+      throw new Error("Lou gi do");
+    }
+  }
+  async onClickButton(){
+    try {
+      this.hamSomething();
+     this.transactionService.put(this.tranSactionId, {status: true}); 
+    } catch (error) {
+      this.toast.warning(error)
+    }
   }
   async ngOnInit() {
     // lấy id transaction từ đường dẫn trình duyệt
@@ -48,6 +63,7 @@ export class ChiTietDonHangComponent implements OnInit {
       // Làm tương tự với danhMucSanPham
       order.product.danhMucSanPham = await this.danhMucSanPhamService.getOne(order.product.danhMucSanPhamId).toPromise();
     });
+
   }
 
 }

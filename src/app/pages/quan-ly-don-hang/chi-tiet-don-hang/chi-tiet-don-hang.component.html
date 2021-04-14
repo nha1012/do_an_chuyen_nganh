@@ -14,7 +14,7 @@
                             <div class="col-md-2">
                                 <img src="{{order?.product.anhMinhHoa}}" width="100%" height="90px" alt="">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <p>{{order?.product.tenSanPham}}</p>
                                 <p>{{order?.product.danhMucSanPham.tenDanhMuc}}</p>
                                 <p>{{order?.product?.nhaCungCap?.tenNhaCungCap}}</p>
@@ -22,21 +22,20 @@
                             <div class="col-md-4">
                                 <span>{{order?.product.giaKhuyenMai}} VNĐ x {{order?.qty}}</span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <span>{{order?.tongTien}} VNĐ</span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" nbInput placeholder="Thêm ghi chú cho đơn hàng">
-                                <button class="btn" nbButton status="primary">Lưu</button>
+                            <div class="col-md-5">
+                                
                             </div>
                             <div class="col-md-4">
                                 <p>Tổng giá trị sản phẩm:</p>
                                 <p *ngIf="transaction.payment !== 'TT_TAI_QUAY'">Phí vận chuyển:</p>
                                 <p>Số tiền phải thanh toán:</p>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <p>{{transaction.tongTien}} VNĐ</p>
                                 <p *ngIf="transaction.payment !== 'TT_TAI_QUAY'">30.000 VNĐ</p>
                                 <p>{{transaction?.tongTien}} VNĐ</p>
@@ -45,8 +44,8 @@
                     </nb-card-body>
                     <nb-card-footer>
                         <div class="col-md-2 ml-auto">
-                            <span *ngIf="!transaction.status"></span>
-                            <span *ngIf="transaction.status"><button nbButton status="primary">Xác thực</button></span>
+                            <span *ngIf="transaction.status"></span>
+                            <span *ngIf="!transaction.status"><button nbButton status="primary" (click)="onClickButton($event)">Xác thực</button></span>
                         </div>
                     </nb-card-footer>
                 </nb-card>
