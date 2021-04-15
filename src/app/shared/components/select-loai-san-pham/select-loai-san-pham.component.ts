@@ -27,7 +27,7 @@ export class SelectLoaiSanPhamComponent implements OnInit {
   }
   getBuilder () {
     const builder = new RequestQueryBuilder();
-    builder.sortBy({field:"tenSanPham", order: 'ASC'})
+    builder.sortBy({field:"tenDanhMuc", order: 'ASC'})
     return builder;
   }
   setSelectedItem(event: string | symbol) {
