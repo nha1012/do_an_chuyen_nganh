@@ -22,8 +22,15 @@
 						</div>
 					</nb-card-body>
 					<nb-card-footer>
-						<button (click)="thongTinNhaCungCap = {}" nbButton>Huỷ</button>
-						<button nbButton [disabled]="isThemNhaCungCap" [nbSpinner]="isThemNhaCungCap" [status]="'primary'" (click)="themNhaCungCap()">Thêm mới</button>
+						<div class="row">
+							<div class="col-sm-6">
+								<button (click)="thongTinNhaCungCap = {}" nbButton>Huỷ</button>
+							</div>
+							<div class="col-sm-6">
+								<button nbButton [disabled]="isThemNhaCungCap" [nbSpinner]="isThemNhaCungCap" [status]="'primary'" (click)="themNhaCungCap()">Thêm mới</button>
+							</div>
+							
+						</div>
 					</nb-card-footer>
 				</nb-card>
 			</div>

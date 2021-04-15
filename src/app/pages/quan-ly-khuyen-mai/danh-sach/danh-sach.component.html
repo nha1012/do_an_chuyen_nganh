@@ -40,11 +40,11 @@
 				<nb-datepicker #ngayKetThuc></nb-datepicker>
 				<input [fullWidth]="true" class="mt-1" type="text" nbInput [(ngModel)]="chuongTrinhKhuyenMai.tenChuongTrinh" placeholder="Tên chương trình">
 				<div class="btn-group row mt-2">
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<button nbButton status="warning" (click)="this.chuongTrinhKhuyenMai = {}">Xoá</button>
 
 					</div>
-					<div class="col-md-8">
+					<div class="col-md-6">
 						<button nbButton status="primary" [fullWidth]="true" (click)="themCTKM()">Thêm</button>
 					</div>
 
