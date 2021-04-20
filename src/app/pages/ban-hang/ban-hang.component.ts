@@ -16,6 +16,8 @@ import { CartItem } from './cart-item.interface';
   styleUrls: ['./ban-hang.component.scss'],
 })
 export class BanHangComponent implements OnInit {
+  //Danh sách giỏ hàng mỗi phần tử trong này là 1 CartItem bấm và cart Item để Thấy chi tiết các thuộc tính
+  // Biến tongSoLuong trong CartItem là số lượng còn lại trong kho cuar sản phẩm đó
   lstCart: CartItem[] = [];
   tgLamViec: any;
   @ViewChild('table', { static: false })
@@ -44,16 +46,24 @@ export class BanHangComponent implements OnInit {
     this.productId = $event;
     this.table.loadData();
   }
+  //Tăng và giảm số lượng sản phẩm trong giỏ hàng
+  // Giờ phải kiểm tra số lượng trước khi cộng
   handleActionSanPham($event, productId: string) {
+    // Biến value ở đây là CartItem
+    // Từ value ở đây lấy ra số luong san pham roi thuc hien kiểm tra
     this.lstCart.forEach((value, index) => {
       if (productId === value.productId) {
         if ($event === HandleCongTruEnum.CONG) {
+          //Khi bấm +
+          //Code chức năng ở đây......
           value.thanhTien += value.giaKhuyenMai;
           value.soLuong++;
         } else if ($event === HandleCongTruEnum.TRU) {
+          //Khi bấm -
           value.thanhTien -= value.giaKhuyenMai;
           value.soLuong--;
         } else {
+          //Khi bấm xoá
           this.lstCart.splice(index, 1);
         }
       }
