@@ -3,11 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
 import { HandleCongTruEnum } from 'app/shared/components/cell-so-luong-san-pham/cell-so-luong-san-pham.component';
 import { PhieuMuaHangDialogComponent } from 'app/shared/components/phieu-mua-hang-dialog/phieu-mua-hang-dialog.component';
-import { OrderService } from 'app/shared/services/order/order.service';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
 import { ProductService } from 'app/shared/services/product/product.service';
-import { TranSactionEntity } from 'app/shared/services/transaction/transaction.interface';
-import { TransactionService } from 'app/shared/services/transaction/transaction.service';
 import { WorkshiftEntity } from 'app/shared/services/workshift/workshift.interface';
 import { RequestQueryBuilder } from 'nest-crud-client';
 import { DatatableComponent, DatatableService } from 'ngn-datatable';
@@ -128,5 +125,11 @@ export class BanHangComponent implements OnInit {
       }
       this.lstCart.push(cartItem);
     }
+  }
+  tongTien($event){
+
+  }
+  clickchecksoluong(){
+    
   }
 }

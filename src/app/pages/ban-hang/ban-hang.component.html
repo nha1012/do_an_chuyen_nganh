@@ -13,22 +13,25 @@
 			<nb-card-body>
 				<div class="row mb-3">
 					<div class="col-sm-3"><strong>Tên sản phẩm</strong></div>
-					<div class="col-sm-3"><strong>Giá sản phẩm</strong></div>
+					<div class="col-sm-2"><strong>Giá sản phẩm</strong></div>
 					<div class="col-sm-2"><strong>Số lượng</strong></div>
-					<div class="col-sm-3"><strong>Thành tiền</strong></div>
+					<div class="col-sm-2"><strong>Thành tiền</strong></div>
+					<div class="col-sm-2"><strong>Tổng tiền</strong></div>
 				</div>
 				<div *ngFor="let product of lstCart" class="row">
 					<div class="col-sm-3">{{ product.tenSanPham }}</div>
-					<div class="col-sm-3">{{ product.giaKhuyenMai }} VNĐ</div>
+					<div class="col-sm-2">{{ product.giaKhuyenMai }} VNĐ</div>
 					<div class="col-sm-2">
 						<ngx-cell-so-luong-san-pham
 							[soLuong]="product.soLuong"
 							(handerActionSanPham)="
 								handleActionSanPham($event, product.productId)
 							"
+							(click)="clickchecksoluong()"
 						></ngx-cell-so-luong-san-pham>
 					</div>
-					<div class="col-sm-3">{{ product.thanhTien }} VNĐ</div>
+					<div class="col-sm-2">{{ product.thanhTien }} VNĐ</div>
+					<div class="col-sm-2" (tongTien)="tongTien($event)" ></div>
 					<div class="col-sm-1">
 						<nb-icon
 							class="btn__trash"
