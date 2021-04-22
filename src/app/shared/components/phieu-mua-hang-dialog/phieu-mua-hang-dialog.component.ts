@@ -12,6 +12,11 @@ import { CaLamEnum } from 'app/shared/services/workshift/workshift.interface';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ProductService } from 'app/shared/services/product/product.service';
+import { UsersService } from 'app/shared/services/user/user.service';
+import { UserService } from 'app/@core/mock/users.service';
+import { RequestQueryBuilder } from 'nest-crud-client';
+import { DatatableComponent, DatatableService } from 'ngn-datatable';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'ngx-dang-ky-ca-lam-dialog',
   templateUrl: './phieu-mua-hang-dialog.component.html',
@@ -19,7 +24,9 @@ import { ProductService } from 'app/shared/services/product/product.service';
 })
 export class PhieuMuaHangDialogComponent implements OnInit {
   @ViewChild('hoaDon', { static: false }) hoaDon: ElementRef;
+  table: DatatableComponent<UserEntity>;
 
+ 
   CaLamEnum = CaLamEnum;
   caLamSelected: CaLamEnum;
   date: Date;
@@ -28,15 +35,29 @@ export class PhieuMuaHangDialogComponent implements OnInit {
   lstCart: CartItem[] = [];
   isActive = false;
   tongTien = 0;
-  khachHangId: string;
+  locKhachHang: string;
   constructor(
     private toast: NbToastrService,
     protected ref: NbDialogRef<PhieuMuaHangDialogComponent>,
     private transactionService: TransactionService,
     private orderService: OrderService,
     private authService: AuthService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private userService: UserService,
+    private router: Router,
+    protected route: ActivatedRoute,
+    ) { }
   ngOnInit(): void {
+  }
+  khachHangId(event: string){
+    this.locKhachHang = event;
+  }
+  getBuilder(builder: RequestQueryBuilder){
+    builder.setFilter({field:'status', operator: '$eq' , value:true});
+    builder.setJoin({field: 'User'});
+
+    this.locKhachHang &&
+    builder.setFilter({ field: 'userId' , operator: '$eq' , value: this.locKhachHang});
   }
   handleHuy() {
     this.ref.close();
@@ -50,7 +71,7 @@ export class PhieuMuaHangDialogComponent implements OnInit {
       this.checkValid();
       this.isGiaoDich = true;
       let newTransaction = await this.transactionService
-        .create({ userId: this.khachHangId, payment: TypeTransaction.TAIQUAY, status: true }).toPromise();
+        .create({ userId: this.locKhachHang, payment: TypeTransaction.TAIQUAY, status: true }).toPromise();
       this.lstCart.forEach(async (value: CartItem) => {
         if (value.tongSoLuong < value.soLuong) {
           this.isGiaoDich = false;

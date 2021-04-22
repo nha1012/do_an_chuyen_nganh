@@ -12,7 +12,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="row">
-							<ngx-select-khach-hang [fullWidth]="true" [placerHolder]="'Chọn khách hàng'" (KhachHangSelected)="khachHangId = $event"></ngx-select-khach-hang>
+							<ngx-select-khach-hang [fullWidth]="true" [placerHolder]="'Chọn khách hàng'" (KhachHangSelected)="khachHangId($event)"></ngx-select-khach-hang>
 						</div>
 						<div class="col-sm-12 btn__grp">
 							<div class="row">

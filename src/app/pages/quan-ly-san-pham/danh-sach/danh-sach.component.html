@@ -2,8 +2,8 @@
 	<nb-card-header> Quản lý sản phẩm </nb-card-header>
 	<nb-card-body>
 		<div class="row d-flex">
-			<ngx-select-ten-san-pham (productSelected)="getProductId($event)"></ngx-select-ten-san-pham>
-			<ngx-select-nha-cung-cap (selectedItem)="getTenNhaCungCap($event)" [size]="'medium'"></ngx-select-nha-cung-cap>
+			<ngx-select-ten-san-pham class="ml-2" (productSelected)="getProductId($event)"></ngx-select-ten-san-pham>
+			<ngx-select-nha-cung-cap class="ml-2" (selectedItem)="getTenNhaCungCap($event)" [size]="'medium'"></ngx-select-nha-cung-cap>
 			<ngx-select-ctkm (selectedItem)="getCTKM($event)"></ngx-select-ctkm>
 				<div class="nut-loc">
 					<button nbButton status="primary" outline (click)="loadDataTable()">Lọc</button>

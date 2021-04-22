@@ -55,9 +55,12 @@ export class BanHangComponent implements OnInit {
       if (productId === value.productId) {
         if ($event === HandleCongTruEnum.CONG) {
           //Khi bấm +
-          //Code chức năng ở đây......
-          value.thanhTien += value.giaKhuyenMai;
-          value.soLuong++;
+          if(value.soLuong>=value.tongSoLuong){
+            this.toast.success('Không đủ số lượng','Thông báo');
+          }else if(value.soLuong<value.tongSoLuong){
+            value.thanhTien += value.giaKhuyenMai;
+            value.soLuong++;
+          }
         } else if ($event === HandleCongTruEnum.TRU) {
           //Khi bấm -
           value.thanhTien -= value.giaKhuyenMai;
@@ -135,11 +138,5 @@ export class BanHangComponent implements OnInit {
       }
       this.lstCart.push(cartItem);
     }
-  }
-  tongTien($event){
-
-  }
-  clickchecksoluong(){
-    
   }
 }
