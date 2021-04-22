@@ -7,6 +7,7 @@
 					Các sản phẩm ít được quan tâm
 				</nb-card-header>
 				<nb-card-body>
+					<nb-alert class="ml-2" accent="info" *ngIf="getSanPham().length===0">Không có dữ liệu thống kê</nb-alert>
 					<ngx-charts-bar-vertical
 						*ngIf="getSanPham().length>0"
 						[animations]="true"

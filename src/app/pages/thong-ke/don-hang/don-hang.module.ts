@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DonHangComponent } from './don-hang.component';
 import { RouterModule } from '@angular/router';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NbButtonModule, NbCardModule, NbDatepickerModule, NbInputModule } from '@nebular/theme';
+import { NbAlertModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbInputModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 
 
@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     NbDatepickerModule,
     NbButtonModule,
     NbInputModule,
+    NbAlertModule,
     RouterModule.forChild([{
       path: '', component: DonHangComponent,
     }]),

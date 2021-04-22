@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { disableCursor } from '@fullcalendar/common';
 import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
 import { HandleCongTruEnum } from 'app/shared/components/cell-so-luong-san-pham/cell-so-luong-san-pham.component';
 import { PhieuMuaHangDialogComponent } from 'app/shared/components/phieu-mua-hang-dialog/phieu-mua-hang-dialog.component';
@@ -57,10 +58,10 @@ export class BanHangComponent implements OnInit {
           //Khi bấm +
           if(value.soLuong>=value.tongSoLuong){
             this.toast.success('Không đủ số lượng','Thông báo');
-          }else if(value.soLuong<value.tongSoLuong){
-            value.thanhTien += value.giaKhuyenMai;
-            value.soLuong++;
+            $event=false;
           }
+          value.thanhTien += value.giaKhuyenMai;
+          value.soLuong++;
         } else if ($event === HandleCongTruEnum.TRU) {
           //Khi bấm -
           value.thanhTien -= value.giaKhuyenMai;

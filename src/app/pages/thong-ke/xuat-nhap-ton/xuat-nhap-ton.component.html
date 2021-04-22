@@ -8,6 +8,7 @@
         Sản phẩm tồn kho
       </nb-card-header>
       <nb-card-body>
+		  <nb-alert class="ml-2" accent="info" *ngIf="sanPhamTonKho.length===0">Không có dữ liệu thống kê</nb-alert>
         <ngx-charts-bar-vertical
 						*ngIf="sanPhamTonKho.length > 0"
 						[animations]="true"

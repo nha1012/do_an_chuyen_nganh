@@ -5,13 +5,13 @@
   <nb-card-body>
     <div class="row">
       <ngx-select-ctkm class="ml-2" (selectedItem)="chuongTrinhKhuyenMaiId=$event"></ngx-select-ctkm>
-			<div class="nut-loc ml-2">
-				<button nbButton status="primary" outline (click)="xemThongKe()">
+			<div class="nut-loc">
+				<button class="ml-2" nbButton status="primary" outline (click)="xemThongKe()">
 					Xem thống kê
 				</button>
 			</div>
 		</div>
-    <nb-alert class="mt-2" accent="info" *ngIf="baoCaoCTKM.length === 0">Không có dữ liệu thống kê</nb-alert>
+    <nb-alert class="ml-2" accent="info" *ngIf="baoCaoCTKM.length === 0">Không có dữ liệu thống kê</nb-alert>
     <ngx-charts-pie-chart
       *ngIf="baoCaoCTKM.length >0"
       [results]="baoCaoCTKM"

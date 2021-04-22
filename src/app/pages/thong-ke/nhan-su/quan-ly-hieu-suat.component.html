@@ -30,10 +30,11 @@
 				>
 					Lọc
 				</button>
-			</div>
+			</div>			
 		</div>
+		<nb-alert class="ml-2" accent="info" *ngIf="values.length===0">Không có dữ liệu thống kê</nb-alert>
 		<ngx-charts-bar-vertical-2d
-			*ngIf="datas"
+			*ngIf="values.length>0"
 			class="chart"
 			[animations]="true"
 			[showXAxisLabel]="true"
