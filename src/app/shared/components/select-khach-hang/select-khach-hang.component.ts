@@ -10,12 +10,12 @@ import { RoleEnum } from 'app/shared/services/role/role.interface';
   styleUrls: ['./select-khach-hang.component.scss'],
 })
 export class SelectKhachHangComponent implements OnInit {
-  @Output() KhachHangSelected = new EventEmitter();
+  @Output() khachHangSelected = new EventEmitter();
   @Input() placerHolder: string = '';
   @Input() fullWidth: boolean = false;
   khachhangs: UserEntity[];
   constructor(private userService: UsersService) {
-    this.userService.getMany(this.getBuilder()).subscribe(value=>this.khachhangs)
+    this.userService.getMany(this.getBuilder()).subscribe(value=>this.khachhangs=value)
   }
   ngOnInit(): void {
 

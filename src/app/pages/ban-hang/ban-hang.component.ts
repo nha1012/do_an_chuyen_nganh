@@ -57,15 +57,15 @@ export class BanHangComponent implements OnInit {
         if ($event === HandleCongTruEnum.CONG) {
           //Khi bấm +
           if(value.soLuong>=value.tongSoLuong){
-            this.toast.success('Không đủ số lượng','Thông báo');
-            $event=false;
+          }else{
+            value.thanhTien += value.giaKhuyenMai;
+            value.soLuong++;
           }
-          value.thanhTien += value.giaKhuyenMai;
-          value.soLuong++;
         } else if ($event === HandleCongTruEnum.TRU) {
           //Khi bấm -
           value.thanhTien -= value.giaKhuyenMai;
           value.soLuong--;
+
         } else {
           //Khi bấm xoá
           this.lstCart.splice(index, 1);
@@ -87,6 +87,8 @@ export class BanHangComponent implements OnInit {
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
     builder.setFilter({ field: 'status', operator: '$eq', value: true });
+    builder.setFilter({ field: 'soLuong', operator: '$gte', value: 1 });
+
     this.productId &&
       builder.setFilter({ field: 'productId', operator: '$eq', value: this.productId });
   }

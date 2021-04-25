@@ -1,4 +1,4 @@
-<nb-card>
+=<nb-card>
 	<nb-card-header
 		><span>Trang bán hàng</span
 		><span class="float-right"
@@ -22,7 +22,8 @@
 					<div class="col-sm-2">{{ product.giaKhuyenMai }} VNĐ</div>
 					<div class="col-sm-2">
 						<ngx-cell-so-luong-san-pham
-							[soLuong]="product.soLuong"
+							[(soLuong)]="product.soLuong"
+							[tongSoLuong]="product.tongSoLuong"
 							(handerActionSanPham)="
 								handleActionSanPham($event, product.productId)
 							"

@@ -35,30 +35,19 @@ export class PhieuMuaHangDialogComponent implements OnInit {
   lstCart: CartItem[] = [];
   isActive = false;
   tongTien = 0;
-  locKhachHang: string;
+  khachHangId: string;
+
   constructor(
     private toast: NbToastrService,
     protected ref: NbDialogRef<PhieuMuaHangDialogComponent>,
     private transactionService: TransactionService,
     private orderService: OrderService,
-    private authService: AuthService,
     private productService: ProductService,
-    private userService: UserService,
-    private router: Router,
     protected route: ActivatedRoute,
     ) { }
   ngOnInit(): void {
   }
-  khachHangId(event: string){
-    this.locKhachHang = event;
-  }
-  getBuilder(builder: RequestQueryBuilder){
-    builder.setFilter({field:'status', operator: '$eq' , value:true});
-    builder.setJoin({field: 'User'});
 
-    this.locKhachHang &&
-    builder.setFilter({ field: 'userId' , operator: '$eq' , value: this.locKhachHang});
-  }
   handleHuy() {
     this.ref.close();
   }
@@ -71,13 +60,14 @@ export class PhieuMuaHangDialogComponent implements OnInit {
       this.checkValid();
       this.isGiaoDich = true;
       let newTransaction = await this.transactionService
-        .create({ userId: this.locKhachHang, payment: TypeTransaction.TAIQUAY, status: true }).toPromise();
+        .create({ userId: this.khachHangId, payment: TypeTransaction.TAIQUAY, status: true }).toPromise();
       this.lstCart.forEach(async (value: CartItem) => {
         if (value.tongSoLuong < value.soLuong) {
           this.isGiaoDich = false;
           this.toast.warning('Không đủ sản phẩm trong kho, vui lòng xem lại');
           return;
         }
+        debugger;
         const order: OrderEntity = {
           productId: value.productId,
           transactionId: newTransaction.transactionId,
@@ -85,7 +75,9 @@ export class PhieuMuaHangDialogComponent implements OnInit {
           qty: value.soLuong,
           tongTien: value.thanhTien,
         };
-        const orderCreated = await this.orderService.create(order).toPromise();
+        const orderCreated = await this.orderService
+        console.log(orderCreated);
+        
         if (orderCreated) {
           if (newTransaction.qty) {
             newTransaction.qty++;
@@ -93,20 +85,20 @@ export class PhieuMuaHangDialogComponent implements OnInit {
             newTransaction.qty = 1;
           }
           if (newTransaction.tongTien) {
-            newTransaction.tongTien += orderCreated.tongTien;
+            //newTransaction.tongTien += orderCreated.tongTien;
           } else {
-            newTransaction.tongTien = orderCreated.tongTien;
+            //newTransaction.tongTien = orderCreated.tongTien;
           }
           const transactionUpdate: TranSactionEntity = {
             tongTien: newTransaction.tongTien,
             qty: newTransaction.qty,
           };
           // update lại bảng giao dịch
-          newTransaction = await this.transactionService.put(newTransaction.transactionId, transactionUpdate)
+          const newTransactionUpdate = await this.transactionService.put(newTransaction.transactionId, transactionUpdate)
             .toPromise();
           // xoá đi sản phẩm ở bảng product
-          this.productService.put(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
-          this.tongTien = newTransaction.tongTien;
+          await this.productService.put(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
+          this.tongTien = newTransactionUpdate.tongTien;
           this.isActive = true;
           this.isGiaoDich = false;
           this.toast.info('Đã chuyển qua trang xuất hoá đơn');
