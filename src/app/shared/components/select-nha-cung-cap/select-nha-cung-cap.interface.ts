@@ -14,6 +14,8 @@ import { RequestQueryBuilder } from 'nest-crud-client';
 export class SelectNhaCungCapComponent implements OnInit {
   @Input() value;
   @Input() size = 'small';
+  @Input() fullWidth: boolean;
+  @Input() placerholder: string;
 
   @Output() selectedItem = new EventEmitter();
 

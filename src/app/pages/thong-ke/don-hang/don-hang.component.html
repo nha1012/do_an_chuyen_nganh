@@ -12,7 +12,9 @@
 			/>
 			<nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
     <button nbButton status="primary" (click)="baoCao()">Xem thống kê</button>
+    <nb-alert class="ml-2" accent="info" *ngIf="transactions.length===0">Không có dữ liệu thống kê</nb-alert>
     <ngx-charts-line-chart
+      *ngIf="transactions.length>0"
       [animations]="true"
       [showXAxisLabel]="true"
       [showYAxisLabel]="true"
@@ -24,7 +26,6 @@
       [view]="[1000, 400]"
       [legend]="true"
     >
-
     </ngx-charts-line-chart>
   </nb-card-body>
 </nb-card>

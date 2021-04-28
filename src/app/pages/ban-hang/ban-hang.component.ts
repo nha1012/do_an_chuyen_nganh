@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { disableCursor } from '@fullcalendar/common';
 import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
 import { HandleCongTruEnum } from 'app/shared/components/cell-so-luong-san-pham/cell-so-luong-san-pham.component';
 import { PhieuMuaHangDialogComponent } from 'app/shared/components/phieu-mua-hang-dialog/phieu-mua-hang-dialog.component';
-import { OrderService } from 'app/shared/services/order/order.service';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
 import { ProductService } from 'app/shared/services/product/product.service';
-import { TranSactionEntity } from 'app/shared/services/transaction/transaction.interface';
-import { TransactionService } from 'app/shared/services/transaction/transaction.service';
 import { WorkshiftEntity } from 'app/shared/services/workshift/workshift.interface';
 import { RequestQueryBuilder } from 'nest-crud-client';
 import { DatatableComponent, DatatableService } from 'ngn-datatable';
@@ -19,6 +17,8 @@ import { CartItem } from './cart-item.interface';
   styleUrls: ['./ban-hang.component.scss'],
 })
 export class BanHangComponent implements OnInit {
+  //Danh sách giỏ hàng mỗi phần tử trong này là 1 CartItem bấm và cart Item để Thấy chi tiết các thuộc tính
+  // Biến tongSoLuong trong CartItem là số lượng còn lại trong kho cuar sản phẩm đó
   lstCart: CartItem[] = [];
   tgLamViec: any;
   @ViewChild('table', { static: false })
@@ -47,16 +47,27 @@ export class BanHangComponent implements OnInit {
     this.productId = $event;
     this.table.loadData();
   }
+  //Tăng và giảm số lượng sản phẩm trong giỏ hàng
+  // Giờ phải kiểm tra số lượng trước khi cộng
   handleActionSanPham($event, productId: string) {
+    // Biến value ở đây là CartItem
+    // Từ value ở đây lấy ra số luong san pham roi thuc hien kiểm tra
     this.lstCart.forEach((value, index) => {
       if (productId === value.productId) {
         if ($event === HandleCongTruEnum.CONG) {
-          value.thanhTien += value.giaKhuyenMai;
-          value.soLuong++;
+          //Khi bấm +
+          if(value.soLuong>=value.tongSoLuong){
+          }else{
+            value.thanhTien += value.giaKhuyenMai;
+            value.soLuong++;
+          }
         } else if ($event === HandleCongTruEnum.TRU) {
+          //Khi bấm -
           value.thanhTien -= value.giaKhuyenMai;
           value.soLuong--;
+
         } else {
+          //Khi bấm xoá
           this.lstCart.splice(index, 1);
         }
       }
@@ -76,6 +87,8 @@ export class BanHangComponent implements OnInit {
     builder.setJoin({ field: 'danhMucSanPham' });
     builder.setJoin({ field: 'nhaCungCap' });
     builder.setFilter({ field: 'status', operator: '$eq', value: true });
+    builder.setFilter({ field: 'soLuong', operator: '$gte', value: 1 });
+
     this.productId &&
       builder.setFilter({ field: 'productId', operator: '$eq', value: this.productId });
   }

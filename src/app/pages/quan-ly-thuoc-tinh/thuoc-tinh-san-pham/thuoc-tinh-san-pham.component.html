@@ -10,8 +10,14 @@
 					</div>
 				</nb-card-body>
 				<nb-card-footer>
-					<button nbButton>Huỷ</button>
-					<button nbButton [disabled]="isThemThuocTinhSanPham" [nbSpinner]="isThemThuocTinhSanPham"  [status]="'primary'" (click)="themMoiThuocTinh()">Thêm mới</button>
+					<div class="row">
+						<div class="col-sm-7">
+							<button nbButton>Huỷ</button>
+						</div>
+						<div class="col-sm-5">
+							<button nbButton [disabled]="isThemThuocTinhSanPham" [nbSpinner]="isThemThuocTinhSanPham"  [status]="'primary'" (click)="themMoiThuocTinh()">Thêm mới</button>
+						</div>
+					</div>									
 				</nb-card-footer>
 			</nb-card>
 		</div>

@@ -1,7 +1,7 @@
 <nb-select
 	[placeholder]="placerHolder"
 	[fullWidth]='fullWidth'
-	(selectedChange)="KhachHangSelected.emit($event)"
+	(selectedChange)="khachHangSelected.emit($event)"
 >
 	<nb-option *ngFor="let user of khachhangs" [value]="user.userId">{{
 		user.displayName

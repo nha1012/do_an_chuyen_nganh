@@ -20,12 +20,17 @@ export class CellSoLuongSanPhamComponent implements OnInit {
   clickHandle(event: HandleCongTruEnum) {
     if (event === HandleCongTruEnum.CONG) {
       this.handerActionSanPham.emit(HandleCongTruEnum.CONG);
+      if (this.soLuong>=this.tongSoLuong) {
+        this.toast.warning('Không đủ số lượng','Thông báo');
+        return;
+      }
       return this.soLuong++;
     }
     if (this.soLuong === 1) {
       if (confirm('Bạn có muốn xoá sản phẩm')) {
         return this.handerActionSanPham.emit(HandleCongTruEnum.XOA);
       }
+    return this.soLuong      
     }
     this.handerActionSanPham.emit(HandleCongTruEnum.TRU);
     return this.soLuong--;

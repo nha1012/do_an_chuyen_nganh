@@ -1,10 +1,12 @@
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from 'app/shared/services/transaction/transaction.service';
 import { TranSactionEntity } from 'app/shared/services/transaction/transaction.interface';
 import { RequestQueryBuilder } from 'nest-crud-client';
 import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap.service';
+import { DanhMucSanPhamService } from 'app/shared/services/danh-muc-san-pham/danh-muc-san-pham.service';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-chi-tiet-don-hang',
@@ -14,10 +16,13 @@ import { NhaCungCapService } from 'app/shared/services/nha-cung-cap/nha-cung-cap
 export class ChiTietDonHangComponent implements OnInit {
   tranSactionId: string;
   transaction:TranSactionEntity;
+  loading=false;
   constructor(
     private transactionService: TransactionService,
     private router: ActivatedRoute,
     private nhaCungCapService: NhaCungCapService,
+    private danhMucSanPhamService: DanhMucSanPhamService,
+    private toast: NbToastrService,
     ){}
   buider():RequestQueryBuilder{
     const builder = new RequestQueryBuilder();
@@ -26,8 +31,17 @@ export class ChiTietDonHangComponent implements OnInit {
     builder.setJoin({field:'orders.product'});
     return builder;
   }
+  async onClickButton(){
+    try {
+    this.loading = true;
+      this.transaction.status = await (await this.transactionService.put(this.tranSactionId, {status: true}).toPromise()).status;
+      this.loading = false;
+    } catch (error) {
+      this.toast.warning(error)
+    }
+  }
   async ngOnInit() {
-    // lấy id transaction từ đuonwgf dẫn trình duyệt
+    // lấy id transaction từ đường dẫn trình duyệt
     this.tranSactionId = this.router.snapshot.paramMap.get('id')
     // lấy 1 transaction với điều kiện id = this.trấnctionId
     /**
@@ -42,9 +56,11 @@ export class ChiTietDonHangComponent implements OnInit {
      * rồi từ product lấy tiếp nhà cung cấp từ server về xem diagrams để hiểu
      */
     this.transaction.orders.map(async order => {
-      return order.product.nhaCungCap = await this.nhaCungCapService.getOne(order.product.nhaCungCapId).toPromise();
+      order.product.nhaCungCap = await this.nhaCungCapService.getOne(order.product.nhaCungCapId).toPromise();
       // Làm tương tự với danhMucSanPham
+      order.product.danhMucSanPham = await this.danhMucSanPhamService.getOne(order.product.danhMucSanPhamId).toPromise();
     });
+
   }
 
 }

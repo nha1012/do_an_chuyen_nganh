@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbInputModule, NbSpinnerModule } from '@nebular/theme';
+import { NbAlertModule, NbButtonModule, NbCardModule, NbCheckboxModule, NbDatepickerModule, NbInputModule, NbSpinnerModule } from '@nebular/theme';
 import { ThemeModule } from 'app/@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { RouterModule } from '@angular/router';
@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     NbSpinnerModule,
     SelectCaLamModule,
+    NbAlertModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: QuanLyHieuSuatComponent },
     ]),

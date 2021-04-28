@@ -12,6 +12,11 @@ import { CaLamEnum } from 'app/shared/services/workshift/workshift.interface';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ProductService } from 'app/shared/services/product/product.service';
+import { UsersService } from 'app/shared/services/user/user.service';
+import { UserService } from 'app/@core/mock/users.service';
+import { RequestQueryBuilder } from 'nest-crud-client';
+import { DatatableComponent, DatatableService } from 'ngn-datatable';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'ngx-dang-ky-ca-lam-dialog',
   templateUrl: './phieu-mua-hang-dialog.component.html',
@@ -19,7 +24,9 @@ import { ProductService } from 'app/shared/services/product/product.service';
 })
 export class PhieuMuaHangDialogComponent implements OnInit {
   @ViewChild('hoaDon', { static: false }) hoaDon: ElementRef;
+  table: DatatableComponent<UserEntity>;
 
+ 
   CaLamEnum = CaLamEnum;
   caLamSelected: CaLamEnum;
   date: Date;
@@ -29,15 +36,18 @@ export class PhieuMuaHangDialogComponent implements OnInit {
   isActive = false;
   tongTien = 0;
   khachHangId: string;
+
   constructor(
     private toast: NbToastrService,
     protected ref: NbDialogRef<PhieuMuaHangDialogComponent>,
     private transactionService: TransactionService,
     private orderService: OrderService,
-    private authService: AuthService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    protected route: ActivatedRoute,
+    ) { }
   ngOnInit(): void {
   }
+
   handleHuy() {
     this.ref.close();
   }
@@ -57,6 +67,7 @@ export class PhieuMuaHangDialogComponent implements OnInit {
           this.toast.warning('Không đủ sản phẩm trong kho, vui lòng xem lại');
           return;
         }
+        debugger;
         const order: OrderEntity = {
           productId: value.productId,
           transactionId: newTransaction.transactionId,
@@ -64,7 +75,9 @@ export class PhieuMuaHangDialogComponent implements OnInit {
           qty: value.soLuong,
           tongTien: value.thanhTien,
         };
-        const orderCreated = await this.orderService.create(order).toPromise();
+        const orderCreated = await this.orderService
+        console.log(orderCreated);
+        
         if (orderCreated) {
           if (newTransaction.qty) {
             newTransaction.qty++;
@@ -72,20 +85,20 @@ export class PhieuMuaHangDialogComponent implements OnInit {
             newTransaction.qty = 1;
           }
           if (newTransaction.tongTien) {
-            newTransaction.tongTien += orderCreated.tongTien;
+            //newTransaction.tongTien += orderCreated.tongTien;
           } else {
-            newTransaction.tongTien = orderCreated.tongTien;
+            //newTransaction.tongTien = orderCreated.tongTien;
           }
           const transactionUpdate: TranSactionEntity = {
             tongTien: newTransaction.tongTien,
             qty: newTransaction.qty,
           };
           // update lại bảng giao dịch
-          newTransaction = await this.transactionService.put(newTransaction.transactionId, transactionUpdate)
+          const newTransactionUpdate = await this.transactionService.put(newTransaction.transactionId, transactionUpdate)
             .toPromise();
           // xoá đi sản phẩm ở bảng product
-          this.productService.put(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
-          this.tongTien = newTransaction.tongTien;
+          await this.productService.put(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
+          this.tongTien = newTransactionUpdate.tongTien;
           this.isActive = true;
           this.isGiaoDich = false;
           this.toast.info('Đã chuyển qua trang xuất hoá đơn');

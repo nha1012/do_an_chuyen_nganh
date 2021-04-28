@@ -54,11 +54,11 @@
         </div>
         <div class="mb-2">
           <span class="col-md-4">Danh mục</span>
-          <ngx-select-loai-san-pham [placerholder]="'Danh mục sản phẩm'" [size]="'small'" (selectedItem)="thongTinSanPham.danhMucSanPhamId = $event" [value]="product.danhMucSanPhamId"></ngx-select-loai-san-pham>
+          <ngx-select-loai-san-pham class="fix" [placerholder]="'Danh mục sản phẩm'" [size]="'small'" (selectedItem)="thongTinSanPham.danhMucSanPhamId = $event" [value]="product.danhMucSanPhamId"></ngx-select-loai-san-pham>
         </div>
         <div class="mb-2">
           <span class="col-md-4">Nhà cung cấp</span>
-          <ngx-select-nha-cung-cap (selectedItem)="thongTinSanPham.nhaCungCapId = $event" [value]="product.nhaCungCapId"></ngx-select-nha-cung-cap>
+          <ngx-select-nha-cung-cap class="fix" (selectedItem)="thongTinSanPham.nhaCungCapId = $event" [value]="product.nhaCungCapId"></ngx-select-nha-cung-cap>
         </div>
         <nb-tabset>
           <nb-tab tabTitle="Mô tả">
