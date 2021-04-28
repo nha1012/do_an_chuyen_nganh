@@ -1,6 +1,6 @@
 
 <nb-card [nbSpinner]="status.loadLogin">
-    <nb-card-header>Đăng nhập</nb-card-header>
+    <nb-card-header class="center"><h3>ĐĂNG NHẬP</h3></nb-card-header>
     <nb-card-body>
         <form (ngSubmit)="login(f)" #f="ngForm">
         <input nbInput name="username" type="username" [(ngModel)]="username"  placeholder="Tên đăng nhập" required
