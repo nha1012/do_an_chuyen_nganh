@@ -17,26 +17,42 @@ export class ThemKhachHangComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  isValid() {
+  isValidUsername(){
     if (!this.thongTinKhachHang.username) {
       throw new Error('Vui lòng nhập tên tài khoản');
-
     }
+    if (this.thongTinKhachHang.username && this.thongTinKhachHang.username.length < 6) {
+      throw new Error('Vui lòng nhập tài khoản trên 5 ký tự');
+    }
+    if (this.thongTinKhachHang.username && this.thongTinKhachHang.username.length > 30) {
+      throw new Error('Vui lòng nhập tài khoản dưới 30 ký tự');
+    }
+  }
+  isValidPassword(){
     if (!this.thongTinKhachHang.password) {
-      throw new Error('Vui lòng nhập tên mật khẩu');
-
+      throw new Error('Vui lòng nhập mật khẩu');
     }
+    if (this.thongTinKhachHang.username && this.thongTinKhachHang.password.length < 6) {
+      throw new Error('Vui lòng nhập mật khẩu trên 5 ký tự');
+    }
+    if (this.thongTinKhachHang.username && this.thongTinKhachHang.password.length > 30) {
+      throw new Error('Vui lòng nhập mật khẩu dưới 30 ký tự');
+    }
+    if (this.thongTinKhachHang.username && this.thongTinKhachHang.password.search('`') > -1) {
+      throw new Error('Vui lòng nhập mật khẩu không chứa dấu `');
+    }
+  }
+  isValid() {
+    this.isValidUsername()
+    this.isValidPassword()
     if (!this.thongTinKhachHang.displayName) {
       throw new Error('Vui lòng nhập tên tài khoản');
-
     }
     if (!this.thongTinKhachHang.address) {
       throw new Error('Vui lòng nhập địa chỉ');
-
     }
     if (!this.thongTinKhachHang.phoneNumber) {
       throw new Error('Vui lòng nhập số điện thoại');
-
     }
     if (!this.thongTinKhachHang.email) {
       throw new Error('Vui lòng nhập email');
