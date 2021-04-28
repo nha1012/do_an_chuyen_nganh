@@ -48,16 +48,17 @@ export class ThemMoiComponent implements OnInit {
       forcePasteAsPlainText: true,
     };
   }
+
   checkVaild() {
-    if (this.thongTinSanPham.tenSanPham === '')
+    if (!this.thongTinSanPham.tenSanPham)
       throw Error('Vui lòng nhập tên sản phẩm');
-    if (this.thongTinSanPham.giaSanPham === 0)
+    if (!this.thongTinSanPham.giaSanPham)
       throw Error('Vui lòng nhập giá sản phẩm');
-    if (this.thongTinSanPham.soLuong === 0)
+    if (!this.thongTinSanPham.soLuong)
       throw Error('Vui lòng nhập số lương sản phẩm');
-    if (this.thongTinSanPham.danhMucSanPhamId === '')
+    if (!this.thongTinSanPham.danhMucSanPhamId)
       throw Error('Vui lòng chọn loại sản phẩm');
-    if (this.thongTinSanPham.moTa === '')
+    if (!this.thongTinSanPham.moTa)
       throw Error('Vui lòng nhập mô tả sản phẩm');
     if (this.files.length <= 0)
       throw Error('Vui lòng tải lên hình ảnh sản phẩm');

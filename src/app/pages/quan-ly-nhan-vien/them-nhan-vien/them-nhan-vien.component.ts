@@ -17,13 +17,34 @@ export class ThemNhanVienComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  isValid() {
+  isValidUsername(){
     if (!this.thongTinNhanVien.username) {
       throw new Error('Vui lòng nhập tên tài khoản');
     }
-    if (!this.thongTinNhanVien.password) {
-      throw new Error('Vui lòng nhập tên mật khẩu');
+    if (this.thongTinNhanVien.username && this.thongTinNhanVien.username.length < 6) {
+      throw new Error('Vui lòng nhập tài khoản trên 5 ký tự');
     }
+    if (this.thongTinNhanVien.username && this.thongTinNhanVien.username.length > 30) {
+      throw new Error('Vui lòng nhập tài khoản dưới 30 ký tự');
+    }
+  }
+  isValidPassword(){
+    if (!this.thongTinNhanVien.password) {
+      throw new Error('Vui lòng nhập mật khẩu');
+    }
+    if (this.thongTinNhanVien.username && this.thongTinNhanVien.password.length < 6) {
+      throw new Error('Vui lòng nhập mật khẩu trên 5 ký tự');
+    }
+    if (this.thongTinNhanVien.username && this.thongTinNhanVien.password.length > 30) {
+      throw new Error('Vui lòng nhập mật khẩu dưới 30 ký tự');
+    }
+    if (this.thongTinNhanVien.username && this.thongTinNhanVien.password.search('`') > -1) {
+      throw new Error('Vui lòng nhập mật khẩu không chứa dấu `');
+    }
+  }
+  isValid() {
+    this.isValidUsername()
+    this.isValidPassword()
     if (!this.thongTinNhanVien.displayName) {
       throw new Error('Vui lòng nhập tên tài khoản');
     }
