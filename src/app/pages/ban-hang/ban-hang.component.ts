@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { disableCursor } from '@fullcalendar/common';
-import { NbDialogRef, NbDialogService, NbToastrService } from '@nebular/theme';
+import { ActivatedRoute } from '@angular/router';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { HandleCongTruEnum } from 'app/shared/components/cell-so-luong-san-pham/cell-so-luong-san-pham.component';
 import { PhieuMuaHangDialogComponent } from 'app/shared/components/phieu-mua-hang-dialog/phieu-mua-hang-dialog.component';
 import { ProductEntity } from 'app/shared/services/product/product.interface';
@@ -105,7 +104,6 @@ export class BanHangComponent implements OnInit {
         .subscribe(value => {
           if (value) {
             this.table.loadData();
-            this.lstCart = [];
           }
         });
     } catch (error) {

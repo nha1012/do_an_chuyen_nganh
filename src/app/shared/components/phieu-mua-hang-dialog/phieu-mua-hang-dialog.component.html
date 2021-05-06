@@ -57,14 +57,16 @@
 					<nb-card-body>
 						<div class="row mb-3">
 							<div class="col-sm-3"><strong>Tên sản phẩm</strong></div>
-							<div class="col-sm-3"><strong>Giá sản phẩm</strong></div>
-							<div class="col-sm-3"><strong>Số lượng</strong></div>
+							<div class="col-sm-2"><strong>Giá sản phẩm</strong></div>
+							<div class="col-sm-2"><strong>Giá khuyến mãi</strong></div>
+							<div class="col-sm-2"><strong>Số lượng</strong></div>
 							<div class="col-sm-3"><strong>Thành tiền</strong></div>
 						</div>
 						<div *ngFor="let product of lstCart" class="row">
 							<div class="col-sm-3">{{ product.tenSanPham }}</div>
-							<div class="col-sm-3">{{ product.giaKhuyenMai }} VND</div>
-							<div class="col-sm-3">{{ product.soLuong }}</div>
+							<div class="col-sm-2">{{ product.giaKhuyenMai }} VND</div>
+							<div class="col-sm-2">{{ product.giaKhuyenMaiCTKM }} VND</div>
+							<div class="col-sm-2">{{ product.soLuong }}</div>
 							<div class="col-sm-3">{{ product.thanhTien }} VND</div>
 						</div>
 					</nb-card-body>
