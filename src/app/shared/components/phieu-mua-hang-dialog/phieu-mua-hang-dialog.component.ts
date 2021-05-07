@@ -86,14 +86,17 @@ export class PhieuMuaHangDialogComponent implements OnInit {
           qty: value.soLuong,
           tongTien: value.thanhTien,
         };
-        const giaKhuyenMaiCTKM = await this.checkIsGiamGia(value.productId);
-        if(giaKhuyenMaiCTKM !== -1){
-          order.tongTien = giaKhuyenMaiCTKM * order.qty;
-          value.giaKhuyenMaiCTKM = giaKhuyenMaiCTKM;
-          value.thanhTien = giaKhuyenMaiCTKM * order.qty;;
-        }else{
+        try {
+        const giaKhuyenMaiCTKM = await this.checkIsGiamGia(value.productId)
+          if(giaKhuyenMaiCTKM !== -1){
+            order.tongTien = giaKhuyenMaiCTKM * order.qty;
+            value.giaKhuyenMaiCTKM = giaKhuyenMaiCTKM;
+            value.thanhTien = giaKhuyenMaiCTKM * order.qty;;
+          }else{
+            value.giaKhuyenMaiCTKM = value.giaKhuyenMai;
+          }
+        } catch (error) {
           value.giaKhuyenMaiCTKM = value.giaKhuyenMai;
-
         }
         const orderCreated = await this.orderService.create(order).toPromise();        
         if (orderCreated) {
