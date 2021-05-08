@@ -115,9 +115,9 @@ export class PhieuMuaHangDialogComponent implements OnInit {
             qty: newTransaction.qty,
           };
           // update lại bảng giao dịch
-          const newTransactionUpdate = await this.transactionService.put(newTransaction.transactionId, transactionUpdate).toPromise();
+          const newTransactionUpdate = await this.transactionService.patch(newTransaction.transactionId, transactionUpdate).toPromise();
           // xoá đi sản phẩm ở bảng product
-          await this.productService.put(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
+          await this.productService.patch(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
           this.tongTien = newTransactionUpdate.tongTien;
           this.isActive = true;
           this.isGiaoDich = false;
