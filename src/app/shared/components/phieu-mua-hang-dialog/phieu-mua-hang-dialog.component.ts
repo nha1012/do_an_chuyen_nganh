@@ -1,10 +1,8 @@
-import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NbDialogRef, NbToastrService } from '@nebular/theme';
 import { CartItem, TypeTransaction } from 'app/pages/ban-hang/cart-item.interface';
-import { AuthService } from 'app/shared/services/auth/auth.service';
 import { OrderEntity } from 'app/shared/services/order/order.interface';
 import { OrderService } from 'app/shared/services/order/order.service';
-import { RoleEnum } from 'app/shared/services/role/role.interface';
 import { TranSactionEntity } from 'app/shared/services/transaction/transaction.interface';
 import { TransactionService } from 'app/shared/services/transaction/transaction.service';
 import { UserEntity } from 'app/shared/services/user/user.interface';
@@ -12,11 +10,11 @@ import { CaLamEnum } from 'app/shared/services/workshift/workshift.interface';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ProductService } from 'app/shared/services/product/product.service';
-import { UsersService } from 'app/shared/services/user/user.service';
-import { UserService } from 'app/@core/mock/users.service';
 import { RequestQueryBuilder } from 'nest-crud-client';
-import { DatatableComponent, DatatableService } from 'ngn-datatable';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DatatableComponent } from 'ngn-datatable';
+import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+import { ChuongTrinhKhuyenMaiService } from 'app/shared/services/chuong-trinh-khuyen-mai/chuong-trinh-khuyen-mai.service';
 @Component({
   selector: 'ngx-dang-ky-ca-lam-dialog',
   templateUrl: './phieu-mua-hang-dialog.component.html',
@@ -25,14 +23,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PhieuMuaHangDialogComponent implements OnInit {
   @ViewChild('hoaDon', { static: false }) hoaDon: ElementRef;
   table: DatatableComponent<UserEntity>;
-
- 
   CaLamEnum = CaLamEnum;
   caLamSelected: CaLamEnum;
   date: Date;
   data: any;
   isGiaoDich = false;
-  lstCart: CartItem[] = [];
+  lstCart: CartItem[];
   isActive = false;
   tongTien = 0;
   khachHangId: string;
@@ -44,6 +40,7 @@ export class PhieuMuaHangDialogComponent implements OnInit {
     private orderService: OrderService,
     private productService: ProductService,
     protected route: ActivatedRoute,
+    private ctkmService: ChuongTrinhKhuyenMaiService
     ) { }
   ngOnInit(): void {
   }
@@ -55,9 +52,24 @@ export class PhieuMuaHangDialogComponent implements OnInit {
     this.toast.info('Đang xử lý, vui lòng chờ');
     return true;
   }
+  async checkIsGiamGia(productId: string){
+    // Lấy ngày hiện tại
+    const dateNow = moment(new Date()).format('YYYY-MM-DD');
+    const builder = new RequestQueryBuilder();
+    builder.select(['chuongTrinhKhuyenMaiValues'])
+    builder.setJoin({field: 'chuongTrinhKhuyenMaiValues', select:['chuongTrinhKhuyenMai', 'giaKhuyenMai']})
+    builder.setJoin({field: 'chuongTrinhKhuyenMaiValues.chuongTrinhKhuyenMai', select:['startDate', 'endDate']})
+    builder.setFilter({field: 'chuongTrinhKhuyenMaiValues.chuongTrinhKhuyenMai.startDate', operator: '$lte', value: dateNow})
+    builder.setFilter({field: 'chuongTrinhKhuyenMaiValues.chuongTrinhKhuyenMai.endDate', operator: '$gte', value: dateNow})
+    const productKhuyenMai = await this.productService.getOne(productId, builder).toPromise();
+    if (productKhuyenMai) {
+      return productKhuyenMai.chuongTrinhKhuyenMaiValues[0].giaKhuyenMai
+    }
+    return -1;
+  }
   async xacNhanGiaoDich() {
     try {
-      this.checkValid();
+      // this.checkValid();
       this.isGiaoDich = true;
       let newTransaction = await this.transactionService
         .create({ userId: this.khachHangId, payment: TypeTransaction.TAIQUAY, status: true }).toPromise();
@@ -67,7 +79,6 @@ export class PhieuMuaHangDialogComponent implements OnInit {
           this.toast.warning('Không đủ sản phẩm trong kho, vui lòng xem lại');
           return;
         }
-        debugger;
         const order: OrderEntity = {
           productId: value.productId,
           transactionId: newTransaction.transactionId,
@@ -75,9 +86,19 @@ export class PhieuMuaHangDialogComponent implements OnInit {
           qty: value.soLuong,
           tongTien: value.thanhTien,
         };
-        const orderCreated = await this.orderService
-        console.log(orderCreated);
-        
+        try {
+        const giaKhuyenMaiCTKM = await this.checkIsGiamGia(value.productId)
+          if(giaKhuyenMaiCTKM !== -1){
+            order.tongTien = giaKhuyenMaiCTKM * order.qty;
+            value.giaKhuyenMaiCTKM = giaKhuyenMaiCTKM;
+            value.thanhTien = giaKhuyenMaiCTKM * order.qty;;
+          }else{
+            value.giaKhuyenMaiCTKM = value.giaKhuyenMai;
+          }
+        } catch (error) {
+          value.giaKhuyenMaiCTKM = value.giaKhuyenMai;
+        }
+        const orderCreated = await this.orderService.create(order).toPromise();        
         if (orderCreated) {
           if (newTransaction.qty) {
             newTransaction.qty++;
@@ -85,19 +106,18 @@ export class PhieuMuaHangDialogComponent implements OnInit {
             newTransaction.qty = 1;
           }
           if (newTransaction.tongTien) {
-            //newTransaction.tongTien += orderCreated.tongTien;
+            newTransaction.tongTien += orderCreated.tongTien;
           } else {
-            //newTransaction.tongTien = orderCreated.tongTien;
+            newTransaction.tongTien = orderCreated.tongTien;
           }
           const transactionUpdate: TranSactionEntity = {
             tongTien: newTransaction.tongTien,
             qty: newTransaction.qty,
           };
           // update lại bảng giao dịch
-          const newTransactionUpdate = await this.transactionService.put(newTransaction.transactionId, transactionUpdate)
-            .toPromise();
+          const newTransactionUpdate = await this.transactionService.patch(newTransaction.transactionId, transactionUpdate).toPromise();
           // xoá đi sản phẩm ở bảng product
-          await this.productService.put(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
+          await this.productService.patch(value.productId, { soLuong: value.tongSoLuong - value.soLuong }).toPromise();
           this.tongTien = newTransactionUpdate.tongTien;
           this.isActive = true;
           this.isGiaoDich = false;

@@ -32,7 +32,7 @@
           [nbDatepicker]="dpkHSTrongThang"
         />
       <nb-rangepicker #dpkHSTrongThang></nb-rangepicker>
-      <button nbButton size="medium" status="primary" (click)="baoCao()">Xem thống kê</button>
+      <button nbButton size="medium" status="primary" (click)="baoCao()">Xem báo cáo</button>
       <nb-alert accent="info" *ngIf="thongKeTheoNgay.length === 0">Không có dữ liệu</nb-alert>
       <ngx-charts-pie-chart
         [results]="thongKeTheoNgay"

@@ -18,9 +18,7 @@ export class DanhMucSanPhamComponent {
   isThemDanhMucSanPham = false;
   datatableService: DatatableService<DanhMucSanPhamEntity> = {
     service: this.danhMucSanPhamService,
-    primaryField: 'danhMucSanPhamId',
-    builder: this.getBuilder.bind(this),
-  };
+    primaryField: 'danhMucSanPhamId' };
   actions: DatatableAction<DanhMucSanPhamEntity>[] = [
     { name: 'quick-edit' },
     { name: 'delete' },
@@ -52,9 +50,5 @@ export class DanhMucSanPhamComponent {
       this.toast.danger(error);
 
     }
-  }
-  getBuilder(builder: RequestQueryBuilder) {
-    builder.select(['tenDanhMuc'] as Array<keyof DanhMucSanPhamEntity>);
-
   }
 }

@@ -1,7 +1,26 @@
 .group__image-nho {
-	img {
-		cursor: zoom-in;
+	display: flex;
+	flex-direction: roư;
+	div{
+		flex: 1;
+		img {
+			cursor: zoom-in;
+		}
 	}
+	div.active{
+		flex: 1;
+		background-color: darkgray;
+		border-radius: 10px;
+
+		img {
+			cursor: zoom-in;
+			margin-left: 11px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border-radius: 10px;
+		}
+	}
+
 }
 .row .mb-2	input{
 	display: block;

@@ -5,6 +5,7 @@ export interface CartItem {
   soLuong: number;
   thanhTien: number;
   tongSoLuong?: number;
+  giaKhuyenMaiCTKM?: number;
 }
 
 export enum TypeTransaction {
